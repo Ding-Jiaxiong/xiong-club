@@ -23,10 +23,13 @@ public class SubjectController {
     @Resource
     private SubjectCategoryService subjectCategoryService;
 
+
     @GetMapping("/test")
     public String test() {
 
-        SubjectCategory subjectCategory = subjectCategoryService.queryById(1L);
+        SubjectCategory subjectCategory = subjectCategoryService.getById(1L);
+
+        System.out.println(subjectCategory);
 
         return subjectCategory.getCategoryName();
     }

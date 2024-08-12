@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="xiong-club-starter" />
+        <module name="xiong-club-domain" />
+        <module name="xiong-club-application" />
+        <module name="xiong-club-infra" />
+        <module name="xiong-club-subject-api" />
+        <module name="xiong-club-common" />
+      </profile>
+    </annotationProcessing>
+  </component>
+</project>

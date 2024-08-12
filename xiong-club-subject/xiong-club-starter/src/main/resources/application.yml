@@ -4,12 +4,15 @@ server:
 spring:
   datasource:
     username: root
-    password: 123456
+    password: FRLgS1AccIoA0Lw4lLmN++0VDhhoHVywI/lEA+djdi1luEXpnuQ4HY6vGBSiZJ36YgKR+tULnxfQG6mG1iwlEw==
     url: jdbc:mysql://116.196.77.213:3306/xiongclub?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf8&useSSL=false
     type: com.alibaba.druid.pool.DruidDataSource
     druid:
       initial-size: 20
       min-idle: 20
+
+      connectionProperties: config.decrypt=true;config.decrypt.key=${publicKey};
+
       max-active: 100
       max-wait: 60000
       stat-view-servlet:
@@ -26,3 +29,5 @@ spring:
           enabled: true
         config:
           enabled: true
+
+publicKey: MFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBAOOJB6c1IPS98GQytaHrZzal37Ce0Lc5TF8KvL1fdc4cW74XqpnjKWpm3MDgErr0ZSL7iYmEK60qp7nOwXkCeWECAwEAAQ==

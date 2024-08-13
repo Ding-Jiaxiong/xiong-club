@@ -83,4 +83,27 @@ public class SubjectCategoryController {
 
     }
 
+    /**
+     * 根据分类id查二级分类
+     */
+    @PostMapping("/queryCategoryByPrimary")
+    public Result<List<SubjectCategoryDTO>> queryCategoryByPrimary(@RequestBody SubjectCategoryDTO subjectCategoryDTO) {
+        try {
+            if (log.isInfoEnabled()) {
+                log.info("SubjectCategoryController.queryCategoryByPrimary.dto:{}"
+                        , JSON.toJSONString(subjectCategoryDTO));
+            }
+            Preconditions.checkNotNull(subjectCategoryDTO.getParentId(), "分类id不能为空");
+            SubjectCategoryBO subjectCategoryBO = SubjectCategoryDTOConverter.INSTANCE.
+                    convertDtoToCategoryBO(subjectCategoryDTO);
+            List<SubjectCategoryBO> subjectCategoryBOList = subjectCategoryDomainService.queryCategory(subjectCategoryBO);
+            List<SubjectCategoryDTO> subjectCategoryDTOList = SubjectCategoryDTOConverter.INSTANCE.
+                    convertBoToCategoryDTOList(subjectCategoryBOList);
+            return Result.ok(subjectCategoryDTOList);
+        } catch (Exception e) {
+            log.error("SubjectCategoryController.queryPrimaryCategory.error:{}", e.getMessage(), e);
+            return Result.fail(e.getMessage());
+        }
+    }
+
 }

@@ -14,7 +14,7 @@ spring:
 
   datasource:
     username: root
-    password: FRLgS1AccIoA0Lw4lLmN++0VDhhoHVywI/lEA+djdi1luEXpnuQ4HY6vGBSiZJ36YgKR+tULnxfQG6mG1iwlEw==
+    password: aG7Yw7FTYok+IV37XQvCUTdzZJdXCcvgIxS30XKrKlESlMWMjrne0IZCKbEccR6bHBkJnD2wJ3dUQD+EYzHD1g==
     url: jdbc:mysql://116.196.77.213:3306/xiongclub?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf8&useSSL=false
     type: com.alibaba.druid.pool.DruidDataSource
     druid:
@@ -40,8 +40,10 @@ spring:
         config:
           enabled: true
 
-publicKey: MFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBAOOJB6c1IPS98GQytaHrZzal37Ce0Lc5TF8KvL1fdc4cW74XqpnjKWpm3MDgErr0ZSL7iYmEK60qp7nOwXkCeWECAwEAAQ==
+publicKey: MFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBAKUYdPsGnI5mghLo090o+EFtYWUAXYCj6dsAwdhn/IBw5/2u+ivbP1mGwyPvjd1Meduqj0hEU+wZw1w5VQ4qh7kCAwEAAQ==
 
+logging:
+  config: classpath:log4j2-spring.xml
 
 mybatis-plus:
   configuration:

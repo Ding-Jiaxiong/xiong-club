@@ -68,8 +68,24 @@
             <option name="tableUIInfoList">
               <list>
                 <TableUIInfo>
-                  <option name="className" value="SubjectMapping" />
-                  <option name="tableName" value="subject_mapping" />
+                  <option name="className" value="SubjectBrief" />
+                  <option name="tableName" value="subject_brief" />
+                </TableUIInfo>
+                <TableUIInfo>
+                  <option name="className" value="SubjectInfo" />
+                  <option name="tableName" value="subject_info" />
+                </TableUIInfo>
+                <TableUIInfo>
+                  <option name="className" value="SubjectJudge" />
+                  <option name="tableName" value="subject_judge" />
+                </TableUIInfo>
+                <TableUIInfo>
+                  <option name="className" value="SubjectMultiple" />
+                  <option name="tableName" value="subject_multiple" />
+                </TableUIInfo>
+                <TableUIInfo>
+                  <option name="className" value="SubjectRadio" />
+                  <option name="tableName" value="subject_radio" />
                 </TableUIInfo>
               </list>
             </option>

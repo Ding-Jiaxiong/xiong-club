@@ -3,6 +3,7 @@ package com.dingjiaxiong.subject.infra.basic.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.dingjiaxiong.subject.infra.basic.entity.SubjectMapping;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -15,6 +16,14 @@ import java.util.List;
 public interface SubjectMappingMapper extends BaseMapper<SubjectMapping> {
 
     List<SubjectMapping> queryDistinctLabelId(SubjectMapping subjectMapping);
+
+    /**
+     * 批量新增数据（MyBatis原生foreach方法）
+     *
+     * @param entities List<SubjectMapping> 实例对象列表
+     * @return 影响行数
+     */
+    int insertBatch(@Param("entities") List<SubjectMapping> entities);
 }
 
 

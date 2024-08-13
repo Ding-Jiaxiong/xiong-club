@@ -27,6 +27,13 @@ public class SubjectMappingServiceImpl extends ServiceImpl<SubjectMappingMapper,
 
         return subjectMappingMapper.queryDistinctLabelId(subjectMapping);
     }
+
+    @Override
+    public void batchInsert(List<SubjectMapping> mappingList) {
+
+        subjectMappingMapper.insertBatch(mappingList);
+
+    }
 }
 
 

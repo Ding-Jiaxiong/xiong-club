@@ -22,6 +22,16 @@
         update_by,update_time,is_deleted
     </sql>
 
+    <insert id="insertBatch">
+        insert into subject_mapping(id, subject_id, category_id, label_id, created_by, created_time, update_by,
+        update_time)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+            (#{entity.id}, #{entity.subjectId}, #{entity.categoryId}, #{entity.labelId}, #{entity.createdBy},
+            #{entity.createdTime}, #{entity.updateBy}, #{entity.updateTime})
+        </foreach>
+    </insert>
+
     <select id="queryDistinctLabelId" resultType="com.dingjiaxiong.subject.infra.basic.entity.SubjectMapping">
         select
         distinct label_id

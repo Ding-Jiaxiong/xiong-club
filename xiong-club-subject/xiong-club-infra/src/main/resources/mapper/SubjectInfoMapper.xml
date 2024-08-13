@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dingjiaxiong.subject.infra.basic.mapper.SubjectInfoMapper">
+
+    <resultMap id="BaseResultMap" type="com.dingjiaxiong.subject.infra.basic.entity.SubjectInfo">
+            <id property="id" column="id" jdbcType="BIGINT"/>
+            <result property="subjectName" column="subject_name" jdbcType="VARCHAR"/>
+            <result property="subjectDifficult" column="subject_difficult" jdbcType="TINYINT"/>
+            <result property="settleName" column="settle_name" jdbcType="VARCHAR"/>
+            <result property="subjectType" column="subject_type" jdbcType="TINYINT"/>
+            <result property="subjectScore" column="subject_score" jdbcType="TINYINT"/>
+            <result property="subjectParse" column="subject_parse" jdbcType="VARCHAR"/>
+            <result property="createdBy" column="created_by" jdbcType="VARCHAR"/>
+            <result property="createdTime" column="created_time" jdbcType="TIMESTAMP"/>
+            <result property="updateBy" column="update_by" jdbcType="VARCHAR"/>
+            <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+            <result property="isDeleted" column="is_deleted" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,subject_name,subject_difficult,
+        settle_name,subject_type,subject_score,
+        subject_parse,created_by,created_time,
+        update_by,update_time,is_deleted
+    </sql>
+
+    <select id="countByCondition" resultType="java.lang.Integer">
+        select count(1)
+        from subject_info a,
+        subject_mapping b
+        where
+        a.id = b.subject_id
+        and b.category_id = #{categoryId}
+        and b.label_id = #{labelId}
+        and a.is_deleted = 0
+        and b.is_deleted = 0
+        <if test="subjectInfo.subjectDifficult != null">
+            and a.subject_difficult = #{subjectInfo.subjectDifficult}
+        </if>
+        <if test="subjectInfo.subjectType != null">
+            and a.subject_type = #{subjectInfo.subjectType}
+        </if>
+    </select>
+
+    <select id="queryPage" resultType="com.dingjiaxiong.subject.infra.basic.entity.SubjectInfo">
+        select a.id,
+        a.subject_name,
+        a.subject_difficult,
+        a.settle_name,
+        a.subject_type,
+        a.subject_score,
+        a.subject_parse,
+        a.created_by,
+        a.created_time,
+        a.update_by,
+        a.update_time,
+        a.is_deleted
+        from subject_info a,
+        subject_mapping b
+        where
+        a.id = b.subject_id
+        and b.category_id = #{categoryId}
+        and b.label_id = #{labelId}
+        and a.is_deleted = 0
+        and b.is_deleted = 0
+        <if test="subjectInfo.subjectDifficult != null">
+            and a.subject_difficult = #{subjectInfo.subjectDifficult}
+        </if>
+        <if test="subjectInfo.subjectType != null">
+            and a.subject_type = #{subjectInfo.subjectType}
+        </if>
+        limit #{start},#{pageSize}
+    </select>
+
+
+</mapper>

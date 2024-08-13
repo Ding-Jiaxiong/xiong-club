@@ -58,7 +58,7 @@ public class SubjectCategoryController {
 
         } catch (Exception e) {
             log.error("SubjectCategoryController.add.error:{}", e.getMessage(), e);
-            return Result.fail();
+            return Result.fail(e.getMessage());
         }
 
     }

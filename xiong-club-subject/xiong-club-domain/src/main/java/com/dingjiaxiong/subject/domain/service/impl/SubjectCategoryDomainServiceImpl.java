@@ -2,6 +2,8 @@ package com.dingjiaxiong.subject.domain.service.impl;
 
 
 import com.alibaba.fastjson.JSON;
+import com.dingjiaxiong.subject.common.enums.CategoryTypeEnum;
+import com.dingjiaxiong.subject.common.enums.IsDeletedFlagEnum;
 import com.dingjiaxiong.subject.domain.convert.SubjectCategoryConverter;
 import com.dingjiaxiong.subject.domain.entity.SubjectCategoryBO;
 import com.dingjiaxiong.subject.domain.service.SubjectCategoryDomainService;
@@ -39,6 +41,8 @@ public class SubjectCategoryDomainServiceImpl implements SubjectCategoryDomainSe
 
         SubjectCategory subjectCategory = SubjectCategoryConverter.INSTANCE
                 .convertBoToCategory(subjectCategoryBO);
+
+        subjectCategory.setIsDeleted(IsDeletedFlagEnum.UN_DELETED.getCode());
         List<SubjectCategory> subjectCategoryList = subjectCategoryService.queryCategory(subjectCategory);
         List<SubjectCategoryBO> boList = SubjectCategoryConverter.INSTANCE
                 .convertBoToCategory(subjectCategoryList);
@@ -51,5 +55,20 @@ public class SubjectCategoryDomainServiceImpl implements SubjectCategoryDomainSe
 
     }
 
+    @Override
+    public Boolean update(SubjectCategoryBO subjectCategoryBO) {
+        SubjectCategory subjectCategory = SubjectCategoryConverter.INSTANCE
+                .convertBoToCategory(subjectCategoryBO);
+        boolean count = subjectCategoryService.updateById(subjectCategory);
+        return count;
+    }
+
+    @Override
+    public Boolean delete(SubjectCategoryBO subjectCategoryBO) {
+        SubjectCategory subjectCategory = SubjectCategoryConverter.INSTANCE
+                .convertBoToCategory(subjectCategoryBO);
+        boolean count = subjectCategoryService.removeById(subjectCategory.getId());
+        return count;
+    }
 
 }

@@ -68,8 +68,8 @@
             <option name="tableUIInfoList">
               <list>
                 <TableUIInfo>
-                  <option name="className" value="SubjectLabel" />
-                  <option name="tableName" value="subject_label" />
+                  <option name="className" value="SubjectMapping" />
+                  <option name="tableName" value="subject_mapping" />
                 </TableUIInfo>
               </list>
             </option>

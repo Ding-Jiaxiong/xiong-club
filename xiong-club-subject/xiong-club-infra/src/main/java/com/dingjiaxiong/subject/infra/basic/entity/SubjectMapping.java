@@ -4,15 +4,17 @@ import com.baomidou.mybatisplus.annotation.*;
 
 import java.io.Serializable;
 import java.util.Date;
+
 import lombok.Data;
 
 /**
- * 题目标签表
- * @TableName subject_label
+ * 题目分类关系表
+ *
+ * @TableName subject_mapping
  */
-@TableName(value ="subject_label")
+@TableName(value = "subject_mapping")
 @Data
-public class SubjectLabel implements Serializable {
+public class SubjectMapping implements Serializable {
     /**
      * 主键
      */
@@ -20,19 +22,19 @@ public class SubjectLabel implements Serializable {
     private Long id;
 
     /**
-     * 标签分类
+     * 题目id
      */
-    private String labelName;
+    private Long subjectId;
 
     /**
-     * 排序
+     * 分类id
      */
-    private Integer sortNum;
+    private Long categoryId;
 
     /**
-     * 
+     * 标签id
      */
-    private String categoryId;
+    private Long labelId;
 
     /**
      * 创建人
@@ -45,17 +47,17 @@ public class SubjectLabel implements Serializable {
     private Date createdTime;
 
     /**
-     * 更新人
+     * 修改人
      */
     private String updateBy;
 
     /**
-     * 更新时间
+     * 修改时间
      */
     private Date updateTime;
 
     /**
-     * 
+     *
      */
     @TableLogic
     private Integer isDeleted;

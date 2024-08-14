@@ -1,7 +1,0 @@
-com\dingjiaxiong\subject\common\enums\SubjectInfoTypeEnum.class
-com\dingjiaxiong\subject\common\enums\CategoryTypeEnum.class
-com\dingjiaxiong\subject\common\enums\IsDeletedFlagEnum.class
-com\dingjiaxiong\subject\common\entity\PageInfo.class
-com\dingjiaxiong\subject\common\entity\Result.class
-com\dingjiaxiong\subject\common\entity\PageResult.class
-com\dingjiaxiong\subject\common\enums\ResultCodeEnum.class

@@ -1,0 +1,13 @@
+server:
+  port: 5000
+
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: oss
+          uri: lb://xiong-club-oss-dev
+          predicates:
+            - Path=/oss/**
+          filters:
+            - StripPrefix=1

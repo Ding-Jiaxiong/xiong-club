@@ -1,0 +1,23 @@
+10:38:45.224  [main] INFO  com.dingjiaxiong.subject.SubjectApplication - Starting SubjectApplication using Java 17.0.11 on HelloWorld with PID 6400 (D:\PlanetProjects\8_brush_questionscommunity\xiong-club\xiong-club-subject\xiong-club-starter\target\xiong-club-starter.jar started by DingJiaxiong in D:\PlanetProjects\8_brush_questionscommunity\xiong-club\xiong-club-subject\xiong-club-starter\target)
+10:38:45.231  [main] INFO  com.dingjiaxiong.subject.SubjectApplication - The following 1 profile is active: "dev"
+10:38:46.352  [main] INFO  org.springframework.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port(s): 3000 (http)
+10:38:46.359  [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-3000"]
+10:38:46.360  [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+10:38:46.361  [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.69]
+10:38:46.446  [main] INFO  org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/api] - Initializing Spring embedded WebApplicationContext
+10:38:46.446  [main] INFO  org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1167 ms
+10:38:46.641  [main] INFO  com.alibaba.druid.spring.boot.autoconfigure.DruidDataSourceAutoConfigure - Init DruidDataSource
+10:38:53.458  [main] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} inited
+10:38:54.122  [main] INFO  springfox.documentation.spring.web.WebMvcPropertySourcedRequestMappingHandlerMapping - Mapped URL path [/v2/api-docs] onto method [springfox.documentation.swagger2.web.Swagger2ControllerWebMvc#getDocumentation(String, HttpServletRequest)]
+10:38:54.368  [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-3000"]
+10:38:54.402  [main] INFO  org.springframework.boot.web.embedded.tomcat.TomcatWebServer - Tomcat started on port(s): 3000 (http) with context path '/api'
+10:38:54.403  [main] INFO  springfox.documentation.spring.web.plugins.DocumentationPluginsBootstrapper - Documentation plugins bootstrapped
+10:38:54.411  [main] INFO  springfox.documentation.spring.web.plugins.DocumentationPluginsBootstrapper - Found 1 custom documentation plugin(s)
+10:38:54.446  [main] INFO  springfox.documentation.spring.web.scanners.ApiListingReferenceScanner - Scanning for api listing references
+10:38:54.591  [main] INFO  springfox.documentation.spring.web.readers.operation.CachingOperationNameGenerator - Generating unique operation named: addUsingPOST_1
+10:38:54.597  [main] INFO  springfox.documentation.spring.web.readers.operation.CachingOperationNameGenerator - Generating unique operation named: addUsingPOST_2
+10:38:54.599  [main] INFO  springfox.documentation.spring.web.readers.operation.CachingOperationNameGenerator - Generating unique operation named: deleteUsingPOST_1
+10:38:54.600  [main] INFO  springfox.documentation.spring.web.readers.operation.CachingOperationNameGenerator - Generating unique operation named: updateUsingPOST_1
+10:38:54.624  [main] INFO  com.dingjiaxiong.subject.SubjectApplication - Started SubjectApplication in 9.858 seconds (JVM running for 10.699)
+10:40:09.558  [SpringApplicationShutdownHook] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} closing ...
+10:40:09.578  [SpringApplicationShutdownHook] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} closed

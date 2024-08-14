@@ -84,7 +84,7 @@ public class SubjectController {
             PageResult<SubjectInfoBO> boPageResult = subjectInfoDomainService.getSubjectPage(subjectInfoBO);
             return Result.ok(boPageResult);
         } catch (Exception e) {
-            log.error("SubjectController.getlist.error:{}", e.getMessage(), e);
+            log.error("SubjectController.getSubjectPage.error:{}", e.getMessage(), e);
             return Result.fail("分页查询题目失败");
         }
     }
@@ -104,7 +104,7 @@ public class SubjectController {
             SubjectInfoDTO dto = SubjectInfoDTOConverter.INSTANCE.convertBOToDTO(boResult);
             return Result.ok(dto);
         } catch (Exception e) {
-            log.error("SubjectController.getinfo.error:{}", e.getMessage(), e);
+            log.error("SubjectController.querySubjectInfo.error:{}", e.getMessage(), e);
             return Result.fail("查询题目详情失败");
         }
     }

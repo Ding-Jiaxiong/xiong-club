@@ -44,8 +44,6 @@ public class SaTokenConfigure {
 //                    SaRouter.match("/user/**", r -> StpUtil.checkRole("user"));
 
                     // 更多匹配 ...
-                }).setError(e -> {
-                    return SaResult.error(e.getMessage());
                 });
     }
 }

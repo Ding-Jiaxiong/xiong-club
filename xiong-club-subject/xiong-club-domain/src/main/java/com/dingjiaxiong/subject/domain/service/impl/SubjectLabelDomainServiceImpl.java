@@ -73,6 +73,16 @@ public class SubjectLabelDomainServiceImpl implements SubjectLabelDomainService 
     @Override
     public List<SubjectLabelBO> queryLabelByCategoryId(SubjectLabelBO subjectLabelBO) {
 
+        // 如果当前分类是1级分类，则查询所有标签
+        SubjectCategory subjectCategory = subjectCategoryService.getById(subjectLabelBO.getCategoryId());
+        if(CategoryTypeEnum.PRIMARY.getCode() == subjectCategory.getCategoryType()){
+            SubjectLabel subjectLabel = new SubjectLabel();
+            subjectLabel.setCategoryId(subjectLabelBO.getCategoryId());
+            List<SubjectLabel> labelList = subjectLabelService.queryByCondition(subjectLabel);
+            List<SubjectLabelBO> labelResultList = SubjectLabelConverter.INSTANCE.convertLabelToBoList(labelList);
+            return labelResultList;
+        }
+
         Long categoryId = subjectLabelBO.getCategoryId();
 
         SubjectMapping subjectMapping = new SubjectMapping();

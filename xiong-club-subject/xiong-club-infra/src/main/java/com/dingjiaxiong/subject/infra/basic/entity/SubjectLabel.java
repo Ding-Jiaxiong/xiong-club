@@ -32,7 +32,7 @@ public class SubjectLabel implements Serializable {
     /**
      * 
      */
-    private String categoryId;
+    private Long categoryId;
 
     /**
      * 创建人

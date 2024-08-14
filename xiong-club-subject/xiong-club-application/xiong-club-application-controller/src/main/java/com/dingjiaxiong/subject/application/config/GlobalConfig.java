@@ -31,7 +31,7 @@ public class GlobalConfig extends WebMvcConfigurationSupport {
 //        registry.addInterceptor(new LoginInterceptor())
 //                .addPathPatterns("/**");
 //    }
-//
+
 
     /**
      * 自定义mappingJackson2HttpMessageConverter

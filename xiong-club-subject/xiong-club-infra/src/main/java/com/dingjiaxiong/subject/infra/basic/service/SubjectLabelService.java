@@ -14,4 +14,6 @@ public interface SubjectLabelService extends IService<SubjectLabel> {
 
     List<SubjectLabel> batchQueryById(List<Long> labelIdList);
 
+    List<SubjectLabel> queryByCondition(SubjectLabel subjectLabel);
+
 }

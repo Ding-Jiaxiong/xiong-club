@@ -11,13 +11,13 @@ import java.util.Collections;
 import java.util.List;
 
 /**
-* @author DingJiaxiong
-* @description 针对表【subject_label(题目标签表)】的数据库操作Service实现
-* @createDate 2024-08-13 16:43:44
-*/
+ * @author DingJiaxiong
+ * @description 针对表【subject_label(题目标签表)】的数据库操作Service实现
+ * @createDate 2024-08-13 16:43:44
+ */
 @Service
 public class SubjectLabelServiceImpl extends ServiceImpl<SubjectLabelMapper, SubjectLabel>
-    implements SubjectLabelService {
+        implements SubjectLabelService {
 
     @Resource
     private SubjectLabelMapper subjectLabelMapper;
@@ -27,6 +27,11 @@ public class SubjectLabelServiceImpl extends ServiceImpl<SubjectLabelMapper, Sub
 
         return subjectLabelMapper.batchQueryById(labelIdList);
 
+    }
+
+    @Override
+    public List<SubjectLabel> queryByCondition(SubjectLabel subjectLabel) {
+        return subjectLabelMapper.queryByCondition(subjectLabel);
     }
 }
 

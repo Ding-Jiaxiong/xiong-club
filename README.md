@@ -4557,6 +4557,140 @@ gateway（网关）：网关层会对外提供服务，内部实现路由，鉴�
 
 
 
+##### 2.52 鉴权数据表建立
+
+
+
+用户表
+
+```sql
+DROP TABLE IF EXISTS `auth_user`;
+CREATE TABLE `auth_user`
+(
+    `id`           bigint(20) NOT NULL AUTO_INCREMENT COMMENT '主键',
+    `user_name`    varchar(32)  DEFAULT NULL COMMENT '用户名称/账号',
+    `nick_name`    varchar(32)  DEFAULT NULL COMMENT '昵称',
+    `email`        varchar(32)  DEFAULT NULL COMMENT '邮箱',
+    `phone`        varchar(32)  DEFAULT NULL COMMENT '手机号',
+    `password`     varchar(64)  DEFAULT NULL COMMENT '密码',
+    `sex`          tinyint(2) DEFAULT NULL COMMENT '性别',
+    `avatar`       varchar(255) DEFAULT NULL COMMENT '头像',
+    `status`       tinyint(2) DEFAULT NULL COMMENT '状态 0启用 1禁用',
+    `introduce`    varchar(255) DEFAULT NULL COMMENT '个人介绍',
+    `ext_json`     varchar(255) DEFAULT NULL COMMENT '特殊字段',
+    `created_by`   varchar(32)  DEFAULT NULL COMMENT '创建人',
+    `created_time` datetime     DEFAULT NULL COMMENT '创建时间',
+    `update_by`    varchar(32)  DEFAULT NULL COMMENT '更新人',
+    `update_time`  datetime     DEFAULT NULL COMMENT '更新时间',
+    `is_deleted`   int(11) DEFAULT '0' COMMENT '是否被删除 0未删除 1已删除',
+    PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='用户信息表';
+```
+
+
+
+用户角色关联表
+
+
+
+```sql
+DROP TABLE IF EXISTS `auth_user_role`;
+CREATE TABLE `auth_user_role`
+(
+    `id`           bigint(20) NOT NULL AUTO_INCREMENT COMMENT '主键',
+    `user_id`      bigint(20) DEFAULT NULL COMMENT '用户id',
+    `role_id`      bigint(20) DEFAULT NULL COMMENT '角色id',
+    `created_by`   varchar(32) DEFAULT NULL COMMENT '创建人',
+    `created_time` datetime    DEFAULT NULL COMMENT '创建时间',
+    `update_by`    varchar(32) DEFAULT NULL COMMENT '更新人',
+    `update_time`  datetime    DEFAULT NULL COMMENT '更新时间',
+    `is_deleted`   int(11) DEFAULT '0',
+    PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='用户角色表';
+```
+
+
+
+角色表
+
+
+
+```sql
+DROP TABLE IF EXISTS `auth_role`;
+CREATE TABLE `auth_role`
+(
+    `id`           bigint(20) NOT NULL AUTO_INCREMENT,
+    `role_name`    varchar(32) DEFAULT NULL COMMENT '角色名称',
+    `role_key`     varchar(64) DEFAULT NULL COMMENT '角色唯一标识',
+    `created_by`   varchar(32) DEFAULT NULL COMMENT '创建人',
+    `created_time` datetime    DEFAULT NULL COMMENT '创建时间',
+    `update_by`    varchar(32) DEFAULT NULL COMMENT '更新人',
+    `update_time`  datetime    DEFAULT NULL COMMENT '更新时间',
+    `is_deleted`   int(11) DEFAULT '0' COMMENT '是否被删除 0未删除 1已删除',
+    PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+```
+
+
+
+角色权限关联表
+
+
+
+```sql
+DROP TABLE IF EXISTS `auth_role_permission`;
+CREATE TABLE `auth_role_permission`
+(
+    `id`            bigint(20) NOT NULL AUTO_INCREMENT,
+    `role_id`       bigint(20) DEFAULT NULL COMMENT '角色id',
+    `permission_id` bigint(20) DEFAULT NULL COMMENT '权限id',
+    `created_by`    varchar(32) DEFAULT NULL COMMENT '创建人',
+    `created_time`  datetime    DEFAULT NULL COMMENT '创建时间',
+    `update_by`     varchar(32) DEFAULT NULL COMMENT '更新人',
+    `update_time`   datetime    DEFAULT NULL COMMENT '更新时间',
+    `is_deleted`    int(11) DEFAULT '0',
+    PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='角色权限关联表';
+```
+
+
+
+
+
+权限表
+
+
+
+```sql
+DROP TABLE IF EXISTS `auth_permission`;
+CREATE TABLE `auth_permission`
+(
+    `id`             bigint(20) NOT NULL AUTO_INCREMENT,
+    `name`           varchar(64)  DEFAULT NULL COMMENT '权限名称',
+    `parent_id`      bigint(20) DEFAULT NULL COMMENT '父id',
+    `type`           tinyint(4) DEFAULT NULL COMMENT '权限类型 0菜单 1操作',
+    `menu_url`       varchar(255) DEFAULT NULL COMMENT '菜单路由',
+    `status`         tinyint(2) DEFAULT NULL COMMENT '状态 0启用 1禁用',
+    `show`           tinyint(2) DEFAULT NULL COMMENT '展示状态 0展示 1隐藏',
+    `icon`           varchar(128) DEFAULT NULL COMMENT '图标',
+    `permission_key` varchar(64)  DEFAULT NULL COMMENT '权限唯一标识',
+    `created_by`     varchar(32)  DEFAULT NULL COMMENT '创建人',
+    `created_time`   datetime     DEFAULT NULL COMMENT '创建时间',
+    `update_by`      varchar(32)  DEFAULT NULL COMMENT '更新人',
+    `update_time`    datetime     DEFAULT NULL COMMENT '更新时间',
+    `is_deleted`     int(11) DEFAULT '0' COMMENT '是否被删除 0为删除 1已删除',
+    PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+```
+
+
+
+![image-20240814170934688](./assets/image-20240814170934688.png)
+
+
+
+OK
+
 
 
 

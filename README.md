@@ -5468,19 +5468,85 @@ auth 服务也上来了，还有就是 subject 服务
 
 
 
+##### 2.60 Docker 安装 Redis
+
+
+
+```
+docker search redis
+docker pull redis
+```
+
+
+
+![image-20240814201535667](./assets/image-20240814201535667.png)
+
+
+
+![image-20240814201619792](./assets/image-20240814201619792.png)
+
+
+
+https://redis.io/docs/latest/operate/oss_and_stack/management/config/：在这里面搞一个 redis 的配置文件
+
+
+
+直接整了一个 7.2 的
+
+
+
+![image-20240814201941072](./assets/image-20240814201941072.png)
+
+
+
+另存为，放到服务器上
+
+
+
+![image-20240814202456742](./assets/image-20240814202456742.png)
+
+
+
+这里是直接下载的鸡翅的：`https://lark-assets-prod-aliyun.oss-cn-hangzhou.aliyuncs.com/yuque/0/2023/conf/29413969/1698584659695-36fd651d-44ca-4bec-ae1c-17dced7d5a3a.conf?OSSAccessKeyId=LTAI4GKnqTWmz2X8mzA1Sjbv&Expires=1723639739&Signature=OpQV49AFAPDVTvVXpOXms4hRcss%3D&response-content-disposition=attachment%3Bfilename*%3DUTF-8%27%27redis.conf`
+
+
+
+启动容器
+
+```
+启动命令
+docker run -p 6379:6379 --name redis -v /data/redis/redis.conf:/etc/redis/redis.conf  -v /data/redis/data:/data -d redis redis-server /etc/redis/redis.conf --appendonly yes
+```
+
+
+
+![image-20240814202659333](./assets/image-20240814202659333.png)
+
+
+
+redis 也跑起来了
+
+
+
+开个端口，6379 
+
+
+
+![image-20240814202555562](./assets/image-20240814202555562.png)
 
 
 
 
 
+连接一下，
 
 
 
+![image-20240814202826043](./assets/image-20240814202826043.png)
 
 
 
-
-
+7.4 ，我尼玛，最新的
 
 
 

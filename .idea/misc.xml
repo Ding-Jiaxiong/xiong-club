@@ -6,6 +6,8 @@
       <list>
         <option value="$PROJECT_DIR$/xiong-club-subject/pom.xml" />
         <option value="$PROJECT_DIR$/xiong-club-oss/pom.xml" />
+        <option value="$PROJECT_DIR$/xiong-club-auth/pom.xml" />
+        <option value="$PROJECT_DIR$/xiong-club-gateway/pom.xml" />
       </list>
     </option>
   </component>

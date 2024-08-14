@@ -11,8 +11,10 @@
         <module name="xiong-club-oss" />
         <module name="xiong-club-infra" />
         <module name="xiong-club-subject-api" />
+        <module name="xiong-club-gateway" />
         <module name="xiong-club-application-controller" />
         <module name="xiong-club-application-mq" />
+        <module name="xiong-club-auth" />
         <module name="xiong-club-domain" />
         <module name="xiong-club-application-job" />
         <module name="xiong-club-common" />

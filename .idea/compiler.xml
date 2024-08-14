@@ -8,6 +8,7 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="xiong-club-starter" />
+        <module name="xiong-club-oss" />
         <module name="xiong-club-infra" />
         <module name="xiong-club-subject-api" />
         <module name="xiong-club-application-controller" />

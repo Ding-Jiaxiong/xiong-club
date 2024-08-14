@@ -3366,6 +3366,406 @@ docker run -d -u root -p 8080:8080 -p 50000:50000 -v /var/jenkins_home:/var/jenk
 
 
 
+![image-20240814122505447](./assets/image-20240814122505447.png)
+
+
+
+就我们再次执行这个构建，它会自己去拉新的代码的
+
+
+
+![image-20240814122531457](./assets/image-20240814122531457.png)
+
+
+
+直接也是成功了
+
+
+
+![image-20240814122559861](./assets/image-20240814122559861.png)
+
+
+
+没问题，确实是最新的
+
+
+
+![image-20240814122629466](./assets/image-20240814122629466.png)
+
+
+
+而且最新的 jar 包 也打出来了，当然我这里是刚刚手动把项目停掉了
+
+
+
+![image-20240814122748926](./assets/image-20240814122748926.png)
+
+
+
+现在就没有，我们现在要做的，是在构建的时候让项目自动也跑起来 
+
+
+
+![image-20240814122938900](./assets/image-20240814122938900.png)
+
+
+
+在 clean 和 install 完成后，执行脚本
+
+
+
+这里要配置一下 SSH 服务器
+
+
+
+![image-20240814123137768](./assets/image-20240814123137768.png)
+
+
+
+先下一个这个插件
+
+
+
+![image-20240814123204356](./assets/image-20240814123204356.png)
+
+
+
+![image-20240814123211423](./assets/image-20240814123211423.png)
+
+
+
+完成之后，返回
+
+
+
+![image-20240814123248819](./assets/image-20240814123248819.png)
+
+
+
+
+
+![image-20240814123411353](./assets/image-20240814123411353.png)
+
+
+
+这里新增一个
+
+
+
+![image-20240814123528555](./assets/image-20240814123528555.png)
+
+
+
+就真实想部署项目的服务器 ip
+
+
+
+![image-20240814131055679](./assets/image-20240814131055679.png)
+
+
+
+这里要输入服务器的密码
+
+
+
+![image-20240814131432418](./assets/image-20240814131432418.png)
+
+
+
+测试链接成功就行，保存
+
+
+
+再回来
+
+
+
+![image-20240814131527801](./assets/image-20240814131527801.png)
+
+
+
+这下就可以执行 ssh 命令了
+
+
+
+![image-20240814131634775](./assets/image-20240814131634775.png)
+
+
+
+这里用了一大段脚本呢
+
+
+
+![image-20240814131756116](./assets/image-20240814131756116.png)
+
+
+
+
+
+```shell
+cp /var/jenkins_home/workspace/xiong-club-subject/xiong-club-subject/xiong-club-starter/target/xiong-club-starter.jar /var/jenkins_home/jar/
+#!/bin/bash
+APP_NAME=xiong-club-starter.jar
+LOG_NAME=xiong-club-starter.log
+
+pid=`ps -ef | grep $APP_NAME | grep -v grep|awk '{print $2}'`
+
+function is_exist(){
+pid=`ps -ef | grep $APP_NAME | grep -v grep|awk '{print $2}'`
+if [ -z ${pid} ]; then
+String="notExist"
+echo $String
+else
+String="exist"
+echo $String
+fi
+}
+
+str=$(is_exist)
+if [ ${str} = "exist" ]; then
+echo " 检测到已经启动的程序，pid 是 ${pid} "
+kill -9 $pid
+else
+echo " 程序没有启动了 "
+echo "${APP_NAME} is not running"
+fi
+
+str=$(is_exist)
+if [ ${str} = "exist" ]; then
+echo "${APP_NAME} 已经启动了. pid=${pid} ."
+else
+source /etc/profile
+BUILD_ID=dontKillMe
+nohup java -Xms300m -Xmx300m -jar /var/jenkins_home/jar/$APP_NAME   >$LOG_NAME 2>&1 &
+echo "程序已重新启动..."
+fi
+```
+
+
+
+保存，再试一次，试试
+
+
+
+![image-20240814131916764](./assets/image-20240814131916764.png)
+
+
+
+
+
+![image-20240814131939884](./assets/image-20240814131939884.png)
+
+
+
+构建成功了，看看有没有跑起来
+
+
+
+![image-20240814131956920](./assets/image-20240814131956920.png)
+
+
+
+确实是复制过去了
+
+
+
+![image-20240814132012519](./assets/image-20240814132012519.png)
+
+
+
+厉害了，跑起来了，后台启动的
+
+
+
+试试接口
+
+
+
+![image-20240814132048912](./assets/image-20240814132048912.png)
+
+
+
+没问题，这样就完成了全自动了，我超
+
+
+
+![image-20240814132223910](./assets/image-20240814132223910.png)
+
+
+
+厉害，这就是自动部署
+
+
+
+##### 2.39 docker 安装 minio
+
+
+
+【搭建自己的 oos 服务器】
+
+
+
+```
+docker search minio
+```
+
+
+
+![image-20240814132422872](./assets/image-20240814132422872.png)
+
+
+
+```
+docker pull minio/minio
+```
+
+
+
+![image-20240814132527678](./assets/image-20240814132527678.png)
+
+
+
+这里又要等一下了
+
+
+
+![image-20240814132707633](./assets/image-20240814132707633.png)
+
+
+
+OK，直接启动容器
+
+
+
+```
+docker run -p 9000:9000 -p 9090:9090 \
+ --name minio \
+ -d --restart=always \
+ -e "MINIO_ACCESS_KEY=minioadmin" \
+ -e "MINIO_SECRET_KEY=minioadmin" \
+ -v /mydata/minio/data:/data \
+ minio/minio server \
+ /data --console-address ":9090" -address ":9000"
+```
+
+
+
+![image-20240814133002604](./assets/image-20240814133002604.png)
+
+
+
+开个端口：
+
+
+
+![image-20240814133024246](./assets/image-20240814133024246.png)
+
+
+
+9090 也要开应该
+
+
+
+![image-20240814133119609](./assets/image-20240814133119609.png)
+
+
+
+
+
+![image-20240814133136331](./assets/image-20240814133136331.png)
+
+
+
+
+
+![image-20240814133142071](./assets/image-20240814133142071.png)
+
+
+
+出来了
+
+
+
+![image-20240814133220155](./assets/image-20240814133220155.png)
+
+
+
+密码就是之前设置那个
+
+
+
+![image-20240814133233863](./assets/image-20240814133233863.png)
+
+
+
+这样就直接进来了，这和 阿里云 oos 还是很像的，当然我们要通过代码来操作这个东西
+
+
+
+##### 2.40 oss 服务抽取思想以及模块开发
+
+
+
+就是要单独做一个服务
+
+
+
+新的 Maven 模块
+
+
+
+![image-20240814133614332](./assets/image-20240814133614332.png)
+
+
+
+![image-20240814133711285](./assets/image-20240814133711285.png)
+
+
+
+这个就是我们专门的对象存储服务，对外提供接口就行了
+
+
+
+加依赖
+
+
+
+![image-20240814134035662](./assets/image-20240814134035662.png)
+
+
+
+这个服务跑在 4000 端口
+
+
+
+![image-20240814134232942](./assets/image-20240814134232942.png)
+
+
+
+能跑起来就行
+
+
+
+![image-20240814134400755](./assets/image-20240814134400755.png)
+
+
+
+加上 minio  的依赖
+
+新增配置类
+
+
+
+![image-20240814134429779](./assets/image-20240814134429779.png)
+
+
+
+工具类
+
+
+
+![image-20240814134652704](./assets/image-20240814134652704.png)
+
 
 
 

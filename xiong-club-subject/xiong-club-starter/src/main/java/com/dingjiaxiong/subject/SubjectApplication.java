@@ -17,7 +17,6 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @SpringBootApplication
 @ComponentScan("com.dingjiaxiong")
 @MapperScan("com.dingjiaxiong.**.mapper")
-@EnableTransactionManagement
 public class SubjectApplication {
 
     public static void main(String[] args) {

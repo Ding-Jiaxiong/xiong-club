@@ -1,16 +1,7 @@
 server:
-  port: 3000
-  servlet:
-    context-path: /api
+  port: 3010
 
 spring:
-
-  profiles:
-    active: dev
-
-  mvc:
-    pathmatch:
-      matching-strategy: ant_path_matcher
 
   datasource:
     username: root

@@ -4,22 +4,3 @@ minio:
   url: http://116.196.77.213:9000
   accessKey: minioadmin
   secretKey: minioadmin
-
-
-storage:
-  service:
-    type: minio
-
-
-nacos:
-  config:
-    secret-key: nacos
-    access-key: nacos
-    data-id: xiong-club-oss
-    group: DEFAULT_GROUP
-    type: yaml
-    server-addr: http://116.196.77.213:8848/
-    auto-refresh: true
-    remote-first: true
-    bootstrap:
-      enable: true

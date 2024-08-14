@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dingjiaxiong.auth.infra.basic.mapper.AuthPermissionMapper">
+
+    <resultMap id="BaseResultMap" type="com.dingjiaxiong.auth.infra.basic.entity.AuthPermission">
+            <id property="id" column="id" jdbcType="BIGINT"/>
+            <result property="name" column="name" jdbcType="VARCHAR"/>
+            <result property="parentId" column="parent_id" jdbcType="BIGINT"/>
+            <result property="type" column="type" jdbcType="TINYINT"/>
+            <result property="menuUrl" column="menu_url" jdbcType="VARCHAR"/>
+            <result property="status" column="status" jdbcType="TINYINT"/>
+            <result property="show" column="show" jdbcType="TINYINT"/>
+            <result property="icon" column="icon" jdbcType="VARCHAR"/>
+            <result property="permissionKey" column="permission_key" jdbcType="VARCHAR"/>
+            <result property="createdBy" column="created_by" jdbcType="VARCHAR"/>
+            <result property="createdTime" column="created_time" jdbcType="TIMESTAMP"/>
+            <result property="updateBy" column="update_by" jdbcType="VARCHAR"/>
+            <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+            <result property="isDeleted" column="is_deleted" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,name,parent_id,
+        type,menu_url,status,
+        show,icon,permission_key,
+        created_by,created_time,update_by,
+        update_time,is_deleted
+    </sql>
+</mapper>

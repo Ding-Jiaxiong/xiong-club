@@ -68,24 +68,24 @@
             <option name="tableUIInfoList">
               <list>
                 <TableUIInfo>
-                  <option name="className" value="SubjectBrief" />
-                  <option name="tableName" value="subject_brief" />
+                  <option name="className" value="AuthUser" />
+                  <option name="tableName" value="auth_user" />
                 </TableUIInfo>
                 <TableUIInfo>
-                  <option name="className" value="SubjectInfo" />
-                  <option name="tableName" value="subject_info" />
+                  <option name="className" value="AuthRolePermission" />
+                  <option name="tableName" value="auth_role_permission" />
                 </TableUIInfo>
                 <TableUIInfo>
-                  <option name="className" value="SubjectJudge" />
-                  <option name="tableName" value="subject_judge" />
+                  <option name="className" value="AuthRole" />
+                  <option name="tableName" value="auth_role" />
                 </TableUIInfo>
                 <TableUIInfo>
-                  <option name="className" value="SubjectMultiple" />
-                  <option name="tableName" value="subject_multiple" />
+                  <option name="className" value="AuthPermission" />
+                  <option name="tableName" value="auth_permission" />
                 </TableUIInfo>
                 <TableUIInfo>
-                  <option name="className" value="SubjectRadio" />
-                  <option name="tableName" value="subject_radio" />
+                  <option name="className" value="AuthUserRole" />
+                  <option name="tableName" value="auth_user_role" />
                 </TableUIInfo>
               </list>
             </option>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dingjiaxiong.auth.infra.basic.mapper.AuthRoleMapper">
+
+    <resultMap id="BaseResultMap" type="com.dingjiaxiong.auth.infra.basic.entity.AuthRole">
+            <id property="id" column="id" jdbcType="BIGINT"/>
+            <result property="roleName" column="role_name" jdbcType="VARCHAR"/>
+            <result property="roleKey" column="role_key" jdbcType="VARCHAR"/>
+            <result property="createdBy" column="created_by" jdbcType="VARCHAR"/>
+            <result property="createdTime" column="created_time" jdbcType="TIMESTAMP"/>
+            <result property="updateBy" column="update_by" jdbcType="VARCHAR"/>
+            <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+            <result property="isDeleted" column="is_deleted" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,role_name,role_key,
+        created_by,created_time,update_by,
+        update_time,is_deleted
+    </sql>
+</mapper>

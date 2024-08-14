@@ -1,5 +1,6 @@
 package com.dingjiaxiong.oss.config;
 
+import com.alibaba.nacos.api.config.annotation.NacosValue;
 import com.dingjiaxiong.oss.adapter.AliStorageAdapter;
 import com.dingjiaxiong.oss.adapter.MinioStorageAdapter;
 import com.dingjiaxiong.oss.adapter.StorageAdapter;

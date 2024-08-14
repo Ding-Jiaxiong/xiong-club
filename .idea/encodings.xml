@@ -3,6 +3,24 @@
   <component name="Encoding">
     <file url="file://$PROJECT_DIR$/xiong-club-auth/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/xiong-club-auth/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/xiong-club-auth/xiong-club-auth-api/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/xiong-club-auth/xiong-club-auth-api/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/xiong-club-auth/xiong-club-auth-application/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/xiong-club-auth/xiong-club-auth-application/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/xiong-club-auth/xiong-club-auth-application/xiong-club-auth-application-controller/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/xiong-club-auth/xiong-club-auth-application/xiong-club-auth-application-controller/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/xiong-club-auth/xiong-club-auth-application/xiong-club-auth-application-job/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/xiong-club-auth/xiong-club-auth-application/xiong-club-auth-application-job/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/xiong-club-auth/xiong-club-auth-application/xiong-club-auth-application-mq/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/xiong-club-auth/xiong-club-auth-application/xiong-club-auth-application-mq/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/xiong-club-auth/xiong-club-auth-common/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/xiong-club-auth/xiong-club-auth-common/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/xiong-club-auth/xiong-club-auth-domain/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/xiong-club-auth/xiong-club-auth-domain/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/xiong-club-auth/xiong-club-auth-infra/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/xiong-club-auth/xiong-club-auth-infra/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/xiong-club-auth/xiong-club-auth-starter/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/xiong-club-auth/xiong-club-auth-starter/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/xiong-club-gateway/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/xiong-club-gateway/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/xiong-club-oss/src/main/java" charset="UTF-8" />

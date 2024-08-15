@@ -15,6 +15,7 @@
         <module name="xiong-club-auth-application-mq" />
         <module name="xiong-club-domain" />
         <module name="xiong-club-auth-common" />
+        <module name="xiong-club-wx" />
         <module name="xiong-club-infra" />
         <module name="xiong-club-auth-api" />
         <module name="xiong-club-subject-api" />

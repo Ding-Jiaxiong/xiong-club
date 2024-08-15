@@ -10,4 +10,5 @@ import com.dingjiaxiong.auth.infra.basic.entity.AuthPermission;
 */
 public interface AuthPermissionService extends IService<AuthPermission> {
 
+
 }

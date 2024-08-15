@@ -1,9 +1,7 @@
 package com.dingjiaxiong.auth.infra.basic.entity;
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableName;
+import com.baomidou.mybatisplus.annotation.*;
+
 import java.io.Serializable;
 import java.util.Date;
 import lombok.Data;
@@ -49,6 +47,7 @@ public class AuthPermission implements Serializable {
     /**
      * 展示状态 0展示 1隐藏
      */
+    @TableField(value = "`show`")
     private Integer show;
 
     /**
@@ -84,6 +83,7 @@ public class AuthPermission implements Serializable {
     /**
      * 是否被删除 0为删除 1已删除
      */
+    @TableLogic
     private Integer isDeleted;
 
     @TableField(exist = false)

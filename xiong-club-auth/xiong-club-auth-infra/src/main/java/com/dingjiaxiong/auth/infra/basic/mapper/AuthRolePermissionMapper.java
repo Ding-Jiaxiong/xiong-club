@@ -2,6 +2,9 @@ package com.dingjiaxiong.auth.infra.basic.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.dingjiaxiong.auth.infra.basic.entity.AuthRolePermission;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 /**
 * @author DingJiaxiong
@@ -10,6 +13,8 @@ import com.dingjiaxiong.auth.infra.basic.entity.AuthRolePermission;
 * @Entity com.dingjiaxiong.auth.infra.basic.entity.AuthRolePermission
 */
 public interface AuthRolePermissionMapper extends BaseMapper<AuthRolePermission> {
+
+    int insertBatch(@Param("entities") List<AuthRolePermission> entities);
 
 }
 

@@ -6,6 +6,10 @@ import com.dingjiaxiong.auth.infra.basic.mapper.AuthUserMapper;
 import com.dingjiaxiong.auth.infra.basic.service.AuthUserService;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
+import java.util.Collections;
+import java.util.List;
+
 /**
 * @author DingJiaxiong
 * @description 针对表【auth_user(用户信息表)】的数据库操作Service实现
@@ -15,6 +19,13 @@ import org.springframework.stereotype.Service;
 public class AuthUserServiceImpl extends ServiceImpl<AuthUserMapper, AuthUser>
     implements AuthUserService {
 
+    @Resource
+    private AuthUserMapper authUserMapper;
+
+    @Override
+    public List<AuthUser> queryByCondition(AuthUser existAuthUser) {
+        return authUserMapper.queryAllByLimit(existAuthUser);
+    }
 }
 
 

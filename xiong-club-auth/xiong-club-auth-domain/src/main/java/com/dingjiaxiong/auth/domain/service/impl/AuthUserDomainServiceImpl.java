@@ -1,6 +1,8 @@
 package com.dingjiaxiong.auth.domain.service.impl;
 
 import cn.dev33.satoken.secure.SaSecureUtil;
+import cn.dev33.satoken.stp.SaTokenInfo;
+import cn.dev33.satoken.stp.StpUtil;
 import com.dingjiaxiong.auth.common.enums.AuthUserStatusEnum;
 import com.dingjiaxiong.auth.domain.constants.AuthConstant;
 import com.dingjiaxiong.auth.domain.convert.AuthUserBOConverter;
@@ -51,14 +53,26 @@ public class AuthUserDomainServiceImpl implements AuthUserDomainService {
     //
     private String authRolePrefix = "auth.role";
 
+    private static final String LOGIN_PREFIX = "loginCode";
+
     @Override
     @SneakyThrows
     @Transactional
     public Boolean register(AuthUserBO authUserBO) {
 
+        //校验用户是否存在
+        AuthUser existAuthUser = new AuthUser();
+        existAuthUser.setUserName(authUserBO.getUserName());
+        List<AuthUser> existUser = authUserService.queryByCondition(existAuthUser);
+        if (existUser.size() > 0) {
+            return true;
+        }
+
         AuthUser authUser = AuthUserBOConverter.INSTANCE.convertBOToEntity(authUserBO);
 
-        authUser.setPassword(SaSecureUtil.md5BySalt(authUser.getPassword(), salt));
+        if (StringUtils.isNotBlank(authUser.getPassword())) {
+            authUser.setPassword(SaSecureUtil.md5BySalt(authUser.getPassword(), salt));
+        }
 
         authUser.setStatus(AuthUserStatusEnum.OPEN.getCode());
 
@@ -109,5 +123,19 @@ public class AuthUserDomainServiceImpl implements AuthUserDomainService {
         return count;
     }
 
+    @Override
+    public SaTokenInfo doLogin(String validCode) {
+        String loginKey = redisUtil.buildKey(LOGIN_PREFIX, validCode);
+        String openId = redisUtil.get(loginKey);
+        if (StringUtils.isBlank(openId)) {
+            return null;
+        }
+        AuthUserBO authUserBO = new AuthUserBO();
+        authUserBO.setUserName(openId);
+        this.register(authUserBO);
+        StpUtil.login(openId);
+        SaTokenInfo tokenInfo = StpUtil.getTokenInfo();
+        return tokenInfo;
+    }
 
 }

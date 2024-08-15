@@ -1,6 +1,7 @@
 package com.dingjiaxiong.oss.controller;
 
 import com.alibaba.nacos.api.config.annotation.NacosValue;
+import com.dingjiaxiong.oss.entity.Result;
 import com.dingjiaxiong.oss.service.FileService;
 import com.dingjiaxiong.oss.util.MinioUtil;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -37,4 +38,17 @@ public class FileController {
         return storagetttype;
     }
 
+    @RequestMapping("/getUrl")
+    public String getUrl(String bucketName, String objectName) throws Exception {
+        return fileService.getUrl(bucketName, objectName);
+    }
+
+    /**
+     * 上传文件
+     */
+    @RequestMapping("/upload")
+    public Result upload(MultipartFile uploadFile, String bucket, String objectName) throws Exception {
+        String url = fileService.uploadFile(uploadFile, bucket, objectName);
+        return Result.ok(url);
+    }
 }

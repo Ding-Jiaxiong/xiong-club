@@ -2,10 +2,15 @@ package com.dingjiaxiong.auth.domain.service.impl;
 
 import cn.dev33.satoken.secure.SaSecureUtil;
 import com.dingjiaxiong.auth.common.enums.AuthUserStatusEnum;
+import com.dingjiaxiong.auth.domain.constants.AuthConstant;
 import com.dingjiaxiong.auth.domain.convert.AuthUserBOConverter;
 import com.dingjiaxiong.auth.domain.entity.AuthUserBO;
 import com.dingjiaxiong.auth.domain.service.AuthUserDomainService;
+import com.dingjiaxiong.auth.infra.basic.entity.AuthRole;
 import com.dingjiaxiong.auth.infra.basic.entity.AuthUser;
+import com.dingjiaxiong.auth.infra.basic.entity.AuthUserRole;
+import com.dingjiaxiong.auth.infra.basic.service.AuthRoleService;
+import com.dingjiaxiong.auth.infra.basic.service.AuthUserRoleService;
 import com.dingjiaxiong.auth.infra.basic.service.AuthUserService;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
@@ -27,10 +32,17 @@ public class AuthUserDomainServiceImpl implements AuthUserDomainService {
     @Resource
     private AuthUserService authUserService;
 
+    @Resource
+    private AuthUserRoleService authUserRoleService;
+
+    @Resource
+    private AuthRoleService authRoleService;
+
     private String salt = "xiongclub";
 
     @Override
     @SneakyThrows
+    @Transactional
     public Boolean register(AuthUserBO authUserBO) {
 
         AuthUser authUser = AuthUserBOConverter.INSTANCE.convertBOToEntity(authUserBO);
@@ -41,7 +53,17 @@ public class AuthUserDomainServiceImpl implements AuthUserDomainService {
 
         boolean save = authUserService.save(authUser);
 
-        // 建立一个初步的角色的关联
+        // 建立一个初步的角色的关联，插入之后
+        AuthRole authRole = new AuthRole();
+        authRole.setRoleKey(AuthConstant.NORMAL_USER);
+        AuthRole roleResult = authRoleService.queryByCondition(authRole);
+        Long roleId = roleResult.getId();
+        Long userId = authUser.getId();
+        AuthUserRole authUserRole = new AuthUserRole();
+        authUserRole.setUserId(userId);
+        authUserRole.setRoleId(roleId);
+
+        authUserRoleService.insert(authUserRole);
 
         return save;
     }

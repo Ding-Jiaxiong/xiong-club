@@ -10,4 +10,6 @@ import com.dingjiaxiong.auth.infra.basic.entity.AuthUserRole;
 */
 public interface AuthUserRoleService extends IService<AuthUserRole> {
 
+    AuthUserRole insert(AuthUserRole authUserRole);
+
 }

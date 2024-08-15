@@ -10,4 +10,6 @@ import com.dingjiaxiong.auth.infra.basic.entity.AuthRole;
 */
 public interface AuthRoleService extends IService<AuthRole> {
 
+    AuthRole queryByCondition(AuthRole authRole);
+
 }

@@ -11,6 +11,8 @@ import com.dingjiaxiong.auth.infra.basic.entity.AuthRole;
 */
 public interface AuthRoleMapper extends BaseMapper<AuthRole> {
 
+    AuthRole queryAllByLimit(AuthRole authRole);
+
 }
 
 

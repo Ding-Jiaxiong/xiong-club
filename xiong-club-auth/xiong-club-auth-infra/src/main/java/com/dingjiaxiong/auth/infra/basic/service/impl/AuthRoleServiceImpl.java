@@ -6,6 +6,8 @@ import com.dingjiaxiong.auth.infra.basic.mapper.AuthRoleMapper;
 import com.dingjiaxiong.auth.infra.basic.service.AuthRoleService;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
+
 /**
 * @author DingJiaxiong
 * @description 针对表【auth_role】的数据库操作Service实现
@@ -15,6 +17,13 @@ import org.springframework.stereotype.Service;
 public class AuthRoleServiceImpl extends ServiceImpl<AuthRoleMapper, AuthRole>
     implements AuthRoleService {
 
+    @Resource
+    private AuthRoleMapper authRoleMapper;
+
+    @Override
+    public AuthRole queryByCondition(AuthRole authRole) {
+        return authRoleMapper.queryAllByLimit(authRole);
+    }
 }
 
 

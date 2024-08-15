@@ -8,6 +8,7 @@ import lombok.Data;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 /**
  * 题目分类
@@ -46,5 +47,10 @@ public class SubjectCategoryBO implements Serializable {
      * 数量
      */
     private Integer count;
+
+    /**
+     * 标签bo数量
+     */
+    private List<SubjectLabelBO> labelBOList;
 
 }

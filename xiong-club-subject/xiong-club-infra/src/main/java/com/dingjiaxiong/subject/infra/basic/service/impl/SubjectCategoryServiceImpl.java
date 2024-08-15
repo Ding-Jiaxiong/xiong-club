@@ -11,13 +11,13 @@ import java.util.Collections;
 import java.util.List;
 
 /**
-* @author DingJiaxiong
-* @description 针对表【subject_category(题目分类)】的数据库操作Service实现
-* @createDate 2024-08-12 19:31:07
-*/
+ * @author DingJiaxiong
+ * @description 针对表【subject_category(题目分类)】的数据库操作Service实现
+ * @createDate 2024-08-12 19:31:07
+ */
 @Service
 public class SubjectCategoryServiceImpl extends ServiceImpl<SubjectCategoryMapper, SubjectCategory>
-    implements SubjectCategoryService {
+        implements SubjectCategoryService {
 
     @Resource
     private SubjectCategoryMapper subjectCategoryMapper;
@@ -25,6 +25,12 @@ public class SubjectCategoryServiceImpl extends ServiceImpl<SubjectCategoryMappe
     @Override
     public List<SubjectCategory> queryCategory(SubjectCategory subjectCategory) {
         return subjectCategoryMapper.queryCategory(subjectCategory);
+    }
+
+    @Override
+    public Integer querySubjectCount(Long id) {
+
+        return subjectCategoryMapper.querySubjectCount(id);
     }
 }
 

@@ -51,6 +51,11 @@ public class SubjectCategoryDomainServiceImpl implements SubjectCategoryDomainSe
                     JSON.toJSONString(boList));
         }
 
+        boList.forEach(bo -> {
+            Integer subjectCount = subjectCategoryService.querySubjectCount(bo.getId());
+            bo.setCount(subjectCount);
+        });
+
         return boList;
 
     }

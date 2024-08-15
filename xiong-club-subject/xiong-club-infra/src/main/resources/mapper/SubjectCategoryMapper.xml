@@ -60,4 +60,12 @@
         </where>
     </select>
 
+    <select id="querySubjectCount" resultType="java.lang.Integer">
+        select count(distinct subject_id)
+        from subject_mapping a,
+             subject_label b
+        where a.label_id = b.id
+          and b.category_id = #{id}
+    </select>
+
 </mapper>

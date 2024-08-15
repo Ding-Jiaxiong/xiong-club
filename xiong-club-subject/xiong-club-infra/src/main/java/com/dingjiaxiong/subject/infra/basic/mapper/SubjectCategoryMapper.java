@@ -15,6 +15,8 @@ public interface SubjectCategoryMapper extends BaseMapper<SubjectCategory> {
 
     List<SubjectCategory> queryCategory(SubjectCategory subjectCategory);
 
+    Integer querySubjectCount(Long id);
+
 }
 
 

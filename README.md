@@ -6888,13 +6888,41 @@ redis 的主要结构，就是 openId 加验证码
 
 
 
+##### 2.73 公众号开发文档解析
+
+
+
+https://developers.weixin.qq.com/doc/offiaccount/Getting_Started/Overview.html
+
+
+
+![image-20240815135055323](./assets/image-20240815135055323.png)
+
+
+
+就这个东西
+
+
+
+![image-20240815135308453](./assets/image-20240815135308453.png)
 
 
 
 
 
+![image-20240815135430691](./assets/image-20240815135430691.png)
 
 
+
+我们要去申请一个测试号
+
+
+
+![image-20240815135458897](./assets/image-20240815135458897.png)
+
+
+
+申请一个就行
 
 
 

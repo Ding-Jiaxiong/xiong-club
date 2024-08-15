@@ -11,7 +11,7 @@
  Target Server Version : 50744
  File Encoding         : 65001
 
- Date: 14/08/2024 17:10:08
+ Date: 14/08/2024 22:30:39
 */
 
 SET NAMES utf8mb4;
@@ -145,12 +145,13 @@ CREATE TABLE `subject_brief`  (
   `update_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
   `is_deleted` int(11) NULL DEFAULT 0,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '简答题' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '简答题' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of subject_brief
 -- ----------------------------
 INSERT INTO `subject_brief` VALUES (1, 12, '题目答案', NULL, NULL, NULL, NULL, 0);
+INSERT INTO `subject_brief` VALUES (2, 13, '题目答案2', NULL, NULL, NULL, NULL, 0);
 
 -- ----------------------------
 -- Table structure for subject_category
@@ -197,7 +198,7 @@ CREATE TABLE `subject_info`  (
   `update_time` datetime NULL DEFAULT NULL COMMENT '修改时间',
   `is_deleted` int(11) NULL DEFAULT 0,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 13 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '题目信息表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 14 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '题目信息表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of subject_info
@@ -206,6 +207,7 @@ INSERT INTO `subject_info` VALUES (1, 'SpringBoot自动装配原理是什么？'
 INSERT INTO `subject_info` VALUES (2, 'SpringBoot自动装配原理是什么？【多选题版例子】', 1, NULL, 2, 10, '题目解析', NULL, NULL, NULL, NULL, 0);
 INSERT INTO `subject_info` VALUES (3, 'SpringBoot自动装配原理是什么？【判断题版】', 1, NULL, 3, 8, '题目解析', NULL, NULL, NULL, NULL, 0);
 INSERT INTO `subject_info` VALUES (12, 'SpringBoot自动装配原理是什么？【简答题版】', 1, NULL, 4, 6, '题目解析', NULL, NULL, NULL, NULL, 0);
+INSERT INTO `subject_info` VALUES (13, '多线程实现方式有哪几种？2', 1, NULL, 4, 2, '题目解析2', NULL, NULL, NULL, NULL, 0);
 
 -- ----------------------------
 -- Table structure for subject_judge
@@ -268,7 +270,7 @@ CREATE TABLE `subject_mapping`  (
   `update_time` datetime NULL DEFAULT NULL COMMENT '修改时间',
   `is_deleted` int(11) NULL DEFAULT 0,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 47 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '题目分类关系表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 48 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '题目分类关系表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of subject_mapping
@@ -289,6 +291,7 @@ INSERT INTO `subject_mapping` VALUES (43, 12, 4, 2, NULL, NULL, NULL, NULL, 0);
 INSERT INTO `subject_mapping` VALUES (44, 12, 4, 3, NULL, NULL, NULL, NULL, 0);
 INSERT INTO `subject_mapping` VALUES (45, 12, 5, 2, NULL, NULL, NULL, NULL, 0);
 INSERT INTO `subject_mapping` VALUES (46, 12, 5, 3, NULL, NULL, NULL, NULL, 0);
+INSERT INTO `subject_mapping` VALUES (47, 13, 5, 11, NULL, NULL, NULL, NULL, 0);
 
 -- ----------------------------
 -- Table structure for subject_multiple

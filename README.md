@@ -7344,6 +7344,58 @@ redis 中存的是
 
 
 
+##### 2.80 前端 nodejs 安装
+
+
+
+看看，版本用的 18.18 ，我这里就用 nvm 直接下载一个吧
+
+
+
+![image-20240815165900646](./assets/image-20240815165900646.png)
+
+
+
+再来一个
+
+
+
+![image-20240815170250273](./assets/image-20240815170250273.png)
+
+
+
+装 pnpm
+
+
+
+这里有一个前端项目的源码
+
+
+
+![image-20240815170417349](./assets/image-20240815170417349.png)
+
+
+
+
+
+`npm install pnpm -g`
+
+
+
+![image-20240815170515069](./assets/image-20240815170515069.png)
+
+
+
+![image-20240815170531813](./assets/image-20240815170531813.png)
+
+
+
+换个源 `pnpm config set registry https://registry.npmmirror.com/`
+
+
+
+![image-20240815170657735](./assets/image-20240815170657735.png)
+
 
 
 

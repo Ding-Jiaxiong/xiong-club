@@ -86,6 +86,22 @@ public class UserController {
 
 
     /**
+     * 用户退出
+     */
+    @RequestMapping("logOut")
+    public Result logOut(@RequestParam String userName) {
+        try {
+            log.info("UserController.logOut.userName:{}", userName);
+            Preconditions.checkArgument(!StringUtils.isBlank(userName), "用户名不能为空");
+            StpUtil.logout(userName);
+            return Result.ok();
+        } catch (Exception e) {
+            log.error("UserController.logOut.error:{}", e.getMessage(), e);
+            return Result.fail("用户登出失败");
+        }
+    }
+
+    /**
      * 删除用户
      */
     @RequestMapping("delete")

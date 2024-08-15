@@ -5,13 +5,11 @@ import com.dingjiaxiong.auth.common.enums.AuthUserStatusEnum;
 import com.dingjiaxiong.auth.domain.constants.AuthConstant;
 import com.dingjiaxiong.auth.domain.convert.AuthUserBOConverter;
 import com.dingjiaxiong.auth.domain.entity.AuthUserBO;
+import com.dingjiaxiong.auth.domain.redis.RedisUtil;
 import com.dingjiaxiong.auth.domain.service.AuthUserDomainService;
-import com.dingjiaxiong.auth.infra.basic.entity.AuthRole;
-import com.dingjiaxiong.auth.infra.basic.entity.AuthUser;
-import com.dingjiaxiong.auth.infra.basic.entity.AuthUserRole;
-import com.dingjiaxiong.auth.infra.basic.service.AuthRoleService;
-import com.dingjiaxiong.auth.infra.basic.service.AuthUserRoleService;
-import com.dingjiaxiong.auth.infra.basic.service.AuthUserService;
+import com.dingjiaxiong.auth.infra.basic.entity.*;
+import com.dingjiaxiong.auth.infra.basic.service.*;
+import com.google.gson.Gson;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
@@ -38,7 +36,20 @@ public class AuthUserDomainServiceImpl implements AuthUserDomainService {
     @Resource
     private AuthRoleService authRoleService;
 
+    @Resource
+    private AuthPermissionService authPermissionService;
+
+    @Resource
+    private AuthRolePermissionService authRolePermissionService;
+
     private String salt = "xiongclub";
+
+    @Resource
+    private RedisUtil redisUtil;
+
+    private String authPermissionPrefix = "auth.permission";
+    //
+    private String authRolePrefix = "auth.role";
 
     @Override
     @SneakyThrows
@@ -64,6 +75,22 @@ public class AuthUserDomainServiceImpl implements AuthUserDomainService {
         authUserRole.setRoleId(roleId);
 
         authUserRoleService.insert(authUserRole);
+
+        String roleKey = redisUtil.buildKey(authRolePrefix, authUser.getUserName());
+        List<AuthRole> roleList = new LinkedList<>();
+        roleList.add(authRole);
+        redisUtil.set(roleKey, new Gson().toJson(roleList));
+
+        AuthRolePermission authRolePermission = new AuthRolePermission();
+        authRolePermission.setRoleId(roleId);
+        List<AuthRolePermission> rolePermissionList = authRolePermissionService.queryByCondition(authRolePermission);
+
+        List<Long> permissionIdList = rolePermissionList.stream()
+                .map(AuthRolePermission::getPermissionId).collect(Collectors.toList());
+        //根据roleId查权限
+        List<AuthPermission> permissionList = authPermissionService.queryByRoleList(permissionIdList);
+        String permissionKey = redisUtil.buildKey(authPermissionPrefix, authUser.getUserName());
+        redisUtil.set(permissionKey, new Gson().toJson(permissionList));
 
         return save;
     }

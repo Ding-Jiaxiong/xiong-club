@@ -14,4 +14,6 @@ public interface AuthRolePermissionService extends IService<AuthRolePermission> 
 
     int batchInsert(List<AuthRolePermission> rolePermissionList);
 
+    List<AuthRolePermission> queryByCondition(AuthRolePermission authRolePermission);
+
 }

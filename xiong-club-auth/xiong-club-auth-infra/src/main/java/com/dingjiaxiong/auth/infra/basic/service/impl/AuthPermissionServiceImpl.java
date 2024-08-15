@@ -6,6 +6,10 @@ import com.dingjiaxiong.auth.infra.basic.mapper.AuthPermissionMapper;
 import com.dingjiaxiong.auth.infra.basic.service.AuthPermissionService;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
+import java.util.Collections;
+import java.util.List;
+
 /**
 * @author DingJiaxiong
 * @description 针对表【auth_permission】的数据库操作Service实现
@@ -15,6 +19,13 @@ import org.springframework.stereotype.Service;
 public class AuthPermissionServiceImpl extends ServiceImpl<AuthPermissionMapper, AuthPermission>
     implements AuthPermissionService {
 
+    @Resource
+    private AuthPermissionMapper authPermissionMapper;
+
+    @Override
+    public List<AuthPermission> queryByRoleList(List<Long> roleIdList) {
+        return authPermissionMapper.queryByRoleList(roleIdList);
+    }
 }
 
 

@@ -28,4 +28,12 @@
         created_by,created_time,update_by,
         update_time,is_deleted
     </sql>
+
+    <select id="queryByRoleList" resultType="com.dingjiaxiong.auth.infra.basic.entity.AuthPermission">
+        select * from auth_permission
+        where id in
+        <foreach open="(" close=")" collection="list" item="id" separator=",">
+            #{id}
+        </foreach>
+    </select>
 </mapper>

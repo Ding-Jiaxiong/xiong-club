@@ -16,6 +16,8 @@ public interface AuthRolePermissionMapper extends BaseMapper<AuthRolePermission>
 
     int insertBatch(@Param("entities") List<AuthRolePermission> entities);
 
+    List<AuthRolePermission> queryAllByLimit(AuthRolePermission authRolePermission);
+
 }
 
 

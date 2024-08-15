@@ -30,4 +30,36 @@
             #{entity.updateTime})
         </foreach>
     </insert>
+
+    <select id="queryAllByLimit" resultType="com.dingjiaxiong.auth.infra.basic.entity.AuthRolePermission">
+        select
+        id, role_id, permission_id, created_by, created_time, update_by, update_time, is_deleted
+        from auth_role_permission
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="roleId != null">
+                and role_id = #{roleId}
+            </if>
+            <if test="permissionId != null">
+                and permission_id = #{permissionId}
+            </if>
+            <if test="createdBy != null and createdBy != ''">
+                and created_by = #{createdBy}
+            </if>
+            <if test="createdTime != null">
+                and created_time = #{createdTime}
+            </if>
+            <if test="updateBy != null and updateBy != ''">
+                and update_by = #{updateBy}
+            </if>
+            <if test="updateTime != null">
+                and update_time = #{updateTime}
+            </if>
+            <if test="isDeleted != null">
+                and is_deleted = #{isDeleted}
+            </if>
+        </where>
+    </select>
 </mapper>

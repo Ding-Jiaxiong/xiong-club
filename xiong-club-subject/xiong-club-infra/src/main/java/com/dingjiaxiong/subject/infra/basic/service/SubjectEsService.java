@@ -6,11 +6,4 @@ import com.dingjiaxiong.subject.infra.basic.entity.SubjectInfoEs;
 
 public interface SubjectEsService {
 
-    void createIndex();
-
-    void addDoc();
-
-    void find();
-
-    void search();
 }

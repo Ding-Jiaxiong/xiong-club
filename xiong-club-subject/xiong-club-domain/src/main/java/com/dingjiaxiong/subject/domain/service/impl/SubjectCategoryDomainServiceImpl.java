@@ -8,6 +8,7 @@ import com.dingjiaxiong.subject.domain.convert.SubjectCategoryConverter;
 import com.dingjiaxiong.subject.domain.entity.SubjectCategoryBO;
 import com.dingjiaxiong.subject.domain.entity.SubjectLabelBO;
 import com.dingjiaxiong.subject.domain.service.SubjectCategoryDomainService;
+import com.dingjiaxiong.subject.domain.util.CacheUtil;
 import com.dingjiaxiong.subject.infra.basic.entity.SubjectCategory;
 import com.dingjiaxiong.subject.infra.basic.entity.SubjectLabel;
 import com.dingjiaxiong.subject.infra.basic.entity.SubjectMapping;
@@ -45,6 +46,9 @@ public class SubjectCategoryDomainServiceImpl implements SubjectCategoryDomainSe
 
     @Resource
     private ThreadPoolExecutor labelThreadPool;
+
+    @Resource
+    private CacheUtil cacheUtil;
 
     private Cache<String, String> localCache =
             CacheBuilder.newBuilder()
@@ -109,21 +113,12 @@ public class SubjectCategoryDomainServiceImpl implements SubjectCategoryDomainSe
     @Override
     public List<SubjectCategoryBO> queryCategoryAndLabel(SubjectCategoryBO subjectCategoryBO) {
 
-        String cacheKey = "CategoryAndLabel." + subjectCategoryBO.getId();
-        String content = localCache.getIfPresent(cacheKey);
+        Long id = subjectCategoryBO.getId();
 
-        List<SubjectCategoryBO> subjectCategoryBOS = new LinkedList<>();
+        String cacheKey = "categoryAndLabel." + subjectCategoryBO.getId();
 
-        if (StringUtils.isBlank(content)) {  // 缓存拿的时候为空
-            // 为空就去查
-            subjectCategoryBOS = getSubjectCategoryBOS(subjectCategoryBO.getId());
-
-            // 查完放入缓存
-            localCache.put(cacheKey, JSON.toJSONString(subjectCategoryBOS));
-        } else {
-            // 缓存不为空, 就解析缓存拿到的东西
-            subjectCategoryBOS = JSON.parseArray(content, SubjectCategoryBO.class);
-        }
+        List<SubjectCategoryBO> subjectCategoryBOS = cacheUtil.getResult(cacheKey,
+                SubjectCategoryBO.class, (key) -> getSubjectCategoryBOS(id));
 
         // 查询当前大类下所有分类
         return subjectCategoryBOS;

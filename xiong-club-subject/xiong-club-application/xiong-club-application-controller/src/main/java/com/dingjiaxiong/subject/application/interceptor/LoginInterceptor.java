@@ -19,6 +19,9 @@ public class LoginInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         String loginId = request.getHeader("loginId");
+
+//        System.out.println(loginId);
+
         if (StringUtils.isNotBlank(loginId)) {
             LoginContextHolder.set("loginId", loginId);
         }

@@ -29,6 +29,9 @@ public class GlobalConfig extends WebMvcConfigurationSupport {
 
     @Override
     protected void addInterceptors(InterceptorRegistry registry) {
+
+//        System.out.println("这个请求被拦截到了");
+
         registry.addInterceptor(new LoginInterceptor())
                 .addPathPatterns("/**");
     }

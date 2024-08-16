@@ -158,14 +158,14 @@ public class SubjectCategoryController {
      */
     @PostMapping("/queryCategoryAndLabel")
     public Result<List<SubjectCategoryDTO>> queryCategoryAndLabel(@RequestBody SubjectCategoryDTO subjectCategoryDTO
-    , HttpServletRequest request) {
+    ) {
         try {
             if (log.isInfoEnabled()) {
                 log.info("SubjectCategoryController.queryCategoryAndLabel.dto:{}"
                         , JSON.toJSONString(subjectCategoryDTO));
             }
 
-            Enumeration<String> headerNames = request.getHeaderNames();
+//            Enumeration<String> headerNames = request.getHeaderNames();
 
 
             String loginId = LoginUtil.getLoginId();

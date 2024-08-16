@@ -9550,7 +9550,35 @@ sql 都在打印，马德我就说有问题
 
 
 
+##### 3.16 es 初步介绍
 
+
+
+全称 elasticsearch。
+
+隶属于 elsastic stack。[官网地址：https://www.elastic.co/cn/](https://www.elastic.co/cn/)
+
+
+
+![image-20240816173541934](./assets/image-20240816173541934.png)
+
+
+
+其中包含我们的 elasticsearch，kibana，beats，logstash。（ELK）。
+
+es 主要是对数据进行搜索，分析，倒排。他是一个开源的高扩展的分布式全文搜索引擎。近实时的搜索。扩展性高。处理 PB 级别的数据。
+
+为什么不用 mysql 做呢？
+
+es 的特点：
+
+1、搜索的数据对象大量的非结构化的文本
+
+2、倒排索引
+
+3、每个字段都可以被索引和搜索
+
+4、近实时分析，还可以做聚合，支持各种查询
 
 
 

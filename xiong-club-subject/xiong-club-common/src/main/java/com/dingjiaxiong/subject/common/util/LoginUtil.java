@@ -1,7 +1,7 @@
-package com.dingjiaxiong.subject.application.util;
+package com.dingjiaxiong.subject.common.util;
 
 
-import com.dingjiaxiong.subject.application.context.LoginContextHolder;
+import com.dingjiaxiong.subject.common.context.LoginContextHolder;
 
 /**
  * 用户登录util

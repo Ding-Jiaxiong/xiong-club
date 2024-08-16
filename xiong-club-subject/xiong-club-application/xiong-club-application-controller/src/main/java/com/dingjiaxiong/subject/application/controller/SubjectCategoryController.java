@@ -5,7 +5,7 @@ import com.dingjiaxiong.subject.application.convert.SubjectCategoryDTOConverter;
 import com.dingjiaxiong.subject.application.convert.SubjectLabelDTOConverter;
 import com.dingjiaxiong.subject.application.dto.SubjectCategoryDTO;
 import com.dingjiaxiong.subject.application.dto.SubjectLabelDTO;
-import com.dingjiaxiong.subject.application.util.LoginUtil;
+import com.dingjiaxiong.subject.common.util.LoginUtil;
 import com.dingjiaxiong.subject.common.entity.Result;
 import com.dingjiaxiong.subject.domain.entity.SubjectCategoryBO;
 import com.dingjiaxiong.subject.domain.service.SubjectCategoryDomainService;
@@ -18,8 +18,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
-import java.util.Enumeration;
 import java.util.LinkedList;
 import java.util.List;
 

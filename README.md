@@ -8994,13 +8994,27 @@ CPU 异常飙升，排查，top 命令
 
 
 
+##### 3.10 openFeign的意义
 
 
 
+openfeign 是 spring cloud 搞出来的一个升级版，netflix 的 feign 这个不维护了。
+
+openfeign 他就是声明式的 webservice 的客户端，使用 feign，编写调用更加的简单，主要打上注解就可以进行一个调用。
 
 
 
+```
+String responese = service.hello();
+```
 
+
+
+一行代码直接搞定。
+
+feign 就帮助我们把 http 的调用编的非常的容易和方便，他整体的实现就是利用了 resttemplate 对 http 的一个封装。
+
+feign 通过注解的方式配置之后，就可以完成接口的自动绑定，那我们调用 feign 的时候就像掉接口一样，内置负载。内部封装了 ribbon。
 
 
 

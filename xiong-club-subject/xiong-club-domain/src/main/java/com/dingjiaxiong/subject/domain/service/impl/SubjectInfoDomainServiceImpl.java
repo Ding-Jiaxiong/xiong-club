@@ -3,6 +3,7 @@ package com.dingjiaxiong.subject.domain.service.impl;
 import com.alibaba.fastjson.JSON;
 import com.dingjiaxiong.subject.common.entity.PageResult;
 import com.dingjiaxiong.subject.common.enums.IsDeletedFlagEnum;
+import com.dingjiaxiong.subject.common.util.IdWorkerUtil;
 import com.dingjiaxiong.subject.domain.convert.SubjectInfoConverter;
 import com.dingjiaxiong.subject.domain.entity.SubjectInfoBO;
 import com.dingjiaxiong.subject.domain.entity.SubjectOptionBO;
@@ -10,8 +11,10 @@ import com.dingjiaxiong.subject.domain.handler.subject.SubjectTypeHandler;
 import com.dingjiaxiong.subject.domain.handler.subject.SubjectTypeHandlerFactory;
 import com.dingjiaxiong.subject.domain.service.SubjectInfoDomainService;
 import com.dingjiaxiong.subject.infra.basic.entity.SubjectInfo;
+import com.dingjiaxiong.subject.infra.basic.entity.SubjectInfoEs;
 import com.dingjiaxiong.subject.infra.basic.entity.SubjectLabel;
 import com.dingjiaxiong.subject.infra.basic.entity.SubjectMapping;
+import com.dingjiaxiong.subject.infra.basic.service.SubjectEsService;
 import com.dingjiaxiong.subject.infra.basic.service.SubjectInfoService;
 import com.dingjiaxiong.subject.infra.basic.service.SubjectLabelService;
 import com.dingjiaxiong.subject.infra.basic.service.SubjectMappingService;
@@ -20,6 +23,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -39,6 +43,9 @@ public class SubjectInfoDomainServiceImpl implements SubjectInfoDomainService {
 
     @Resource
     private SubjectLabelService subjectLabelService;
+
+    @Resource
+    private SubjectEsService subjectEsService;
 
     @Override
     @Transactional(rollbackFor = Exception.class)
@@ -71,6 +78,19 @@ public class SubjectInfoDomainServiceImpl implements SubjectInfoDomainService {
             });
         });
         subjectMappingService.batchInsert(mappingList);
+
+        //同步到es
+        SubjectInfoEs subjectInfoEs = new SubjectInfoEs();
+        subjectInfoEs.setDocId(new IdWorkerUtil(1, 1, 1).nextId());
+        subjectInfoEs.setSubjectId(subjectInfo.getId());
+        subjectInfoEs.setSubjectAnswer(subjectInfoBO.getSubjectAnswer());
+        subjectInfoEs.setCreateTime(new Date().getTime());
+        subjectInfoEs.setCreateUser("Ding Jiaxiong");
+        subjectInfoEs.setSubjectName(subjectInfo.getSubjectName());
+        subjectInfoEs.setSubjectType(subjectInfo.getSubjectType());
+        subjectEsService.insert(subjectInfoEs);
+
+
     }
 
     @Override

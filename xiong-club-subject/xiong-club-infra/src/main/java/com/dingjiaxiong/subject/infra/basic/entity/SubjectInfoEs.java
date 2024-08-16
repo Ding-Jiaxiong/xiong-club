@@ -1,11 +1,13 @@
 package com.dingjiaxiong.subject.infra.basic.entity;
 
+import com.dingjiaxiong.subject.common.entity.PageInfo;
 import lombok.Data;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 
 @Data
-public class SubjectInfoEs {
+public class SubjectInfoEs extends PageInfo implements Serializable {
 
     private Long subjectId;
 
@@ -26,3 +28,4 @@ public class SubjectInfoEs {
     private BigDecimal score;
 
 }
+

@@ -9671,7 +9671,111 @@ es 的特点：
 
 
 
+##### 3.18 docker安装es & 图形化es
 
+
+
+```
+yum install -y yum-utils device-mapper-persistent-data lvm2
+
+docker search elasticsearch
+
+docker pull elasticsearch:7.3.1
+
+docker run -d --name elasticsearch -p 9200:9200 -p 9300:9300 -e "discovery.type=single-node"  -e ES_JAVA_OPTS="-Xms1024m -Xmx1024m" 3d3aa92f641f
+```
+
+
+
+启动成功之后，访问http://ip:9200/
+
+
+
+![image-20240816174036812](./assets/image-20240816174036812.png)
+
+
+
+![image-20240816174049339](./assets/image-20240816174049339.png)
+
+
+
+![image-20240816174114074](./assets/image-20240816174114074.png)
+
+
+
+慢慢拉
+
+
+
+![image-20240816174916879](./assets/image-20240816174916879.png)
+
+
+
+直接启动
+
+
+
+![image-20240816174936940](./assets/image-20240816174936940.png)
+
+
+
+访问一下啊
+
+
+
+![image-20240816174957557](./assets/image-20240816174957557.png)
+
+
+
+没问题
+
+
+
+还有一个就是 一个插件，es-head，没听过诶
+
+
+
+![image-20240816175309035](./assets/image-20240816175309035.png)
+
+
+
+直接用 浏览器加载这个
+
+
+
+
+
+![image-20240816175429275](./assets/image-20240816175429275.png)
+
+
+
+
+
+![image-20240816175447292](./assets/image-20240816175447292.png)
+
+
+
+固定到工具栏
+
+
+
+![image-20240816175516978](./assets/image-20240816175516978.png)
+
+
+
+连接上看看
+
+![image-20240816175533327](./assets/image-20240816175533327.png)
+
+
+
+
+
+![image-20240816175553544](./assets/image-20240816175553544.png)
+
+
+
+不错不错
 
 
 

@@ -12,7 +12,7 @@ spring:
           filters:
             - StripPrefix=1
         - id: auth
-          uri: lb://xiong-club-auth
+          uri: lb://xiong-club-auth-dev
           predicates:
             - Path=/auth/**
           filters:

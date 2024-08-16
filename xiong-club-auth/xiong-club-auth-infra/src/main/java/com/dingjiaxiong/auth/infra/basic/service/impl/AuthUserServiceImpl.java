@@ -24,6 +24,9 @@ public class AuthUserServiceImpl extends ServiceImpl<AuthUserMapper, AuthUser>
 
     @Override
     public List<AuthUser> queryByCondition(AuthUser existAuthUser) {
+
+//        System.out.println(existAuthUser);
+
         return authUserMapper.queryAllByLimit(existAuthUser);
     }
 

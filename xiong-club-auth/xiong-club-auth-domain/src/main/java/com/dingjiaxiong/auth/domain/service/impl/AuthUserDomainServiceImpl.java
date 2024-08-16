@@ -171,9 +171,14 @@ public class AuthUserDomainServiceImpl implements AuthUserDomainService {
 
     @Override
     public AuthUserBO getUserInfo(AuthUserBO authUserBO) {
+
+//        System.out.println(authUserBO);
+
         AuthUser authUser = new AuthUser();
         authUser.setUserName(authUserBO.getUserName());
+
         List<AuthUser> userList = authUserService.queryByCondition(authUser);
+
         if (CollectionUtils.isEmpty(userList)) {
             return new AuthUserBO();
         }

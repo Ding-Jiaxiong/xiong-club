@@ -4,9 +4,9 @@ import cn.dev33.satoken.stp.SaTokenInfo;
 import cn.dev33.satoken.stp.StpUtil;
 import com.alibaba.fastjson.JSON;
 import com.dingjiaxiong.auth.application.convert.AuthUserDTOConverter;
-import com.dingjiaxiong.auth.application.dto.AuthUserDTO;
 import com.dingjiaxiong.auth.domain.entity.AuthUserBO;
 import com.dingjiaxiong.auth.domain.service.AuthUserDomainService;
+import com.dingjiaxiong.auth.entity.AuthUserDTO;
 import com.dingjiaxiong.auth.entity.Result;
 import com.google.common.base.Preconditions;
 import lombok.extern.slf4j.Slf4j;
@@ -77,6 +77,10 @@ public class UserController {
             }
             Preconditions.checkArgument(!StringUtils.isBlank(authUserDTO.getUserName()), "用户名不能为空");
             AuthUserBO authUserBO = AuthUserDTOConverter.INSTANCE.convertDTOToBO(authUserDTO);
+
+//            System.out.println("==================");
+//            System.out.println(authUserBO);
+
             AuthUserBO userInfo = authUserDomainService.getUserInfo(authUserBO);
             return Result.ok(AuthUserDTOConverter.INSTANCE.convertBOToDTO(userInfo));
         } catch (Exception e) {

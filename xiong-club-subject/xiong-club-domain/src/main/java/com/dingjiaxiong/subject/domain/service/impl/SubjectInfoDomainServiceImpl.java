@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.dingjiaxiong.subject.common.entity.PageResult;
 import com.dingjiaxiong.subject.common.enums.IsDeletedFlagEnum;
 import com.dingjiaxiong.subject.common.util.IdWorkerUtil;
+import com.dingjiaxiong.subject.common.util.LoginUtil;
 import com.dingjiaxiong.subject.domain.convert.SubjectInfoConverter;
 import com.dingjiaxiong.subject.domain.entity.SubjectInfoBO;
 import com.dingjiaxiong.subject.domain.entity.SubjectOptionBO;
@@ -47,6 +48,8 @@ public class SubjectInfoDomainServiceImpl implements SubjectInfoDomainService {
     @Resource
     private SubjectEsService subjectEsService;
 
+    private LoginUtil loginUtil;
+
     @Override
     @Transactional(rollbackFor = Exception.class)
     public void add(SubjectInfoBO subjectInfoBO) {
@@ -67,6 +70,8 @@ public class SubjectInfoDomainServiceImpl implements SubjectInfoDomainService {
 
         List<Integer> categoryIds = subjectInfoBO.getCategoryIds();
         List<Integer> labelIds = subjectInfoBO.getLabelIds();
+
+
         List<SubjectMapping> mappingList = new LinkedList<>();
         categoryIds.forEach(categoryId -> {
             labelIds.forEach(labelId -> {
@@ -74,6 +79,8 @@ public class SubjectInfoDomainServiceImpl implements SubjectInfoDomainService {
                 subjectMapping.setSubjectId(subjectInfo.getId());
                 subjectMapping.setCategoryId(Long.valueOf(categoryId));
                 subjectMapping.setLabelId(Long.valueOf(labelId));
+                subjectMapping.setCreatedBy(LoginUtil.getLoginId());
+                subjectMapping.setCreatedTime(new Date());
                 mappingList.add(subjectMapping);
             });
         });

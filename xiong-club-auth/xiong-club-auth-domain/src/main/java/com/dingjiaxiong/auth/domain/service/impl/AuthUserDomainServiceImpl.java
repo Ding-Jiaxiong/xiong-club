@@ -135,8 +135,16 @@ public class AuthUserDomainServiceImpl implements AuthUserDomainService {
     @Override
     public Boolean update(AuthUserBO authUserBO) {
         AuthUser authUser = AuthUserBOConverter.INSTANCE.convertBOToEntity(authUserBO);
-        boolean count = authUserService.updateById(authUser);
-        return count;
+
+        Integer count = authUserService.updateByUserName(authUser);
+        return count > 0;
+
+//        System.out.println(authUser);
+
+//        authUserService.updateByUserName(authUser);
+//
+//        boolean count = authUserService.updateById(authUser);
+//        return count;
     }
 
     @Override

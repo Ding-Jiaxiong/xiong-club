@@ -13,4 +13,6 @@ import java.util.List;
 public interface AuthUserService extends IService<AuthUser> {
     List<AuthUser> queryByCondition(AuthUser existAuthUser);
 
+    Integer updateByUserName(AuthUser authUser);
+
 }

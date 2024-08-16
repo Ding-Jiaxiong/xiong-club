@@ -15,6 +15,8 @@ public interface AuthUserMapper extends BaseMapper<AuthUser> {
 
     List<AuthUser> queryAllByLimit(AuthUser existAuthUser);
 
+    Integer updateByUserName(AuthUser authUser);
+
 }
 
 

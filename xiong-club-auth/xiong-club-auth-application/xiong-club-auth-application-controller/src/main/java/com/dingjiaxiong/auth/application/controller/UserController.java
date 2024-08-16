@@ -58,6 +58,9 @@ public class UserController {
             checkUserInfo(authUserDTO);
 
             AuthUserBO authUserBO = AuthUserDTOConverter.INSTANCE.convertDTOToBO(authUserDTO);
+
+//            System.out.println(authUserBO);
+
             return Result.ok(authUserDomainService.update(authUserBO));
         } catch (Exception e) {
             log.error("UserController.update.error:{}", e.getMessage(), e);

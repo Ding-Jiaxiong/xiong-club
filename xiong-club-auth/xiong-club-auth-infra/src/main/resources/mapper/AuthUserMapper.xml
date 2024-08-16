@@ -32,6 +32,55 @@
         is_deleted
     </sql>
 
+    <update id="updateByUserName">
+        update auth_user
+        <set>
+            <if test="nickName != null and nickName != ''">
+                nick_name = #{nickName},
+            </if>
+            <if test="email != null and email != ''">
+                email = #{email},
+            </if>
+            <if test="phone != null and phone != ''">
+                phone = #{phone},
+            </if>
+            <if test="password != null and password != ''">
+                password = #{password},
+            </if>
+            <if test="sex != null">
+                sex = #{sex},
+            </if>
+            <if test="avatar != null and avatar != ''">
+                avatar = #{avatar},
+            </if>
+            <if test="status != null">
+                status = #{status},
+            </if>
+            <if test="introduce != null and introduce != ''">
+                introduce = #{introduce},
+            </if>
+            <if test="extJson != null and extJson != ''">
+                ext_json = #{extJson},
+            </if>
+            <if test="createdBy != null and createdBy != ''">
+                created_by = #{createdBy},
+            </if>
+            <if test="createdTime != null">
+                created_time = #{createdTime},
+            </if>
+            <if test="updateBy != null and updateBy != ''">
+                update_by = #{updateBy},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime},
+            </if>
+            <if test="isDeleted != null">
+                is_deleted = #{isDeleted},
+            </if>
+        </set>
+        where user_name = #{userName}
+    </update>
+
     <select id="queryAllByLimit" resultType="com.dingjiaxiong.auth.infra.basic.entity.AuthUser">
         select
         id, user_name, nick_name, email, phone, password, sex, avatar, status, introduce, ext_json, created_by,

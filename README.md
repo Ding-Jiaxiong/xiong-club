@@ -9901,19 +9901,75 @@ docker run -d --name elasticsearch -p 9200:9200 -p 9300:9300 -e "discovery.type=
 
 
 
+##### 3.20 es分词及ik中文分词器使用
+
+
+
+我是经典鸡翅
+
+es 原生的分词器。中国人要用中国分词器
+
+分词器分的好，搜索的东西才展现的好。
+
+
+
+插件地址：https://github.com/medcl/elasticsearch-analysis-ik/releases/download/v7.3.1/elasticsearch-analysis-ik-7.3.1.zip
+
+
+
+解压后，上传到服务器 的 ik 文件夹下面
+
+```
+mkdir /soft/ik
+
+进入容器内部
+docker exec -it elasticsearch /bin/bash
+cd plugins
+mkdir ik
+
+回到外部
+docker cp /soft/ik/. e4569b178fb1:/usr/share/elasticsearch/plugins/ik
+
+重启es
+```
 
 
 
 
 
+![image-20240816181751840](./assets/image-20240816181751840.png)
 
 
 
+甩到 服务器上
 
 
 
+![image-20240816181928379](./assets/image-20240816181928379.png)
 
 
+
+哦哦，要解压
+
+
+
+![image-20240816182136557](./assets/image-20240816182136557.png)
+
+
+
+![image-20240816182417480](./assets/image-20240816182417480.png)
+
+
+
+试试
+
+
+
+![image-20240816182505971](./assets/image-20240816182505971.png)
+
+
+
+没问题
 
 
 

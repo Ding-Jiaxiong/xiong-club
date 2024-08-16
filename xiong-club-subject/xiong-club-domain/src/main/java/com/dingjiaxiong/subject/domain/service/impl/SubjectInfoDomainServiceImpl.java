@@ -79,8 +79,8 @@ public class SubjectInfoDomainServiceImpl implements SubjectInfoDomainService {
                 subjectMapping.setSubjectId(subjectInfo.getId());
                 subjectMapping.setCategoryId(Long.valueOf(categoryId));
                 subjectMapping.setLabelId(Long.valueOf(labelId));
-                subjectMapping.setCreatedBy(LoginUtil.getLoginId());
-                subjectMapping.setCreatedTime(new Date());
+//                subjectMapping.setCreatedBy(LoginUtil.getLoginId());
+//                subjectMapping.setCreatedTime(new Date());
                 mappingList.add(subjectMapping);
             });
         });

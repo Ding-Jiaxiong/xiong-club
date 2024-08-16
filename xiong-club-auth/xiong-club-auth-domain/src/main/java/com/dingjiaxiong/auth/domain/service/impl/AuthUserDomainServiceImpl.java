@@ -65,6 +65,29 @@ public class AuthUserDomainServiceImpl implements AuthUserDomainService {
         existAuthUser.setUserName(authUserBO.getUserName());
         List<AuthUser> existUser = authUserService.queryByCondition(existAuthUser);
         if (existUser.size() > 0) {
+
+            // 就算有这个用户，也要把他的权限查出来放进redis
+            String roleKey = redisUtil.buildKey(authRolePrefix, existAuthUser.getUserName());
+//            List<AuthRole> roleList = new LinkedList<>();
+//
+//            AuthRole authRole = new AuthRole();
+//            authRole.set
+//
+//            roleList.add(authRole);
+//            redisUtil.set(roleKey, new Gson().toJson(roleList));
+//
+//            AuthRolePermission authRolePermission = new AuthRolePermission();
+//            authRolePermission.setRoleId(roleId);
+//            List<AuthRolePermission> rolePermissionList = authRolePermissionService.queryByCondition(authRolePermission);
+//
+//            List<Long> permissionIdList = rolePermissionList.stream()
+//                    .map(AuthRolePermission::getPermissionId).collect(Collectors.toList());
+//            //根据roleId查权限
+//            List<AuthPermission> permissionList = authPermissionService.queryByRoleList(permissionIdList);
+//            String permissionKey = redisUtil.buildKey(authPermissionPrefix, authUser.getUserName());
+//            redisUtil.set(permissionKey, new Gson().toJson(permissionList));
+
+
             return true;
         }
 

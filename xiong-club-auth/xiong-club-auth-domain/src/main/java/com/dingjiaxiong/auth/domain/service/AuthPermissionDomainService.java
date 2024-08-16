@@ -22,4 +22,6 @@ public interface AuthPermissionDomainService {
 
     Boolean delete(AuthPermissionBO permissionBO);
 
+    List<String> getPermission(String userName);
+
 }

@@ -124,7 +124,9 @@ public class SubjectCategoryDomainServiceImpl implements SubjectCategoryDomainSe
             try {
                 Map<Long, List<SubjectLabelBO>> resultMap = future.get();
 
-                map.putAll(resultMap);
+                if (!CollectionUtils.isEmpty(resultMap)) {
+                    map.putAll(resultMap);
+                }
 
             } catch (Exception e) {
                 e.printStackTrace();
@@ -166,6 +168,10 @@ public class SubjectCategoryDomainServiceImpl implements SubjectCategoryDomainSe
     }
 
     private Map<Long, List<SubjectLabelBO>> getLabelBOList(SubjectCategoryBO category) {
+
+        if (log.isInfoEnabled()) {
+            log.info("getLabelBOList:{}", JSON.toJSONString(category));
+        }
 
         Map<Long, List<SubjectLabelBO>> labelMap = new HashMap<>();
 

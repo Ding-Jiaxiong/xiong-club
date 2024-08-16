@@ -3,6 +3,7 @@ package com.dingjiaxiong.subject.domain.service;
 
 import com.dingjiaxiong.subject.common.entity.PageResult;
 import com.dingjiaxiong.subject.domain.entity.SubjectInfoBO;
+import com.dingjiaxiong.subject.infra.basic.entity.SubjectInfoEs;
 
 import java.util.List;
 
@@ -28,6 +29,11 @@ public interface SubjectInfoDomainService {
      * 查询题目信息
      */
     SubjectInfoBO querySubjectInfo(SubjectInfoBO subjectInfoBO);
+
+    /**
+     * 全文检索
+     */
+    PageResult<SubjectInfoEs> getSubjectPageBySearch(SubjectInfoBO subjectInfoBO);
 
 }
 

@@ -1,6 +1,6 @@
 spring:
   application:
-    name: xiong-club-auth
+    name: xiong-club-auth-dev
   profiles:
     active: dev
   cloud:

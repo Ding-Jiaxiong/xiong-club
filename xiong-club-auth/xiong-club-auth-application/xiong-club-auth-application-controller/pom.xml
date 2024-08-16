@@ -38,6 +38,12 @@
         </dependency>
 
 
+        <dependency>
+            <groupId>com.dingjiaxiong</groupId>
+            <artifactId>xiong-club-auth-api</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+
     </dependencies>
 
 </project>

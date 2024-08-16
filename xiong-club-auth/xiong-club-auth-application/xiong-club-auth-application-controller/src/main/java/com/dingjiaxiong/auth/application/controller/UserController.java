@@ -2,15 +2,13 @@ package com.dingjiaxiong.auth.application.controller;
 
 import cn.dev33.satoken.stp.SaTokenInfo;
 import cn.dev33.satoken.stp.StpUtil;
-import cn.dev33.satoken.util.SaResult;
 import com.alibaba.fastjson.JSON;
 import com.dingjiaxiong.auth.application.convert.AuthUserDTOConverter;
 import com.dingjiaxiong.auth.application.dto.AuthUserDTO;
-import com.dingjiaxiong.auth.common.entity.Result;
 import com.dingjiaxiong.auth.domain.entity.AuthUserBO;
 import com.dingjiaxiong.auth.domain.service.AuthUserDomainService;
+import com.dingjiaxiong.auth.entity.Result;
 import com.google.common.base.Preconditions;
-import com.google.common.base.Strings;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.web.bind.annotation.*;
@@ -83,7 +81,7 @@ public class UserController {
             return Result.ok(AuthUserDTOConverter.INSTANCE.convertBOToDTO(userInfo));
         } catch (Exception e) {
             log.error("UserController.update.error:{}", e.getMessage(), e);
-            return Result.fail("更新用户信息失败");
+            return Result.fail("查询用户信息失败");
         }
     }
 

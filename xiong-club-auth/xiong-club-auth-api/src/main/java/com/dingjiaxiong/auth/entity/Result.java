@@ -1,6 +1,5 @@
-package com.dingjiaxiong.auth.common.entity;
+package com.dingjiaxiong.auth.entity;
 
-import com.dingjiaxiong.auth.common.enums.ResultCodeEnum;
 import lombok.Data;
 
 @Data
@@ -14,7 +13,7 @@ public class Result<T> {
 
     private T data;
 
-    public static Result ok(){
+    public static Result ok() {
         Result result = new Result();
         result.setSuccess(true);
         result.setCode(ResultCodeEnum.SUCCESS.getCode());
@@ -22,7 +21,7 @@ public class Result<T> {
         return result;
     }
 
-    public static <T> Result ok(T data){
+    public static <T> Result ok(T data) {
         Result result = new Result();
         result.setSuccess(true);
         result.setCode(ResultCodeEnum.SUCCESS.getCode());
@@ -31,7 +30,7 @@ public class Result<T> {
         return result;
     }
 
-    public static Result fail(){
+    public static Result fail() {
         Result result = new Result();
         result.setSuccess(false);
         result.setCode(ResultCodeEnum.FAIL.getCode());
@@ -39,7 +38,7 @@ public class Result<T> {
         return result;
     }
 
-    public static <T> Result fail(T data){
+    public static <T> Result fail(T data) {
         Result result = new Result();
         result.setSuccess(false);
         result.setCode(ResultCodeEnum.FAIL.getCode());

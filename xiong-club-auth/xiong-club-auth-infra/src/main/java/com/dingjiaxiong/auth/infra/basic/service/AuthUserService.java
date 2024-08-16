@@ -11,6 +11,7 @@ import java.util.List;
 * @createDate 2024-08-14 22:06:37
 */
 public interface AuthUserService extends IService<AuthUser> {
+
     List<AuthUser> queryByCondition(AuthUser existAuthUser);
 
     Integer updateByUserName(AuthUser authUser);

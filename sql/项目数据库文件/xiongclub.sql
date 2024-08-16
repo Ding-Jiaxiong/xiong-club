@@ -11,7 +11,7 @@
  Target Server Version : 50744
  File Encoding         : 65001
 
- Date: 14/08/2024 22:30:39
+ Date: 16/08/2024 12:20:04
 */
 
 SET NAMES utf8mb4;
@@ -37,11 +37,12 @@ CREATE TABLE `auth_permission`  (
   `update_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
   `is_deleted` int(11) NULL DEFAULT 0 COMMENT '是否被删除 0为删除 1已删除',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of auth_permission
 -- ----------------------------
+INSERT INTO `auth_permission` VALUES (1, '新增题目', 1, 1, '1adiwd/awdw', 1, 1, 'httt://1.png', 'subject:add', NULL, NULL, NULL, NULL, 0);
 
 -- ----------------------------
 -- Table structure for auth_role
@@ -57,11 +58,13 @@ CREATE TABLE `auth_role`  (
   `update_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
   `is_deleted` int(11) NULL DEFAULT 0 COMMENT '是否被删除 0未删除 1已删除',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of auth_role
 -- ----------------------------
+INSERT INTO `auth_role` VALUES (1, '管理员', 'admin_user', NULL, NULL, NULL, NULL, 0);
+INSERT INTO `auth_role` VALUES (2, '普通用户', 'normal_user', NULL, NULL, NULL, NULL, 0);
 
 -- ----------------------------
 -- Table structure for auth_role_permission
@@ -77,11 +80,12 @@ CREATE TABLE `auth_role_permission`  (
   `update_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
   `is_deleted` int(11) NULL DEFAULT 0,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '角色权限关联表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '角色权限关联表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of auth_role_permission
 -- ----------------------------
+INSERT INTO `auth_role_permission` VALUES (1, 2, 1, NULL, NULL, NULL, NULL, 0);
 
 -- ----------------------------
 -- Table structure for auth_user
@@ -105,11 +109,17 @@ CREATE TABLE `auth_user`  (
   `update_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
   `is_deleted` int(11) NULL DEFAULT 0 COMMENT '是否被删除 0未删除 1已删除',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '用户信息表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 9 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '用户信息表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of auth_user
 -- ----------------------------
+INSERT INTO `auth_user` VALUES (1, '家雄', '海绵宝宝', '12312312@qq.com', '12321312', '06cb2346090c9a60fe3edb6841a9cf77', 1, 'https://avatars.githubusercontent.com/u/61930795?v=4', 0, '个人介绍', '留存json', NULL, NULL, NULL, NULL, 0);
+INSERT INTO `auth_user` VALUES (2, '派大星', '派大星', '12312312@qq.com', '12321312', '06cb2346090c9a60fe3edb6841a9cf77', 1, 'https://avatars.githubusercontent.com/u/61930795?v=4', 0, '个人介绍', '留存json', NULL, NULL, NULL, NULL, 0);
+INSERT INTO `auth_user` VALUES (3, '章鱼哥', '章鱼哥', '12312312@qq.com', '12321312', '06cb2346090c9a60fe3edb6841a9cf77', 1, 'https://avatars.githubusercontent.com/u/61930795?v=4', 0, '个人介绍', '留存json', NULL, NULL, NULL, NULL, 0);
+INSERT INTO `auth_user` VALUES (4, 'oh_tG6SENPKGoINk9-qDRtW9YbRM', NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, 0);
+INSERT INTO `auth_user` VALUES (5, 'oh_tG6cjQH3sZXq6EmQ7u9hgE7dc', '丁家雄', NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, 0);
+INSERT INTO `auth_user` VALUES (8, 'oGbwpwBMJ_qpWWxDvsl2ZL_7o_L4', '丁家雄', 'xiong@qq.com', '18708360500', '19991012', 1, 'http://116.196.77.213:9000/user/icon/mytouxiang.jpg', 0, '风轻轻拂过半山', '留存json', NULL, NULL, NULL, NULL, 0);
 
 -- ----------------------------
 -- Table structure for auth_user_role
@@ -125,11 +135,16 @@ CREATE TABLE `auth_user_role`  (
   `update_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
   `is_deleted` int(11) NULL DEFAULT 0,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '用户角色表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 8 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '用户角色表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of auth_user_role
 -- ----------------------------
+INSERT INTO `auth_user_role` VALUES (1, 2, 2, NULL, NULL, NULL, NULL, 0);
+INSERT INTO `auth_user_role` VALUES (2, 3, 2, NULL, NULL, NULL, NULL, 0);
+INSERT INTO `auth_user_role` VALUES (3, 4, 2, NULL, NULL, NULL, NULL, 0);
+INSERT INTO `auth_user_role` VALUES (4, 5, 1, NULL, NULL, NULL, NULL, 0);
+INSERT INTO `auth_user_role` VALUES (7, 8, 2, NULL, NULL, NULL, NULL, 0);
 
 -- ----------------------------
 -- Table structure for subject_brief
@@ -145,13 +160,15 @@ CREATE TABLE `subject_brief`  (
   `update_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
   `is_deleted` int(11) NULL DEFAULT 0,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '简答题' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '简答题' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of subject_brief
 -- ----------------------------
 INSERT INTO `subject_brief` VALUES (1, 12, '题目答案', NULL, NULL, NULL, NULL, 0);
 INSERT INTO `subject_brief` VALUES (2, 13, '题目答案2', NULL, NULL, NULL, NULL, 0);
+INSERT INTO `subject_brief` VALUES (3, 14, '题目答案2', NULL, NULL, NULL, NULL, 0);
+INSERT INTO `subject_brief` VALUES (4, 15, '题目答案2', NULL, NULL, NULL, NULL, 0);
 
 -- ----------------------------
 -- Table structure for subject_category
@@ -198,7 +215,7 @@ CREATE TABLE `subject_info`  (
   `update_time` datetime NULL DEFAULT NULL COMMENT '修改时间',
   `is_deleted` int(11) NULL DEFAULT 0,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 14 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '题目信息表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 16 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '题目信息表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of subject_info
@@ -208,6 +225,8 @@ INSERT INTO `subject_info` VALUES (2, 'SpringBoot自动装配原理是什么？�
 INSERT INTO `subject_info` VALUES (3, 'SpringBoot自动装配原理是什么？【判断题版】', 1, NULL, 3, 8, '题目解析', NULL, NULL, NULL, NULL, 0);
 INSERT INTO `subject_info` VALUES (12, 'SpringBoot自动装配原理是什么？【简答题版】', 1, NULL, 4, 6, '题目解析', NULL, NULL, NULL, NULL, 0);
 INSERT INTO `subject_info` VALUES (13, '多线程实现方式有哪几种？2', 1, NULL, 4, 2, '题目解析2', NULL, NULL, NULL, NULL, 0);
+INSERT INTO `subject_info` VALUES (14, '多线程实现方式有哪几种？2', 1, NULL, 4, 2, '题目解析2', NULL, NULL, NULL, NULL, 0);
+INSERT INTO `subject_info` VALUES (15, '多线程实现方式有哪几种？2', 1, NULL, 4, 2, '题目解析2', NULL, NULL, NULL, NULL, 0);
 
 -- ----------------------------
 -- Table structure for subject_judge
@@ -250,9 +269,9 @@ CREATE TABLE `subject_label`  (
 -- ----------------------------
 -- Records of subject_label
 -- ----------------------------
-INSERT INTO `subject_label` VALUES (1, 'Spirng', 10, NULL, NULL, NULL, NULL, NULL, 0);
-INSERT INTO `subject_label` VALUES (2, 'SpringMVC', 1, NULL, NULL, NULL, NULL, NULL, 0);
-INSERT INTO `subject_label` VALUES (3, 'SpringBoot', 2, NULL, NULL, NULL, NULL, NULL, 0);
+INSERT INTO `subject_label` VALUES (1, 'Spirng', 10, 1, NULL, NULL, NULL, NULL, 0);
+INSERT INTO `subject_label` VALUES (2, 'SpringMVC', 1, 1, NULL, NULL, NULL, NULL, 0);
+INSERT INTO `subject_label` VALUES (3, 'SpringBoot', 2, 1, NULL, NULL, NULL, NULL, 0);
 INSERT INTO `subject_label` VALUES (4, 'MySQL', 1, 1, NULL, NULL, NULL, NULL, 0);
 
 -- ----------------------------
@@ -270,7 +289,7 @@ CREATE TABLE `subject_mapping`  (
   `update_time` datetime NULL DEFAULT NULL COMMENT '修改时间',
   `is_deleted` int(11) NULL DEFAULT 0,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 48 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '题目分类关系表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 50 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '题目分类关系表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of subject_mapping
@@ -292,6 +311,8 @@ INSERT INTO `subject_mapping` VALUES (44, 12, 4, 3, NULL, NULL, NULL, NULL, 0);
 INSERT INTO `subject_mapping` VALUES (45, 12, 5, 2, NULL, NULL, NULL, NULL, 0);
 INSERT INTO `subject_mapping` VALUES (46, 12, 5, 3, NULL, NULL, NULL, NULL, 0);
 INSERT INTO `subject_mapping` VALUES (47, 13, 5, 11, NULL, NULL, NULL, NULL, 0);
+INSERT INTO `subject_mapping` VALUES (48, 14, 5, 11, NULL, NULL, NULL, NULL, 0);
+INSERT INTO `subject_mapping` VALUES (49, 15, 5, 11, NULL, NULL, NULL, NULL, 0);
 
 -- ----------------------------
 -- Table structure for subject_multiple

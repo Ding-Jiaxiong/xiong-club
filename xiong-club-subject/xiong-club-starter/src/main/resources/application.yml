@@ -6,6 +6,7 @@ spring:
   datasource:
     username: root
     password: aG7Yw7FTYok+IV37XQvCUTdzZJdXCcvgIxS30XKrKlESlMWMjrne0IZCKbEccR6bHBkJnD2wJ3dUQD+EYzHD1g==
+#    password: PJ8S7cyh5WOIlgzJfKFRy61BF+vxbEEC7zVo9Etc1mbGS1hF7tpyovaHYgnNkSdGR5hXi+koAguJ2GY5kxLeoA==
     url: jdbc:mysql://116.196.77.213:3306/xiongclub?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf8&useSSL=false
     type: com.alibaba.druid.pool.DruidDataSource
     druid:
@@ -30,6 +31,10 @@ spring:
           enabled: true
         config:
           enabled: true
+
+  elasticsearch:
+    rest:
+      uris: http://116.196.77.213:9200
 
 publicKey: MFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBAKUYdPsGnI5mghLo090o+EFtYWUAXYCj6dsAwdhn/IBw5/2u+ivbP1mGwyPvjd1Meduqj0hEU+wZw1w5VQ4qh7kCAwEAAQ==
 

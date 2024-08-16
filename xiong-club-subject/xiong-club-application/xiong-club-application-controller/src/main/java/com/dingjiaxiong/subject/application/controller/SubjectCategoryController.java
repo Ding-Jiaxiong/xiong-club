@@ -5,6 +5,7 @@ import com.dingjiaxiong.subject.application.convert.SubjectCategoryDTOConverter;
 import com.dingjiaxiong.subject.application.convert.SubjectLabelDTOConverter;
 import com.dingjiaxiong.subject.application.dto.SubjectCategoryDTO;
 import com.dingjiaxiong.subject.application.dto.SubjectLabelDTO;
+import com.dingjiaxiong.subject.application.util.LoginUtil;
 import com.dingjiaxiong.subject.common.entity.Result;
 import com.dingjiaxiong.subject.domain.entity.SubjectCategoryBO;
 import com.dingjiaxiong.subject.domain.service.SubjectCategoryDomainService;
@@ -17,6 +18,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import java.util.Enumeration;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -54,7 +57,6 @@ public class SubjectCategoryController {
             Preconditions.checkNotNull(subjectCategoryDTO.getCategoryType(), "分类类型不能为空");
             Preconditions.checkArgument(!StringUtils.isBlank(subjectCategoryDTO.getCategoryName()), "分类名称不能为空");
             Preconditions.checkNotNull(subjectCategoryDTO.getParentId(), "分类父级id不能为空");
-
 
 
             SubjectCategoryBO subjectCategoryBO = SubjectCategoryDTOConverter.INSTANCE.convertDtoToCategoryBO(subjectCategoryDTO);
@@ -155,12 +157,21 @@ public class SubjectCategoryController {
      * 查询分类及标签一次性
      */
     @PostMapping("/queryCategoryAndLabel")
-    public Result<List<SubjectCategoryDTO>> queryCategoryAndLabel(@RequestBody SubjectCategoryDTO subjectCategoryDTO) {
+    public Result<List<SubjectCategoryDTO>> queryCategoryAndLabel(@RequestBody SubjectCategoryDTO subjectCategoryDTO
+    , HttpServletRequest request) {
         try {
             if (log.isInfoEnabled()) {
                 log.info("SubjectCategoryController.queryCategoryAndLabel.dto:{}"
                         , JSON.toJSONString(subjectCategoryDTO));
             }
+
+            Enumeration<String> headerNames = request.getHeaderNames();
+
+
+            String loginId = LoginUtil.getLoginId();
+
+            System.out.println(loginId);
+
             Preconditions.checkNotNull(subjectCategoryDTO.getId(), "分类id不能为空");
             SubjectCategoryBO subjectCategoryBO = SubjectCategoryDTOConverter.INSTANCE.
                     convertDtoToCategoryBO(subjectCategoryDTO);

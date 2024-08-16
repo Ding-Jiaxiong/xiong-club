@@ -7956,11 +7956,169 @@ OK，
 
 
 
+##### 2.90 利用minio的mc突破图片权限
 
 
 
+minio 有效期只有 7 天
 
 
+
+先是去简化了一波 url 
+
+![image-20240816110512050](./assets/image-20240816110512050.png)
+
+
+
+这个东西访问不了
+
+
+
+![image-20240816110605979](./assets/image-20240816110605979.png)
+
+
+
+要用这个东西
+
+
+
+![image-20240816110652372](./assets/image-20240816110652372.png)
+
+
+
+没有权限
+
+
+
+一个一个来
+
+
+
+![image-20240816110808256](./assets/image-20240816110808256.png)
+
+
+
+直接启动容器
+
+
+
+```
+docker run -it --entrypoint=/bin/sh minio/mc
+```
+
+
+
+![image-20240816110833270](./assets/image-20240816110833270.png)
+
+
+
+直接进去了，执行命令
+
+
+
+```
+mc config host add <ALIAS> <YOUR-S3-ENDPOINT> <YOUR-ACCESS-KEY> <YOUR-SECRET-KEY> [--api API-SIGNATURE]
+
+mc config host add minio http://116.196.77.213:9000 YyCL6ZvDyiashaqYebNO MPna3sBxaGYXqEBRYrDYaCzSS1OXHB1DOJ70WEAq
+```
+
+
+
+![image-20240816110943332](./assets/image-20240816110943332.png)
+
+
+
+这玩意儿要创建成自己的
+
+
+
+![image-20240816111039813](./assets/image-20240816111039813.png)
+
+
+
+执行这个命令
+
+
+
+![image-20240816111102141](./assets/image-20240816111102141.png)
+
+
+
+成功添加
+
+
+
+```
+mc ls minio
+```
+
+
+
+![image-20240816111123457](./assets/image-20240816111123457.png)
+
+
+
+```
+mc anonymous
+```
+
+
+
+![image-20240816111234791](./assets/image-20240816111234791.png)
+
+
+
+卡在 100 % 了
+
+
+
+这个好像就是开启一个匿名访问
+
+
+
+```
+mc anonymous set download minio/xiongclub
+```
+
+
+
+![image-20240816111755187](./assets/image-20240816111755187.png)
+
+
+
+这个好像是开启下载权限
+
+
+
+![image-20240816111830916](./assets/image-20240816111830916.png)
+
+
+
+确实可以下载了
+
+
+
+![image-20240816111908952](./assets/image-20240816111908952.png)
+
+
+
+访问也没问题了， 可以了，再传一张试试
+
+
+
+![image-20240816111956176](./assets/image-20240816111956176.png)
+
+
+
+直接把这个 url 设置成头像
+
+
+
+![image-20240816112027305](./assets/image-20240816112027305.png)
+
+
+
+没问题，就这样
 
 
 

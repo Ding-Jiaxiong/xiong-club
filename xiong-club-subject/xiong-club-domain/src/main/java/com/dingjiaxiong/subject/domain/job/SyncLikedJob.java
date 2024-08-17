@@ -40,9 +40,9 @@ public class SyncLikedJob {
         XxlJobHelper.log("syncLikedJobHandler.start");
         try {
 
-            log.info("123456");
+//            log.info("123456");
 
-//            subjectLikedDomainService.syncLiked();
+            subjectLikedDomainService.syncLiked();
         } catch (Exception e) {
             XxlJobHelper.log("syncLikedJobHandler.error" + e.getMessage());
         }

@@ -2,6 +2,8 @@ package com.dingjiaxiong.subject.infra.basic.service;
 
 import com.dingjiaxiong.subject.infra.basic.entity.SubjectLiked;
 
+import java.util.List;
+
 /**
  * 题目点赞表 表服务接口
  *
@@ -46,5 +48,7 @@ public interface SubjectLikedService {
      * 根据条件查询角色
      */
     SubjectLiked queryByCondition(SubjectLiked subjectLiked);
+
+    void batchInsertOrUpdate(List<SubjectLiked> subjectLikedList);
 
 }

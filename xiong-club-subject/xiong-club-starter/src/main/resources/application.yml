@@ -82,7 +82,7 @@ es:
 xxl:
   job:
     admin:
-      addresses: http://116.196.77.213:8088/xxl-job-admin
+      addresses: http://localhost:8088/xxl-job-admin
     accessToken: default_token
     executor:
       appname: xiong-club-subjcet

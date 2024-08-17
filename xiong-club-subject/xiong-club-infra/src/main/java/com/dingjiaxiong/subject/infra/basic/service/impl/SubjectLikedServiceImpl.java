@@ -8,6 +8,7 @@ import com.dingjiaxiong.subject.infra.basic.service.SubjectLikedService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -89,5 +90,11 @@ public class SubjectLikedServiceImpl implements SubjectLikedService {
         return subjectLikedDao.selectOne(queryWrapper);
 
     }
+
+    @Override
+    public void batchInsertOrUpdate(List<SubjectLiked> subjectLikedList) {
+        subjectLikedDao.batchInsertOrUpdate(subjectLikedList);
+    }
+
 
 }

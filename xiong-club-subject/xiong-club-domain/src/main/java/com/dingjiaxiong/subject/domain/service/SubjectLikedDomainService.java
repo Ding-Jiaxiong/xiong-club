@@ -36,4 +36,10 @@ public interface SubjectLikedDomainService {
      */
     Integer getLikedCount(String subjectId);
 
+    /**
+     * 同步点赞数据
+     */
+    void syncLiked();
+
+
 }

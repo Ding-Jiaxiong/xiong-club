@@ -14,4 +14,23 @@
         <result column="is_deleted" jdbcType="INTEGER" property="isDeleted"/>
     </resultMap>
 
+
+    <insert id="batchInsertOrUpdate">
+        INSERT INTO subject_liked
+        (subject_id, like_user_id, status, created_by, created_time, update_by, update_time, is_deleted)
+        VALUES
+        <foreach collection="entities" item="item" separator=",">
+            (#{item.subjectId}, #{item.likeUserId}, #{item.status}, #{item.createdBy}, #{item.createdTime},
+            #{item.updateBy}, #{item.updateTime}, #{item.isDeleted})
+        </foreach>
+        ON DUPLICATE KEY UPDATE
+        status = VALUES(status),
+        created_by = VALUES(created_by),
+        created_time = VALUES(created_time),
+        update_by = VALUES(update_by),
+        update_time = VALUES(update_time),
+        is_deleted = VALUES(is_deleted)
+
+    </insert>
+
 </mapper>

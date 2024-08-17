@@ -49,6 +49,13 @@ public class PracticeSetServiceImpl implements PracticeSetService {
     @Resource
     private PracticeDao practiceDao;
 
+    @Resource
+    private SubjectRadioDao subjectRadioDao;
+
+    @Resource
+    private SubjectMultipleDao subjectMultipleDao;
+
+
     @Override
     public List<SpecialPracticeVO> getSpecialPracticeContent() {
 
@@ -298,6 +305,38 @@ public class PracticeSetServiceImpl implements PracticeSetService {
         practicePO.setId(practiceId);
         practicePO.setSubmitTime(new Date());
         practiceDao.update(practicePO);
+    }
+
+
+    @Override
+    public PracticeSubjectVO getPracticeSubject(PracticeSubjectDTO dto) {
+        PracticeSubjectVO practiceSubjectVO = new PracticeSubjectVO();
+        SubjectPO subjectPO = subjectDao.selectById(dto.getSubjectId());
+        practiceSubjectVO.setSubjectName(subjectPO.getSubjectName());
+        practiceSubjectVO.setSubjectType(subjectPO.getSubjectType());
+        if (dto.getSubjectType() == SubjectInfoTypeEnum.RADIO.getCode()) {
+            List<PracticeSubjectOptionVO> optionList = new LinkedList<>();
+            List<SubjectRadioPO> radioSubjectPOS = subjectRadioDao.selectBySubjectId(subjectPO.getId());
+            radioSubjectPOS.forEach(e -> {
+                PracticeSubjectOptionVO practiceSubjectOptionVO = new PracticeSubjectOptionVO();
+                practiceSubjectOptionVO.setOptionContent(e.getOptionContent());
+                practiceSubjectOptionVO.setOptionType(e.getOptionType());
+                optionList.add(practiceSubjectOptionVO);
+            });
+            practiceSubjectVO.setOptionList(optionList);
+        }
+        if (dto.getSubjectType() == SubjectInfoTypeEnum.MULTIPLE.getCode()) {
+            List<PracticeSubjectOptionVO> optionList = new LinkedList<>();
+            List<SubjectMultiplePO> multipleSubjectPOS = subjectMultipleDao.selectBySubjectId(subjectPO.getId());
+            multipleSubjectPOS.forEach(e -> {
+                PracticeSubjectOptionVO practiceSubjectOptionVO = new PracticeSubjectOptionVO();
+                practiceSubjectOptionVO.setOptionContent(e.getOptionContent());
+                practiceSubjectOptionVO.setOptionType(e.getOptionType());
+                optionList.add(practiceSubjectOptionVO);
+            });
+            practiceSubjectVO.setOptionList(optionList);
+        }
+        return practiceSubjectVO;
     }
 
 }

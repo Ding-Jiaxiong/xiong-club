@@ -1,6 +1,7 @@
 package com.dingjiaxiong.practice.server.service;
 
 import com.dingjiaxiong.practice.api.req.*;
+import com.dingjiaxiong.practice.api.vo.RankVO;
 import com.dingjiaxiong.practice.api.vo.ReportVO;
 import com.dingjiaxiong.practice.api.vo.ScoreDetailVO;
 import com.dingjiaxiong.practice.api.vo.SubjectDetailVO;
@@ -35,4 +36,8 @@ public interface PracticeDetailService {
      */
     ReportVO getReport(GetReportReq req);
 
+    /**
+     * 练习榜
+     */
+    List<RankVO> getPracticeRankList();
 }

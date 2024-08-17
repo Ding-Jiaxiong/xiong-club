@@ -12,7 +12,9 @@ import com.dingjiaxiong.practice.server.dao.*;
 import com.dingjiaxiong.practice.server.entity.dto.SubjectDTO;
 import com.dingjiaxiong.practice.server.entity.dto.SubjectDetailDTO;
 import com.dingjiaxiong.practice.server.entity.dto.SubjectOptionDTO;
+import com.dingjiaxiong.practice.server.entity.dto.UserInfo;
 import com.dingjiaxiong.practice.server.entity.po.*;
+import com.dingjiaxiong.practice.server.rpc.UserRpc;
 import com.dingjiaxiong.practice.server.service.PracticeDetailService;
 import com.dingjiaxiong.practice.server.util.DateUtils;
 import com.dingjiaxiong.practice.server.util.LoginUtil;
@@ -60,6 +62,9 @@ public class PracticeDetailServiceImpl implements PracticeDetailService {
 
     @Resource
     private SubjectLabelDao subjectLabelDao;
+
+    @Resource
+    private UserRpc userRpc;
 
     @Override
     @Transactional(rollbackFor = Exception.class, propagation = Propagation.REQUIRED)
@@ -369,6 +374,25 @@ public class PracticeDetailServiceImpl implements PracticeDetailService {
             log.info("获取到的题目对应的标签map{}", JSON.toJSONString(map));
         }
         return map;
+    }
+
+
+    @Override
+    public List<RankVO> getPracticeRankList() {
+        List<RankVO> list = new LinkedList<>();
+        List<PracticeRankPO> poList = practiceDetailDao.getPracticeCount();
+        if (CollectionUtils.isEmpty(poList)) {
+            return list;
+        }
+        poList.forEach(e -> {
+            RankVO rankVO = new RankVO();
+            rankVO.setCount(e.getCount());
+            UserInfo userInfo = userRpc.getUserInfo(e.getCreatedBy());
+            rankVO.setName(userInfo.getNickName());
+            rankVO.setAvatar(userInfo.getAvatar());
+            list.add(rankVO);
+        });
+        return list;
     }
 
 }

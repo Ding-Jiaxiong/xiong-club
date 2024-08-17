@@ -82,6 +82,9 @@ public class UserController {
 //            System.out.println(authUserBO);
 
             AuthUserBO userInfo = authUserDomainService.getUserInfo(authUserBO);
+
+//            System.out.println(userInfo);
+
             return Result.ok(AuthUserDTOConverter.INSTANCE.convertBOToDTO(userInfo));
         } catch (Exception e) {
             log.error("UserController.update.error:{}", e.getMessage(), e);

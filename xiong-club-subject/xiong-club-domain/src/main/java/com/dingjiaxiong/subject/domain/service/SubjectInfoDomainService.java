@@ -35,5 +35,7 @@ public interface SubjectInfoDomainService {
      */
     PageResult<SubjectInfoEs> getSubjectPageBySearch(SubjectInfoBO subjectInfoBO);
 
+    List<SubjectInfoBO> getContributeList();
+
 }
 

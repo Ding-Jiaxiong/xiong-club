@@ -32,6 +32,13 @@ public class SubjectInfoServiceImpl extends ServiceImpl<SubjectInfoMapper, Subje
     public List<SubjectInfo> queryPage(SubjectInfo subjectInfo, Long categoryId, Long labelId, int start, Integer pageSize) {
         return subjectInfoMapper.queryPage(subjectInfo, categoryId, labelId, start, pageSize);
     }
+
+    @Override
+    public List<SubjectInfo> getContributeCount() {
+        return subjectInfoMapper.getContributeCount();
+    }
+
+
 }
 
 

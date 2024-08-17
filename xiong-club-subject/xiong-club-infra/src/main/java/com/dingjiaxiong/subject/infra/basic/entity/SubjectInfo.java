@@ -75,6 +75,8 @@ public class SubjectInfo implements Serializable {
     @TableLogic
     private Integer isDeleted;
 
+    private Integer subjectCount;
+
     @TableField(exist = false)
     private static final long serialVersionUID = 1L;
 }

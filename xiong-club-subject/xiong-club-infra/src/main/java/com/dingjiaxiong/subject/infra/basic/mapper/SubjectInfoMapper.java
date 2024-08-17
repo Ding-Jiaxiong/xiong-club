@@ -23,6 +23,10 @@ public interface SubjectInfoMapper extends BaseMapper<SubjectInfo> {
                                 @Param("labelId") Long labelId,
                                 @Param("start") int start,
                                 @Param("pageSize") Integer pageSize);
+
+    List<SubjectInfo> getContributeCount();
+
+
 }
 
 

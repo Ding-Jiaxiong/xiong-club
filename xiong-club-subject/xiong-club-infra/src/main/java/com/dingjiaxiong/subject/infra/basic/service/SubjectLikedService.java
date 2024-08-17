@@ -51,4 +51,9 @@ public interface SubjectLikedService {
 
     void batchInsertOrUpdate(List<SubjectLiked> subjectLikedList);
 
+    int countByCondition(SubjectLiked subjectLiked);
+
+    List<SubjectLiked> queryPage(SubjectLiked subjectLiked, int start, Integer pageSize);
+
+
 }

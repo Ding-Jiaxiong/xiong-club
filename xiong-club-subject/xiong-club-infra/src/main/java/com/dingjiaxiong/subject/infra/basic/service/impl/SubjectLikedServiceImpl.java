@@ -8,6 +8,7 @@ import com.dingjiaxiong.subject.infra.basic.service.SubjectLikedService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
@@ -94,6 +95,16 @@ public class SubjectLikedServiceImpl implements SubjectLikedService {
     @Override
     public void batchInsertOrUpdate(List<SubjectLiked> subjectLikedList) {
         subjectLikedDao.batchInsertOrUpdate(subjectLikedList);
+    }
+
+    @Override
+    public int countByCondition(SubjectLiked subjectLiked) {
+        return subjectLikedDao.countByCondition(subjectLiked);
+    }
+
+    @Override
+    public List<SubjectLiked> queryPage(SubjectLiked subjectLiked, int start, Integer pageSize) {
+        return subjectLikedDao.queryPage(subjectLiked, start, pageSize);
     }
 
 

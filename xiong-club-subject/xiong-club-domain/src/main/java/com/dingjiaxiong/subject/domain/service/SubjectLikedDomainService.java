@@ -1,6 +1,7 @@
 package com.dingjiaxiong.subject.domain.service;
 
 
+import com.dingjiaxiong.subject.common.entity.PageResult;
 import com.dingjiaxiong.subject.domain.entity.SubjectLikedBO;
 
 /**
@@ -42,4 +43,5 @@ public interface SubjectLikedDomainService {
     void syncLiked();
 
 
+    PageResult<SubjectLikedBO> getSubjectLikedPage(SubjectLikedBO subjectLikedBO);
 }

@@ -1,6 +1,7 @@
 package com.dingjiaxiong.subject.application.controller;
 
 import com.alibaba.fastjson.JSON;
+import com.dingjiaxiong.subject.common.entity.PageResult;
 import com.dingjiaxiong.subject.common.util.LoginUtil;
 import com.google.common.base.Preconditions;
 import com.dingjiaxiong.subject.application.convert.SubjectLikedDTOConverter;
@@ -9,6 +10,7 @@ import com.dingjiaxiong.subject.common.entity.Result;
 import com.dingjiaxiong.subject.domain.entity.SubjectLikedBO;
 import com.dingjiaxiong.subject.domain.service.SubjectLikedDomainService;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -53,6 +55,28 @@ public class SubjectLikedController {
         }
 
     }
+
+    /**
+     * 查询我的点赞列表
+     */
+    @PostMapping("/getSubjectLikedPage")
+    public Result<PageResult<SubjectLikedDTO>> getSubjectLikedPage(@RequestBody SubjectLikedDTO subjectLikedDTO) {
+        try {
+            if (log.isInfoEnabled()) {
+                log.info("SubjectController.getSubjectLikedPage.dto:{}", JSON.toJSONString(subjectLikedDTO));
+            }
+            SubjectLikedBO subjectLikedBO = SubjectLikedDTOConverter.INSTANCE.convertDTOToBO(subjectLikedDTO);
+            subjectLikedBO.setPageNo(subjectLikedDTO.getPageNo());
+            subjectLikedBO.setPageSize(subjectLikedDTO.getPageSize());
+            PageResult<SubjectLikedBO> boPageResult = subjectLikedDomainService.getSubjectLikedPage(subjectLikedBO);
+            return Result.ok(boPageResult);
+        } catch (Exception e) {
+            log.error("SubjectCategoryController.getSubjectLikedPage.error:{}", e.getMessage(), e);
+            return Result.fail("分页查询我的点赞失败");
+        }
+    }
+
+
 
     /**
      * 修改题目点赞表
@@ -109,5 +133,7 @@ public class SubjectLikedController {
         }
 
     }
+
+
 
 }

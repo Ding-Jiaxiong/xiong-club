@@ -1,13 +1,17 @@
 package com.dingjiaxiong.subject.domain.service.impl;
 
 import com.alibaba.fastjson.JSON;
+import com.dingjiaxiong.subject.common.entity.PageResult;
 import com.dingjiaxiong.subject.common.enums.IsDeletedFlagEnum;
 import com.dingjiaxiong.subject.common.enums.SubjectLikedStatusEnum;
+import com.dingjiaxiong.subject.common.util.LoginUtil;
 import com.dingjiaxiong.subject.domain.convert.SubjectLikedBOConverter;
 import com.dingjiaxiong.subject.domain.entity.SubjectLikedBO;
 import com.dingjiaxiong.subject.domain.redis.RedisUtil;
 import com.dingjiaxiong.subject.domain.service.SubjectLikedDomainService;
+import com.dingjiaxiong.subject.infra.basic.entity.SubjectInfo;
 import com.dingjiaxiong.subject.infra.basic.entity.SubjectLiked;
+import com.dingjiaxiong.subject.infra.basic.service.SubjectInfoService;
 import com.dingjiaxiong.subject.infra.basic.service.SubjectLikedService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections4.MapUtils;
@@ -40,6 +44,9 @@ public class SubjectLikedDomainServiceImpl implements SubjectLikedDomainService 
     private static final String SUBJECT_LIKED_COUNT_KEY = "subject.liked.count";
 
     private static final String SUBJECT_LIKED_DETAIL_KEY = "subject.liked.detail";
+
+    @Resource
+    private SubjectInfoService subjectInfoService;
 
     @Override
     public void add(SubjectLikedBO subjectLikedBO) {
@@ -122,6 +129,30 @@ public class SubjectLikedDomainServiceImpl implements SubjectLikedDomainService 
             subjectLikedList.add(subjectLiked);
         });
         subjectLikedService.batchInsertOrUpdate(subjectLikedList);
+    }
+
+    @Override
+    public PageResult<SubjectLikedBO> getSubjectLikedPage(SubjectLikedBO subjectLikedBO) {
+        PageResult<SubjectLikedBO> pageResult = new PageResult<>();
+        pageResult.setPageNo(subjectLikedBO.getPageNo());
+        pageResult.setPageSize(subjectLikedBO.getPageSize());
+        int start = (subjectLikedBO.getPageNo() - 1) * subjectLikedBO.getPageSize();
+        SubjectLiked subjectLiked = SubjectLikedBOConverter.INSTANCE.convertBOToEntity(subjectLikedBO);
+        subjectLiked.setLikeUserId(LoginUtil.getLoginId());
+        int count = subjectLikedService.countByCondition(subjectLiked);
+        if (count == 0) {
+            return pageResult;
+        }
+        List<SubjectLiked> subjectLikedList = subjectLikedService.queryPage(subjectLiked, start,
+                subjectLikedBO.getPageSize());
+        List<SubjectLikedBO> subjectInfoBOS = SubjectLikedBOConverter.INSTANCE.convertListInfoToBO(subjectLikedList);
+        subjectInfoBOS.forEach(info -> {
+            SubjectInfo subjectInfo = subjectInfoService.queryById(info.getSubjectId());
+            info.setSubjectName(subjectInfo.getSubjectName());
+        });
+        pageResult.setRecords(subjectInfoBOS);
+        pageResult.setTotal(count);
+        return pageResult;
     }
 
 }

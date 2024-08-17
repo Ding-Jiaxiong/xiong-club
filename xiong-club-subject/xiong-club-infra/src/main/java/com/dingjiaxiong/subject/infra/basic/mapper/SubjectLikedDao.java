@@ -18,5 +18,11 @@ public interface SubjectLikedDao extends BaseMapper<SubjectLiked> {
 
     void batchInsertOrUpdate(@Param("entities") List<SubjectLiked> subjectLikedList);
 
+    int countByCondition(SubjectLiked subjectLiked);
+
+    List<SubjectLiked> queryPage(@Param("entity") SubjectLiked subjectLiked,
+                                 @Param("start") int start,
+                                 @Param("pageSize") Integer pageSize);
+
 }
 

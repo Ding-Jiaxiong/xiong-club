@@ -33,4 +33,21 @@
 
     </insert>
 
+    <select id="countByCondition" resultType="java.lang.Integer">
+        select count(1)
+        from subject_liked
+        where like_user_id = #{likeUserId}
+          and status = 1
+          and is_deleted = 0
+    </select>
+
+    <select id="queryPage" resultType="com.dingjiaxiong.subject.infra.basic.entity.SubjectLiked">
+        select *
+        from subject_liked
+        where like_user_id = #{entity.likeUserId}
+          and is_deleted = 0
+          and status = 1
+        limit #{start} , #{pageSize}
+    </select>
+
 </mapper>

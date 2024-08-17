@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dingjiaxiong.practice.server.dao.SubjectCategoryDao">
+
+
+    <select id="getPrimaryCategory" resultType="com.dingjiaxiong.practice.server.entity.po.PrimaryCategoryPO">
+        select
+        count(distinct a.subject_id) as subjectCount,
+        b.parent_id as parentId
+        from subject_mapping a,
+        subject_category b,
+        subject_info c
+        where a.category_id = b.id
+        and a.subject_id = c.id
+        and a.is_deleted = 0
+        and b.is_deleted = 0
+        and c.is_deleted = 0
+        and c.subject_type in
+        <foreach collection="subjectTypeList" item="item" open="(" close=")" separator=",">
+            #{item}
+        </foreach>
+        group by b.parent_id
+    </select>
+
+    <select id="selectById" resultType="com.dingjiaxiong.practice.server.entity.po.CategoryPO">
+        select id,
+               category_name as categoryName,
+               category_type as categoryType,
+               parent_id     as parentId
+        from subject_category
+        where is_deleted = 0
+          and id = #{id}
+    </select>
+
+    <select id="selectList" resultType="com.dingjiaxiong.practice.server.entity.po.CategoryPO">
+        select id,
+               category_name as categoryName,
+               category_type as categoryType,
+               parent_id     as parentId
+        from subject_category
+        where is_deleted = 0
+          and parent_id = #{parentId}
+          and category_type = #{categoryType}
+    </select>
+</mapper>
+

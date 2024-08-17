@@ -13031,6 +13031,15 @@ server 模块
 
 
 
+##### 4.11 练题功能设计
+
+
+
+看了下前端页面【成品：http://jichiclub.com/practise-questions】
+
+
+
+![image-20240817170356948](./assets/image-20240817170356948.png)
 
 
 
@@ -13046,14 +13055,13 @@ server 模块
 
 
 
+![image-20240817170410717](./assets/image-20240817170410717.png)
 
 
 
 
 
-
-
-
+![image-20240817170429179](./assets/image-20240817170429179.png)
 
 
 

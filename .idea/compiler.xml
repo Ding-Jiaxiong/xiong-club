@@ -20,8 +20,10 @@
         <module name="xiong-club-wx" />
         <module name="xiong-club-infra" />
         <module name="xiong-club-auth-api" />
+        <module name="xiong-club-practice-api" />
         <module name="xiong-club-subject-api" />
         <module name="xiong-club-gateway" />
+        <module name="xiong-club-practice-server" />
         <module name="xiong-club-application-controller" />
         <module name="xiong-club-application-mq" />
         <module name="xiong-club-auth-infra" />

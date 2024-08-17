@@ -1,0 +1,16 @@
+spring:
+  application:
+    name: xiong-club-practice-dev
+  profiles:
+    active: dev
+  cloud:
+    nacos:
+      config:
+        server-addr: 116.196.77.213:8848
+        prefix: ${spring.application.name}
+        group: DEFAULT_GROUP
+        namespace:
+        file-extension: yaml
+      discovery:
+        enabled: true
+        server-addr: 116.196.77.213:8848

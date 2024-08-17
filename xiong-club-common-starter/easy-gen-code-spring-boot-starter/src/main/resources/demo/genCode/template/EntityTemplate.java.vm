@@ -1,0 +1,19 @@
+package ${packageName};
+
+#if($importDate)
+import java.util.Date;
+#end
+
+/**
+ * ${tableComment}实体
+ *
+ * @author ${author}
+ * @date ${date}
+ */
+public class ${className} {
+#foreach($field in $fields)
+
+    private $field.type $field.name;
+#end
+
+}

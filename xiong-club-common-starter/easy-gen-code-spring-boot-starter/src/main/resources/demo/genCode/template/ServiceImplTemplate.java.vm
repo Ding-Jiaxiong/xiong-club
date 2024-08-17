@@ -1,0 +1,11 @@
+package ${packageName};
+
+import com.loser.user.${module}.entity.${pre};
+import com.loser.user.${module}.service.${pre}Service;
+import com.loser.core.impl.EasyMongoServiceImpl;
+import org.springframework.stereotype.Service;
+
+@Service
+public class ${pre}ServiceImpl extends EasyMongoServiceImpl<String, ${pre}> implements ${pre}Service {
+
+}

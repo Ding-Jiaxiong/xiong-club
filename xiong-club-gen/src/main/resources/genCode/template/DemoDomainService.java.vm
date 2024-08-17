@@ -1,0 +1,29 @@
+package com.dingjiaxiong.${module}.domain.service;
+
+
+import com.dingjiaxiong.${module}.domain.entity.${modelName}BO;
+
+/**
+ * ${tableComment} 领域service
+ *
+ * @author ${author}
+ * @since ${genDate}
+ */
+public interface ${modelName}DomainService {
+
+    /**
+     * 添加 ${tableComment} 信息
+     */
+    Boolean add(${modelName}BO ${_modelName}BO);
+
+    /**
+     * 更新 ${tableComment} 信息
+     */
+    Boolean update(${modelName}BO ${_modelName}BO);
+
+    /**
+     * 删除 ${tableComment} 信息
+     */
+    Boolean delete(${modelName}BO ${_modelName}BO);
+
+}

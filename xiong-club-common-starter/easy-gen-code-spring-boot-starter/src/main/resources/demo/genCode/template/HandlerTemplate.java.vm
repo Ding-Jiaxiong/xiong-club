@@ -1,0 +1,84 @@
+package ${packageName};
+
+import com.loser.bean.Result;
+import com.loser.user.mongo.ParamsUtil;
+import com.loser.user.${module}.entity.${pre};
+import com.loser.user.${module}.service.${pre}Service;
+import com.loser.user.${module}.vo.req.${pre}PageReq;
+import com.loser.user.${module}.vo.req.${pre}SaveReq;
+import com.loser.user.${module}.vo.req.${pre}UpdateReq;
+import com.loser.user.${module}.vo.resp.${pre}InfoResp;
+import com.loser.core.entity.Page;
+import com.loser.core.wrapper.LambdaQueryWrapper;
+import com.loser.core.wrapper.Wrappers;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+import java.util.Objects;
+
+/**
+ * 测试数据 处理器
+ *
+ * @author loser
+ * @date 2023-06-13
+ */
+@Component
+public class ${pre}Handler {
+
+    @Autowired
+    private ${pre}Service ${pre}Service;
+
+    /**
+     * 新增测试数据
+     */
+    public Result<Boolean> save(${pre}SaveReq req) {
+
+        ${pre} save = ParamsUtil.copyProperties(req, ${pre}.class);
+        return Result.ok(${pre}Service.save(save));
+
+    }
+
+    /**
+     * 修改测试数据
+     */
+    public Result<Boolean> update(${pre}UpdateReq req) {
+
+        ${pre} update = ParamsUtil.copyProperties(req, ${pre}.class);
+        return Result.ok(${pre}Service.updateById(update));
+
+    }
+
+    /**
+     * 通过id删除测试数据
+     */
+    public Result<Boolean> deleteById(String id) {
+
+        return Result.ok(${pre}Service.removeById(id));
+
+    }
+
+    /**
+     * 通过id获取测试数据
+     */
+    public Result<${pre}InfoResp> getById(String id) {
+
+        ${pre} dbData = ${pre}Service.getById(id);
+        if (Objects.isNull(dbData)) {
+            return Result.ok();
+        }
+        return Result.ok(ParamsUtil.copyProperties(dbData, ${pre}InfoResp.class));
+
+    }
+
+    /**
+     * 分页获取测试数据
+     */
+    public Result<Page<${pre}>> queryList(${pre}PageReq req) {
+
+        LambdaQueryWrapper<${pre}> query = Wrappers.<${pre}>lambdaQuery();
+        Page<${pre}> page = ${pre}Service.page(query, req.getPageNo(), req.getPageSize());
+        return Result.ok(page);
+
+    }
+
+}

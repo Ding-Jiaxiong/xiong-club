@@ -1,0 +1,97 @@
+package com.dingjiaxiong.${module}.application.controller;
+
+import com.alibaba.fastjson.JSON;
+import com.google.common.base.Preconditions;
+import com.dingjiaxiong.${module}.application.convert.${modelName}DTOConverter;
+import com.dingjiaxiong.${module}.application.dto.${modelName}DTO;
+import com.dingjiaxiong.${module}.common.entity.Result;
+import com.dingjiaxiong.${module}.domain.entity.${modelName}BO;
+import com.dingjiaxiong.${module}.domain.service.${modelName}DomainService;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import javax.annotation.Resource;
+
+/**
+ * ${tableComment} controller
+ *
+ * @author ${author}
+ * @since ${genDate}
+ */
+@RestController
+@RequestMapping("${api}/")
+@Slf4j
+public class ${modelName}Controller {
+
+    @Resource
+    private ${modelName}DomainService ${_modelName}DomainService;
+
+    /**
+     * 新增${tableComment}
+     */
+    @RequestMapping("add")
+    public Result<Boolean> add(@RequestBody ${modelName}DTO ${_modelName}DTO) {
+
+        try {
+            if (log.isInfoEnabled()) {
+                log.info("${modelName}Controller.add.dto:{}", JSON.toJSONString(${_modelName}DTO));
+            }
+            #foreach($field in $fields)
+            Preconditions.checkNotNull(${_modelName}DTO.get${field.upName}(), "${field.comment}不能为空");
+            #end
+            ${modelName}BO ${modelName}BO = ${modelName}DTOConverter.INSTANCE.convertDTOToBO(${_modelName}DTO);
+            return Result.ok(${_modelName}DomainService.add(${modelName}BO));
+        } catch (Exception e) {
+            log.error("${modelName}Controller.register.error:{}", e.getMessage(), e);
+            return Result.fail("新增${tableComment}失败");
+        }
+
+    }
+
+    /**
+     * 修改${tableComment}
+     */
+    @RequestMapping("update")
+    public Result<Boolean> update(@RequestBody ${modelName}DTO ${_modelName}DTO) {
+
+        try {
+            if (log.isInfoEnabled()) {
+                log.info("${modelName}Controller.update.dto:{}", JSON.toJSONString(${_modelName}DTO));
+            }
+            #foreach($field in $fields)
+            Preconditions.checkNotNull(${_modelName}DTO.get${field.upName}(), "${field.comment}不能为空");
+            #end
+            ${modelName}BO ${_modelName}BO = ${modelName}DTOConverter.INSTANCE.convertDTOToBO(${_modelName}DTO);
+            return Result.ok(${_modelName}DomainService.update(${_modelName}BO));
+        } catch (Exception e) {
+            log.error("${modelName}Controller.update.error:{}", e.getMessage(), e);
+            return Result.fail("更新${tableComment}信息失败");
+        }
+
+    }
+
+    /**
+     * 删除${tableComment}
+     */
+    @RequestMapping("delete")
+    public Result<Boolean> delete(@RequestBody ${modelName}DTO ${_modelName}DTO) {
+
+        try {
+            if (log.isInfoEnabled()) {
+                log.info("${modelName}Controller.delete.dto:{}", JSON.toJSONString(${_modelName}DTO));
+            }
+            #foreach($field in $fields)
+            Preconditions.checkNotNull(${_modelName}DTO.get${field.upName}(), "${field.comment}不能为空");
+            #end
+            ${modelName}BO ${_modelName}BO = ${modelName}DTOConverter.INSTANCE.convertDTOToBO(${_modelName}DTO);
+            return Result.ok(${_modelName}DomainService.delete(${_modelName}BO));
+        } catch (Exception e) {
+            log.error("${modelName}Controller.delete.error:{}", e.getMessage(), e);
+            return Result.fail("删除${tableComment}信息失败");
+        }
+
+    }
+
+}

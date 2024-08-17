@@ -1,0 +1,21 @@
+package com.dingjiaxiong.${module}.application.convert;
+
+import com.dingjiaxiong.${module}.application.dto.${modelName}DTO;
+import com.dingjiaxiong.${module}.domain.entity.${modelName}BO;
+import org.mapstruct.Mapper;
+import org.mapstruct.factory.Mappers;
+
+/**
+ * ${tableComment} dto转换器
+ *
+ * @author ${author}
+ * @since ${genDate}
+ */
+@Mapper
+public interface ${modelName}DTOConverter {
+
+    ${modelName}DTOConverter INSTANCE = Mappers.getMapper(${modelName}DTOConverter.class);
+
+    ${modelName}BO convertDTOToBO(${modelName}DTO ${_modelName}DTO);
+
+}

@@ -1,0 +1,28 @@
+# 01 数据源输入 填充到全局的context中
+# 1.1 通过指定类的返回值写入 (优先级第一)
+#handler: com.loser.core.impl.JdbcPutContextHandler
+# 1.2 直接从classPath中引入一个json数据 可配合 mapperInfos 替换模板 (优先级第二)
+json: genCode/fields.json
+# 1.3 配置数据库信息从表字段中获取数据 (优先级第三)
+#jdbc:
+#  url: jdbc:mysql://119.91.155.174:3306/
+#  username: root
+#  password: 6666888123
+#  dbName: ape
+#  driver: com.mysql.cj.jdbc.Driver
+#  tableName: sys_user
+
+# 02 模板与生成类的映射关系 通过修改该配置 切换不同的生成模板 （比如从基础的crud代码模板 切换到 rpc代码模板等）
+mapperInfos: genCode/mapper.yml
+
+# 03 针对某个生成文件写入独有上下文 通过 mapper.yml > mappers > fileId 关联
+#filePutHandler: com.loser.core.impl.DemoFilePutContextHandler
+
+# 04 全局上下文参数
+params:
+  pre: Loser
+  module: test
+  author: loser
+  # 内置函数:now()-获取当前时间;date()-获取当前时间不带时分秒;svUid()-生成序列化ID;
+  # 扩展新的函数 则在调用生成方法前 使用 FunctionUtils.register(Function function)
+  date: now()

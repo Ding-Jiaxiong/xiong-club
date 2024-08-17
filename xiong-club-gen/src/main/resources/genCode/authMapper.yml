@@ -1,0 +1,69 @@
+# auth模块映射关系 ${module} 占位符
+# 模板文件和生成类的映射关系 多个文件 数组形式配置
+mappers:
+  -
+  - fileId: 001
+    template: genCode/template/DemoDTO.java.vm
+    filePath: /xiong-club-${module}/xiong-club-${module}-application/xiong-club-${module}-application-controller/src/main/java/com/dingjiaxiong/${module}/application/dto
+    name: ${modelName}DTO
+    ext: java
+  - fileId: 002
+    template: genCode/template/DemoController.java.vm
+    filePath: /xiong-club-${module}/xiong-club-${module}-application/xiong-club-${module}-application-controller/src/main/java/com/dingjiaxiong/${module}/application/controller
+    name: ${modelName}Controller
+    ext: java
+  - fileId: 003
+    template: genCode/template/DemoDTOConverter.java.vm
+    filePath: /xiong-club-${module}/xiong-club-${module}-application/xiong-club-${module}-application-controller/src/main/java/com/dingjiaxiong/${module}/application/convert
+    name: ${modelName}DTOConverter
+    ext: java
+  - fileId: 004
+    template: genCode/template/DemoBO.java.vm
+    filePath: /xiong-club-${module}/xiong-club-${module}-domain/src/main/java/com/dingjiaxiong/${module}/domain/entity
+    name: ${modelName}BO
+    ext: java
+  - fileId: 005
+    template: genCode/template/DemoDomainService.java.vm
+    filePath: /xiong-club-${module}/xiong-club-${module}-domain/src/main/java/com/dingjiaxiong/${module}/domain/service
+    name: ${modelName}DomainService
+    ext: java
+  - fileId: 006
+    template: genCode/template/DemoDomainServiceImpl.java.vm
+    filePath: /xiong-club-${module}/xiong-club-${module}-domain/src/main/java/com/dingjiaxiong/${module}/domain/service/impl
+    name: ${modelName}DomainServiceImpl
+    ext: java
+  - fileId: 007
+    template: genCode/template/DemoBOConverter.java.vm
+    filePath: /xiong-club-${module}/xiong-club-${module}-domain/src/main/java/com/dingjiaxiong/${module}/domain/convert
+    name: ${modelName}BOConverter
+    ext: java
+  - fileId: 008
+    template: genCode/template/DemoService.java.vm
+    filePath: /xiong-club-${module}/xiong-club-${module}-infra/src/main/java/com/dingjiaxiong/${module}/infra/basic/service
+    name: ${modelName}Service
+    ext: java
+  - fileId: 009
+    template: genCode/template/DemoTable.java.vm
+    filePath: /xiong-club-${module}/xiong-club-${module}-infra/src/main/java/com/dingjiaxiong/${module}/infra/basic/entity
+    name: ${modelName}
+    ext: java
+  - fileId: 010
+    template: genCode/template/DemoServiceImpl.java.vm
+    filePath: /xiong-club-${module}/xiong-club-${module}-infra/src/main/java/com/dingjiaxiong/${module}/infra/basic/service/impl
+    name: ${modelName}ServiceImpl
+    ext: java
+  - fileId: 011
+    template: genCode/template/DemoDao.java.vm
+    filePath: /xiong-club-${module}/xiong-club-${module}-infra/src/main/java/com/dingjiaxiong/${module}/infra/basic/mapper
+    name: ${modelName}Dao
+    ext: java
+  - fileId: 012
+    template: genCode/template/DemoXml.xml.vm
+    filePath: /xiong-club-${module}/xiong-club-${module}-infra/src/main/resources/mapper
+    name: ${modelName}Dao
+    ext: xml
+
+
+
+
+

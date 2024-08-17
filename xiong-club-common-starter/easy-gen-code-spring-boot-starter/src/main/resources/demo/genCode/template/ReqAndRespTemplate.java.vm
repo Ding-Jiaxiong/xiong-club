@@ -1,0 +1,21 @@
+package ${packageName};
+
+#if($importDate)
+import java.util.Date;
+#end
+import lombok.Data;
+
+/**
+ * ${tableComment}试图
+ *
+ * @author ${author}
+ * @date ${date}
+ */
+@Data
+public class $className {
+#foreach($field in $fields)
+
+    private $field.type $field.name;
+#end
+
+}

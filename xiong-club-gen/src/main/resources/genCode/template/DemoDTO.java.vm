@@ -1,0 +1,24 @@
+package com.dingjiaxiong.${module}.application.dto;
+
+import lombok.Data;
+
+import java.io.Serializable;
+
+/**
+ * ${tableComment} dto
+ *
+ * @author ${author}
+ * @since ${genDate}
+ */
+@Data
+public class ${modelName}DTO implements Serializable {
+    #foreach($field in $fields)
+
+    /**
+     * ${field.comment}
+     */
+    private $field.type $field.name;
+    #end
+
+}
+

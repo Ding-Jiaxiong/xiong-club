@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dingjiaxiong.${module}.infra.basic.mapper.${modelName}Dao">
+
+    <resultMap id="BaseResultMap" type="com.dingjiaxiong.${module}.infra.basic.entity.${modelName}">
+        #foreach($field in $fields)
+    #if($field.keyType=='PRI')
+        <id column="${field.col}" jdbcType="${field.myBatisType}" property="${field.name}"/>
+    #end
+    #if($field.keyType!='PRI')
+        <result column="${field.col}" jdbcType="${field.myBatisType}" property="${field.name}"/>
+    #end
+#end
+    </resultMap>
+
+</mapper>

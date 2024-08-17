@@ -1,0 +1,48 @@
+package com.dingjiaxiong.${module}.domain.service.impl;
+
+import com.dingjiaxiong.${module}.common.enums.IsDeletedFlagEnum;
+import com.dingjiaxiong.${module}.domain.convert.${modelName}BOConverter;
+import com.dingjiaxiong.${module}.domain.entity.${modelName}BO;
+import com.dingjiaxiong.${module}.domain.service.${modelName}DomainService;
+import com.dingjiaxiong.${module}.infra.basic.entity.${modelName};
+import com.dingjiaxiong.${module}.infra.basic.service.${modelName}Service;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Service;
+
+import javax.annotation.Resource;
+
+/**
+ * ${tableComment} 领域service实现了
+ *
+ * @author ${author}
+ * @since ${genDate}
+ */
+@Service
+@Slf4j
+public class ${modelName}DomainServiceImpl implements ${modelName}DomainService {
+
+    @Resource
+    private ${modelName}Service ${_modelName}Service;
+
+    @Override
+    public Boolean add(${modelName}BO ${_modelName}BO) {
+        ${modelName} ${_modelName} = ${modelName}BOConverter.INSTANCE.convertBOToEntity(${_modelName}BO);
+        ${_modelName}.setIsDeleted(IsDeletedFlagEnum.UN_DELETED.getCode());
+        return ${_modelName}Service.insert(${_modelName}) > 0;
+    }
+
+    @Override
+    public Boolean update(${modelName}BO ${_modelName}BO) {
+        ${modelName} ${_modelName} = ${modelName}BOConverter.INSTANCE.convertBOToEntity(${_modelName}BO);
+        return ${_modelName}Service.update(${_modelName}) > 0;
+    }
+
+    @Override
+    public Boolean delete(${modelName}BO ${_modelName}BO) {
+        ${modelName} ${_modelName} = new ${modelName}();
+        ${_modelName}.setId(${_modelName}BO.getId());
+        ${_modelName}.setIsDeleted(IsDeletedFlagEnum.DELETED.getCode());
+        return ${_modelName}Service.update(${_modelName}) > 0;
+    }
+
+}

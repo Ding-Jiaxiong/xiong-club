@@ -1,0 +1,35 @@
+package com.dingjiaxiong.${module}.infra.basic.entity;
+
+import lombok.Data;
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
+
+import java.io.Serializable;
+
+/**
+ * ${tableComment} 实体类
+ *
+ * @author ${author}
+ * @since ${genDate}
+ */
+@Data
+@TableName("${tableName}")
+public class ${modelName} implements Serializable {
+#foreach($field in $fields)
+
+    /**
+     * ${field.comment}
+     */
+    #if($field.keyType=='PRI')
+    @TableId(value = "`$field.col`", type = IdType.AUTO)
+    #end
+    #if($field.keyType!='PRI')
+    @TableField("`$field.col`")
+    #end
+    private $field.type $field.name;
+    #end
+
+}
+

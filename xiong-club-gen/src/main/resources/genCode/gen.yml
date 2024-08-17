@@ -1,0 +1,33 @@
+# 使用步骤
+# 01 替换数据库连接信息及对应表 jdbc:*
+# 02 替换模板映射关系 mapperInfos
+# 03 替换作者信息 params:loser
+# 04 替换模块 params:module
+# 05 替换 controller 前缀 params:api
+
+# 数据库连接信息
+jdbc:
+  dbName: xiongclub
+  tableName: subject_liked
+  url: jdbc:mysql://116.196.77.213:3306/
+  username: root
+  password: 19991012
+  driver: com.mysql.cj.jdbc.Driver
+
+# 使用的模板与生成文件映射给关系
+mapperInfos: genCode/subjectLikedMapper.yml
+
+# 全局参数
+params:
+  # 作者
+  author: Ding Jiaxiong
+  # 模块
+  module: subject
+  # controller 通用前缀
+  api: /subjectLiked
+  # 生成对象是否移除前缀
+  removePre: false
+  # 使用内置函数赋值给变量  FunctionUtils 中替换
+  genDate: now()
+  # win 需要补充模板具体目录
+  templateBasePath: D:/PlanetProjects/8_brush_questionscommunity/xiong-club/xiong-club-gen/src/main/resources

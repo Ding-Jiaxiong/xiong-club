@@ -1,0 +1,26 @@
+package ${packageName};
+
+#if($importDate)
+import java.util.Date;
+#end
+import lombok.Data;
+
+/**
+ * ${tableComment}实体
+ *
+ * @author ${author}
+ * @date ${date}
+ */
+@Data
+public class ${className} {
+
+    private Integer pageNo = 1;
+
+    private Integer pageSize = 20;
+
+#foreach($field in $fields)
+
+    private $field.type $field.name;
+#end
+
+}

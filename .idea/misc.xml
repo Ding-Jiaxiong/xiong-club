@@ -10,6 +10,8 @@
         <option value="$PROJECT_DIR$/xiong-club-gateway/pom.xml" />
         <option value="$PROJECT_DIR$/xiong/pom.xml" />
         <option value="$PROJECT_DIR$/xiong-club-wx/pom.xml" />
+        <option value="$PROJECT_DIR$/xiong-club-gen/pom.xml" />
+        <option value="$PROJECT_DIR$/xiong-club-common-starter/pom.xml" />
       </list>
     </option>
     <option name="ignoredFiles">

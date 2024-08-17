@@ -1,0 +1,50 @@
+package com.dingjiaxiong.${module}.infra.basic.service;
+
+import com.dingjiaxiong.${module}.infra.basic.entity.${modelName};
+
+/**
+ * ${tableComment} 表服务接口
+ *
+ * @author ${author}
+ * @since ${genDate}
+ */
+public interface ${modelName}Service {
+
+    /**
+     * 通过ID查询单条数据
+     *
+     * @param id 主键
+     * @return 实例对象
+     */
+    ${modelName} queryById(Long id);
+
+    /**
+     * 新增数据
+     *
+     * @param ${_modelName} 实例对象
+     * @return 实例对象
+     */
+    int insert(${modelName} ${_modelName});
+
+    /**
+     * 修改数据
+     *
+     * @param ${_modelName} 实例对象
+     * @return 实例对象
+     */
+    int update(${modelName} ${_modelName});
+
+    /**
+     * 通过主键删除数据
+     *
+     * @param id 主键
+     * @return 是否成功
+     */
+    boolean deleteById(Long id);
+
+    /**
+     * 根据条件查询角色
+     */
+    ${modelName} queryByCondition(${modelName} ${_modelName});
+
+}

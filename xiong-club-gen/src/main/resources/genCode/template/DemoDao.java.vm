@@ -1,0 +1,19 @@
+package com.dingjiaxiong.${module}.infra.basic.mapper;
+
+import com.dingjiaxiong.${module}.infra.basic.entity.${modelName};
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import org.springframework.stereotype.Repository;
+
+import java.util.List;
+
+/**
+ * ${tableComment} 表数据库访问层
+ *
+ * @author ${author}
+ * @since ${genDate}
+ */
+@Repository
+public interface ${modelName}Dao extends BaseMapper<${modelName}> {
+
+}
+

@@ -1,0 +1,8 @@
+package ${packageName};
+
+import com.loser.user.${module}.entity.${pre};
+import com.loser.core.sdk.EasyMongoService;
+
+public interface ${pre}Service extends EasyMongoService<String, ${pre}> {
+
+}

@@ -1,0 +1,74 @@
+# 生成到当前项目的那个子模块,没有则配置 /
+module: /ape-demo/
+
+# 模板文件和生成类的映射关系 多个文件 数组形式配置
+mappers:
+  -
+  - fileId: 001
+    template: genCode/template/ReqAndRespTemplate.java.vm
+    # 生成到 src.main.java 下的对应包中
+    packageName: com.loser.user.${module}.vo.resp
+    name: ${pre}InfoResp
+    ext: java
+
+    # fileId 用于实现 FilePutContextHandler 接口时 忘对应文件的上下文补充数据
+  - fileId: 002
+    template: genCode/template/ReqAndRespTemplate.java.vm
+    # 优先级比 packageName 使用场景为需要指定目录的文件比如resources下的 mapper 文件等
+    filePath: src/main/resources/${module}/template
+    name: ${pre}InfoResp
+    ext: java.vm
+
+  - fileId: 003
+    template: genCode/template/EntityTemplate.java.vm
+    packageName: com.loser.user.${module}.entity
+    name: ${pre}
+    ext: java
+
+  - fileId: 004
+    template: genCode/template/ReqAndRespTemplate.java.vm
+    packageName: com.loser.user.${module}.vo.req
+    name: ${pre}Req
+    ext: java
+
+  - fileId: 005
+    template: genCode/template/ReqAndRespTemplate.java.vm
+    packageName: com.loser.user.${module}.vo.resp
+    name: ${pre}Resp
+    ext: java
+
+  - fileId: 006
+    template: genCode/template/ServiceTemplate.java.vm
+    packageName: com.loser.user.${module}.service
+    name: ${pre}Service
+    ext: java
+
+  - fileId: 007
+    template: genCode/template/ServiceImplTemplate.java.vm
+    packageName: com.loser.user.${module}.service.impl
+    name: ${pre}ServiceImpl
+    ext: java
+
+  - fileId: 008
+    template: genCode/template/HandlerTemplate.java.vm
+    packageName: com.loser.user.${module}.handler
+    name: ${pre}Handler
+    ext: java
+
+  - fileId: 009
+    template: genCode/template/PageReqTemplate.java.vm
+    packageName: com.loser.user.${module}.vo.req
+    name: ${pre}PageReq
+    ext: java
+
+  - fileId: 010
+    template: genCode/template/ReqAndRespTemplate.java.vm
+    packageName: com.loser.user.${module}.vo.req
+    name: ${pre}SaveReq
+    ext: java
+
+  - fileId: 011
+    template: genCode/template/ReqAndRespTemplate.java.vm
+    packageName: com.loser.user.${module}.vo.req
+    name: ${pre}UpdateReq
+    ext: java

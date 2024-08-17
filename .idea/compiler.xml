@@ -8,7 +8,9 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="xiong-club-auth-application-controller" />
+        <module name="easy-gen-code-spring-boot-starter" />
         <module name="xiong-club-starter" />
+        <module name="xiong-club-gen" />
         <module name="xiong-club-oss" />
         <module name="xiong-club-auth-starter" />
         <module name="xiong-club-auth-application-job" />
@@ -28,5 +30,10 @@
         <module name="xiong-club-common" />
       </profile>
     </annotationProcessing>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="xiong-club-gen" options="-parameters" />
+    </option>
   </component>
 </project>

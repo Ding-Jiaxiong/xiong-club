@@ -1,0 +1,21 @@
+package com.dingjiaxiong.${module}.domain.convert;
+
+import com.dingjiaxiong.${module}.domain.entity.${modelName}BO;
+import com.dingjiaxiong.${module}.infra.basic.entity.${modelName};
+import org.mapstruct.Mapper;
+import org.mapstruct.factory.Mappers;
+
+/**
+ * ${tableComment} bo转换器
+ *
+ * @author ${author}
+ * @since ${genDate}
+ */
+@Mapper
+public interface ${modelName}BOConverter {
+
+    ${modelName}BOConverter INSTANCE = Mappers.getMapper(${modelName}BOConverter.class);
+
+    ${modelName} convertBOToEntity(${modelName}BO ${_modelName}BO);
+
+}

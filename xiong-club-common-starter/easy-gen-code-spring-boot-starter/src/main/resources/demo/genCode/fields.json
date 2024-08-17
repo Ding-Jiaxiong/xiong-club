@@ -1,0 +1,44 @@
+{
+  "fields": [
+    {
+      "type": "int",
+      "name": "Element1"
+    },
+    {
+      "type": "boolean",
+      "name": "Element2"
+    },
+    {
+      "type": "byte",
+      "name": "Element3"
+    },
+    {
+      "type": "double",
+      "name": "Element4"
+    },
+    {
+      "type": "float",
+      "name": "Element5"
+    },
+    {
+      "type": "short",
+      "name": "Element6"
+    },
+    {
+      "type": "int",
+      "name": "Element7"
+    },
+    {
+      "type": "char",
+      "name": "Element8"
+    },
+    {
+      "type": "boolean",
+      "name": "Element9"
+    },
+    {
+      "type": "long",
+      "name": "Element10"
+    }
+  ]
+}

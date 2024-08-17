@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dingjiaxiong.practice.server.dao.PracticeDao">
+
+
+    <select id="selectById"
+            resultType="com.dingjiaxiong.practice.server.entity.po.PracticePO">
+        select set_id as setId, time_use as timeUse, submit_time as submitTime, correct_rate as correctRate
+        from practice_info
+        where id = #{id,jdbcType=BIGINT}
+        and is_deleted = 0
+    </select>
+
+    <insert id="insert">
+        <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        INSERT INTO practice_info(set_id, complete_status,time_use,submit_time,correct_rate, is_deleted,
+        created_by, created_time)
+        values (#{setId,jdbcType=BIGINT},
+        #{completeStatus,jdbcType=INTEGER},
+        #{timeUse,jdbcType=VARCHAR},
+        #{submitTime,jdbcType=TIMESTAMP},
+        #{correctRate,jdbcType=VARCHAR},
+        #{isDeleted,jdbcType=INTEGER},
+        #{createdBy,jdbcType=VARCHAR},
+        #{createdTime,jdbcType=TIMESTAMP})
+    </insert>
+
+    <update id="update">
+        update practice_info
+        <set>
+            <if test="submitTime != null">
+                submit_time = #{submitTime},
+            </if>
+            <if test="timeUse != null">
+                time_use = #{timeUse},
+            </if>
+            <if test="completeStatus != null">
+                complete_status = #{completeStatus},
+            </if>
+            <if test="correctRate != null">
+                correct_rate = #{correctRate},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+
+    <update id="deleteById">
+        update practice_info
+        set is_deleted = 1
+        where id = #{id}
+    </update>
+
+    <select id="getUnCompleteCount" resultType="java.lang.Integer">
+        select count(1)
+        from practice_info
+        where created_by = #{loginId}
+          and complete_status = 0
+          and is_deleted = 0
+    </select>
+
+    <select id="getUnCompleteList"
+            resultType="com.dingjiaxiong.practice.server.entity.po.PracticePO">
+        select id, set_id as setId, time_use as timeUse, submit_time as submitTime, correct_rate as correctRate
+        from practice_info
+        where created_by = #{loginId}
+          and is_deleted = 0
+          and complete_status = 0
+        order by submit_time desc
+            limit #{limit}, #{offset}
+    </select>
+
+</mapper>

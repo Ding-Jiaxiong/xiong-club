@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dingjiaxiong.practice.server.dao.PracticeSetDao">
+
+    <insert id="add">
+        <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        INSERT INTO practice_set(set_name, set_type,primary_category_id, is_deleted, created_by, created_time)
+        values (
+        #{setName,jdbcType=VARCHAR},
+        #{setType,jdbcType=INTEGER},
+        #{primaryCategoryId,jdbcType=BIGINT},
+        #{isDeleted,jdbcType=INTEGER},
+        #{createdBy,jdbcType=VARCHAR},
+        #{createdTime,jdbcType=TIMESTAMP})
+    </insert>
+
+    <select id="selectById" resultType="com.dingjiaxiong.practice.server.entity.po.PracticeSetPO">
+        select set_name            as setName,
+               set_type            as setType,
+               set_heat            as setHeat,
+               set_desc            as setDesc,
+               primary_category_id as primaryCategoryId
+        from practice_set
+        where is_deleted = 0
+          and id = #{setId,jdbcType=BIGINT}
+    </select>
+
+    <update id="updateHeat">
+        update practice_set
+        set set_heat = set_heat + 1
+        where id = #{setId,jdbcType=BIGINT}
+    </update>
+
+    <select id="getListCount" resultType="java.lang.Integer">
+        select count(id)
+        from practice_set
+        where is_deleted = 0
+        and set_type = 2
+        <if test="setName != null">
+            and set_name like concat('%',#{setName,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="orderType != null and orderType == 0">
+            order by set_name desc
+        </if>
+        <if test="orderType != null and orderType == 1">
+            order by created_time desc
+        </if>
+        <if test="orderType != null and orderType == 2">
+            order by set_heat desc
+        </if>
+    </select>
+
+    <select id="getSetList" resultType="com.dingjiaxiong.practice.server.entity.po.PracticeSetPO">
+        select id,set_name as setName,set_type as setType,set_heat as setHeat,set_desc as setDesc
+        from practice_set
+        where is_deleted = 0
+        and set_type = 2
+        <if test="dto.setName != null">
+            and set_name like concat('%',#{dto.setName,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="dto.orderType != null and dto.orderType == 0">
+            order by set_name desc
+        </if>
+        <if test="dto.orderType != null and dto.orderType == 1">
+            order by created_time desc
+        </if>
+        <if test="dto.orderType != null and dto.orderType == 2">
+            order by set_heat desc
+        </if>
+        limit #{limit}, #{offset}
+    </select>
+
+</mapper>
+

@@ -1,6 +1,8 @@
 package com.dingjiaxiong.practice.server.service;
 
+import com.dingjiaxiong.practice.api.vo.PracticeSetVO;
 import com.dingjiaxiong.practice.api.vo.SpecialPracticeVO;
+import com.dingjiaxiong.practice.server.entity.dto.PracticeSubjectDTO;
 
 import java.util.List;
 
@@ -12,6 +14,8 @@ public interface PracticeSetService {
     List<SpecialPracticeVO> getSpecialPracticeContent();
 
 
-
-
+    /**
+     * 开始练习
+     */
+    PracticeSetVO addPractice(PracticeSubjectDTO dto);
 }

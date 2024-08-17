@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dingjiaxiong.practice.server.dao.SubjectDao">
+
+    <select id="getPracticeSubject"
+            resultType="com.dingjiaxiong.practice.server.entity.po.SubjectPO">
+        select distinct a.subject_id as id,
+        b.subject_type as subjectType
+        from subject_mapping a,
+        subject_info b
+        where a.subject_id = b.id
+        <if test="subjectType!= null">
+            and b.subject_type = #{subjectType, jdbcType= INTEGER}
+        </if>
+        <if test="excludeSubjectIds!= null and excludeSubjectIds.size()>0">
+            and a.subject_id not in
+            <foreach collection="excludeSubjectIds" item="item" open="(" close=")" separator=",">
+                #{item}
+            </foreach>
+        </if>
+        and CONCAT(a.category_id,'-',a.label_id) in
+        <foreach collection="assembleIds" item="item" open="(" close=")" separator=",">
+            #{item}
+        </foreach>
+        order by rand() LIMIT #{subjectCount, jdbcType= INTEGER};
+    </select>
+
+    <select id="selectById" resultType="com.dingjiaxiong.practice.server.entity.po.SubjectPO">
+        select id,
+               subject_name  as subjectName,
+               subject_type  as subjectType
+        from subject_info
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+
+
+</mapper>
+

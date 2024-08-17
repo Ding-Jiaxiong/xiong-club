@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dingjiaxiong.practice.server.dao.PracticeSetDetailDao">
+
+    <insert id="add">
+        INSERT INTO practice_set_detail(set_id, subject_id, subject_type, is_deleted, created_by, created_time)
+        values (#{setId,jdbcType=BIGINT},
+                #{subjectId,jdbcType=BIGINT},
+                #{subjectType,jdbcType=INTEGER},
+                #{isDeleted,jdbcType=INTEGER},
+                #{createdBy,jdbcType=VARCHAR},
+                #{createdTime,jdbcType=TIMESTAMP})
+    </insert>
+
+    <select id="selectBySetId" resultType="com.dingjiaxiong.practice.server.entity.po.PracticeSetDetailPO">
+        select subject_id as subjectId, subject_type as subjectType
+        from practice_set_detail
+        where is_deleted = 0
+          and set_id = #{setId,jdbcType=BIGINT}
+        order by subject_type
+    </select>
+
+</mapper>
+

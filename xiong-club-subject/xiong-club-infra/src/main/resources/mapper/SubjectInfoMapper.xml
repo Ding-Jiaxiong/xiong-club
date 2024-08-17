@@ -101,5 +101,21 @@
         where id = #{id}
     </select>
 
+    <select id="querySubjectIdCursor" resultType="java.lang.Long">
+        select a.id
+        from subject_info a,
+        subject_mapping b
+        where a.id = b.subject_id
+        and b.category_id = #{categoryId}
+        and b.label_id = #{labelId}
+        <if test="cursor !=null and cursor == 1">
+            and a.id > #{subjectId}
+        </if>
+        <if test="cursor !=null and cursor == 0">
+            and a.id &lt; #{subjectId}
+        </if>
+        limit 0,1
+    </select>
+
 
 </mapper>

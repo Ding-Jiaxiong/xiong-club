@@ -20,4 +20,6 @@ public interface SubjectInfoService extends IService<SubjectInfo> {
 
     SubjectInfo queryById(Long id);
 
+    Long querySubjectIdCursor(Long subjectId, Long categoryId, Long labelId, int cursor);
+
 }

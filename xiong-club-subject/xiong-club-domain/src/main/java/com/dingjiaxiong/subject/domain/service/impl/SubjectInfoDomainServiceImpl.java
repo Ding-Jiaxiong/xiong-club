@@ -163,25 +163,25 @@ public class SubjectInfoDomainServiceImpl implements SubjectInfoDomainService {
 
         bo.setLiked(subjectLikedDomainService.isLiked(subjectInfoBO.getId().toString(), LoginUtil.getLoginId()));
         bo.setLikedCount(subjectLikedDomainService.getLikedCount(subjectInfoBO.getId().toString()));
-//        assembleSubjectCursor(subjectInfoBO, bo);
+        assembleSubjectCursor(subjectInfoBO, bo);
 
-        System.out.println(bo);
+//        System.out.println(bo);
 
         return bo;
     }
 
-//    private void assembleSubjectCursor(SubjectInfoBO subjectInfoBO, SubjectInfoBO bo) {
-//        Long categoryId = subjectInfoBO.getCategoryId();
-//        Long labelId = subjectInfoBO.getLabelId();
-//        Long subjectId = subjectInfoBO.getId();
-//        if (Objects.isNull(categoryId) || Objects.isNull(labelId)) {
-//            return;
-//        }
-//        Long nextSubjectId = subjectInfoService.querySubjectIdCursor(subjectId, categoryId, labelId, 1);
-//        bo.setNextSubjectId(nextSubjectId);
-//        Long lastSubjectId = subjectInfoService.querySubjectIdCursor(subjectId, categoryId, labelId, 0);
-//        bo.setLastSubjectId(lastSubjectId);
-//    }
+    private void assembleSubjectCursor(SubjectInfoBO subjectInfoBO, SubjectInfoBO bo) {
+        Long categoryId = subjectInfoBO.getCategoryId();
+        Long labelId = subjectInfoBO.getLabelId();
+        Long subjectId = subjectInfoBO.getId();
+        if (Objects.isNull(categoryId) || Objects.isNull(labelId)) {
+            return;
+        }
+        Long nextSubjectId = subjectInfoService.querySubjectIdCursor(subjectId, categoryId, labelId, 1);
+        bo.setNextSubjectId(nextSubjectId);
+        Long lastSubjectId = subjectInfoService.querySubjectIdCursor(subjectId, categoryId, labelId, 0);
+        bo.setLastSubjectId(lastSubjectId);
+    }
 
     @Override
     public PageResult<SubjectInfoEs> getSubjectPageBySearch(SubjectInfoBO subjectInfoBO) {

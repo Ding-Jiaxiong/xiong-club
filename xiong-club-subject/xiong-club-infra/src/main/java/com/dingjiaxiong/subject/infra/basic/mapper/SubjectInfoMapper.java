@@ -29,6 +29,10 @@ public interface SubjectInfoMapper extends BaseMapper<SubjectInfo> {
 
     SubjectInfo queryById(Long id);
 
+    Long querySubjectIdCursor(@Param("subjectId") Long subjectId,
+                              @Param("categoryId") Long categoryId,
+                              @Param("labelId") Long labelId,
+                              @Param("cursor") int cursor);
 }
 
 

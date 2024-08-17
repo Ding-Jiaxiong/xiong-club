@@ -44,6 +44,11 @@ public class SubjectInfoServiceImpl extends ServiceImpl<SubjectInfoMapper, Subje
         return subjectInfoMapper.queryById(id);
     }
 
+    @Override
+    public Long querySubjectIdCursor(Long subjectId, Long categoryId, Long labelId, int cursor) {
+        return subjectInfoMapper.querySubjectIdCursor(subjectId, categoryId, labelId, cursor);
+    }
+
 
 }
 

@@ -23,6 +23,12 @@ spring:
             - Path=/subject/**
           filters:
             - StripPrefix=1
+        - id: practice
+          uri: lb://xiong-club-practice-dev
+          predicates:
+            - Path=/practice/**
+          filters:
+            - StripPrefix=1
   redis:
     # Redis数据库索引（默认为0）
     database: 1

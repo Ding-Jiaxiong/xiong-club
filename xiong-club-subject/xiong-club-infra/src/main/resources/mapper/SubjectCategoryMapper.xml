@@ -60,12 +60,22 @@
         </where>
     </select>
 
+<!--    <select id="querySubjectCount" resultType="java.lang.Integer">-->
+<!--        select count(distinct subject_id)-->
+<!--        from subject_mapping a,-->
+<!--             subject_label b-->
+<!--        where a.label_id = b.id-->
+<!--          and b.category_id = #{id}-->
+<!--    </select>-->
+
     <select id="querySubjectCount" resultType="java.lang.Integer">
-        select count(distinct subject_id)
-        from subject_mapping a,
-             subject_label b
-        where a.label_id = b.id
-          and b.category_id = #{id}
+        select count(DISTINCT subject_id)
+        from subject_mapping
+        where label_id in (select id
+                           from subject_label
+                           where category_id in
+                                 (select id from subject_category where parent_id = #{id}))
     </select>
+
 
 </mapper>

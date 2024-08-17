@@ -11,7 +11,7 @@
  Target Server Version : 50744
  File Encoding         : 65001
 
- Date: 16/08/2024 22:43:35
+ Date: 17/08/2024 18:09:47
 */
 
 SET NAMES utf8mb4;
@@ -147,6 +147,96 @@ INSERT INTO `auth_user_role` VALUES (4, 5, 1, NULL, NULL, NULL, NULL, 0);
 INSERT INTO `auth_user_role` VALUES (7, 8, 2, NULL, NULL, NULL, NULL, 0);
 
 -- ----------------------------
+-- Table structure for practice_detail
+-- ----------------------------
+DROP TABLE IF EXISTS `practice_detail`;
+CREATE TABLE `practice_detail`  (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '主键',
+  `practice_id` bigint(20) NULL DEFAULT NULL COMMENT '练题id',
+  `subject_id` bigint(20) NULL DEFAULT NULL COMMENT '题目id',
+  `subject_type` int(11) NULL DEFAULT NULL COMMENT '题目类型',
+  `answer_status` int(11) NULL DEFAULT NULL COMMENT '回答状态',
+  `answer_content` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL COMMENT '回答内容',
+  `created_by` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '创建人',
+  `created_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
+  `update_by` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '更新人',
+  `update_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
+  `is_deleted` int(11) NULL DEFAULT 0 COMMENT '是否被删除 0为删除 1已删除',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin COMMENT = '练习详情表' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of practice_detail
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for practice_info
+-- ----------------------------
+DROP TABLE IF EXISTS `practice_info`;
+CREATE TABLE `practice_info`  (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '主键',
+  `set_id` bigint(20) NULL DEFAULT NULL COMMENT '套题id',
+  `complete_status` int(11) NULL DEFAULT NULL COMMENT '是否完成 1完成 0未完成',
+  `time_use` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL COMMENT '用时',
+  `submit_time` datetime NULL DEFAULT NULL COMMENT '交卷时间',
+  `correct_rate` decimal(10, 2) NULL DEFAULT NULL COMMENT '正确率',
+  `created_by` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '创建人',
+  `created_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
+  `update_by` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '更新人',
+  `update_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
+  `is_deleted` int(11) NULL DEFAULT 0 COMMENT '是否被删除 0为删除 1已删除',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin COMMENT = '练习表' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of practice_info
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for practice_set
+-- ----------------------------
+DROP TABLE IF EXISTS `practice_set`;
+CREATE TABLE `practice_set`  (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '主键',
+  `set_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL COMMENT '套题名称',
+  `set_type` int(11) NULL DEFAULT NULL COMMENT '套题类型 1实时生成 2预设套题',
+  `set_heat` int(11) NULL DEFAULT NULL COMMENT '热度',
+  `set_desc` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL COMMENT '套题描述',
+  `primary_category_id` bigint(20) NULL DEFAULT NULL COMMENT '大类id',
+  `created_by` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '创建人',
+  `created_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
+  `update_by` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '更新人',
+  `update_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
+  `is_deleted` int(11) NULL DEFAULT 0 COMMENT '是否被删除 0为删除 1已删除',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin COMMENT = '套题信息表' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of practice_set
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for practice_set_detail
+-- ----------------------------
+DROP TABLE IF EXISTS `practice_set_detail`;
+CREATE TABLE `practice_set_detail`  (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '主键',
+  `set_id` bigint(20) NOT NULL COMMENT '套题id',
+  `subject_id` bigint(20) NULL DEFAULT NULL COMMENT '题目id',
+  `subject_type` int(11) NULL DEFAULT NULL COMMENT '题目类型',
+  `created_by` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '创建人',
+  `created_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
+  `update_by` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '更新人',
+  `update_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
+  `is_deleted` int(11) NULL DEFAULT 0 COMMENT '是否被删除 0为删除 1已删除',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin COMMENT = '套题内容表' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of practice_set_detail
+-- ----------------------------
+
+-- ----------------------------
 -- Table structure for subject_brief
 -- ----------------------------
 DROP TABLE IF EXISTS `subject_brief`;
@@ -160,7 +250,7 @@ CREATE TABLE `subject_brief`  (
   `update_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
   `is_deleted` int(11) NULL DEFAULT 0,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 18 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '简答题' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 20 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '简答题' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of subject_brief
@@ -182,6 +272,8 @@ INSERT INTO `subject_brief` VALUES (14, 14, 'MyISAM，InnoDB等', 'oGbwpwBMJ_qpW
 INSERT INTO `subject_brief` VALUES (15, 15, 'MySQL的覆盖索引(Covering Index)是指二级索引中包含了查询所需的所有字段，从而使查询可以仅通过访问二级索引而不需要访问实际的表数据（主键索引)。', 'oGbwpwBMJ_qpWWxDvsl2ZL_7o_L4', '2024-08-16 22:18:30', NULL, NULL, 0);
 INSERT INTO `subject_brief` VALUES (16, 16, 'MVCC(Multi--Version Concurrency Control)多版本并发控制。', 'oGbwpwBMJ_qpWWxDvsl2ZL_7o_L4', '2024-08-16 22:24:00', NULL, NULL, 0);
 INSERT INTO `subject_brief` VALUES (17, 17, '表示显示宽度', 'oGbwpwBMJ_qpWWxDvsl2ZL_7o_L4', '2024-08-16 22:38:06', NULL, NULL, 0);
+INSERT INTO `subject_brief` VALUES (18, 18, '读写操作会冲突', 'oGbwpwBMJ_qpWWxDvsl2ZL_7o_L4', '2024-08-17 10:43:51', NULL, NULL, 0);
+INSERT INTO `subject_brief` VALUES (19, 19, '主要是通过：锁、Redo Log、Undo Log、MVCC。', 'oGbwpwBMJ_qpWWxDvsl2ZL_7o_L4', '2024-08-17 10:48:20', NULL, NULL, 0);
 
 -- ----------------------------
 -- Table structure for subject_category
@@ -227,7 +319,7 @@ CREATE TABLE `subject_info`  (
   `update_time` datetime NULL DEFAULT NULL COMMENT '修改时间',
   `is_deleted` int(11) NULL DEFAULT 0,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 18 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '题目信息表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 23 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '题目信息表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of subject_info
@@ -249,6 +341,11 @@ INSERT INTO `subject_info` VALUES (14, 'MySQL有哪些存储引擎？', 1, NULL,
 INSERT INTO `subject_info` VALUES (15, 'MySQL的覆盖索引是什么', 1, NULL, 4, 2, '题目解析', 'oGbwpwBMJ_qpWWxDvsl2ZL_7o_L4', '2024-08-16 22:18:30', NULL, NULL, 0);
 INSERT INTO `subject_info` VALUES (16, 'MySQL的MVCC是什么', 1, NULL, 4, 2, '题目解析', 'oGbwpwBMJ_qpWWxDvsl2ZL_7o_L4', '2024-08-16 22:24:00', NULL, NULL, 0);
 INSERT INTO `subject_info` VALUES (17, 'MySQL的int(11)的11是什么?', 1, NULL, 4, 2, '题目解析', 'oGbwpwBMJ_qpWWxDvsl2ZL_7o_L4', '2024-08-16 22:38:06', NULL, NULL, 0);
+INSERT INTO `subject_info` VALUES (18, '如果MySQL中没有MVCC,会有什么影响？', 1, NULL, 4, 2, '题目解析', 'oGbwpwBMJ_qpWWxDvsl2ZL_7o_L4', '2024-08-17 10:43:51', NULL, NULL, 0);
+INSERT INTO `subject_info` VALUES (19, 'MySQL是如何实现事务的？', 1, NULL, 4, 2, '题目解析', 'oGbwpwBMJ_qpWWxDvsl2ZL_7o_L4', '2024-08-17 10:48:20', NULL, NULL, 0);
+INSERT INTO `subject_info` VALUES (20, 'Redis有几种基础数据类型', 1, NULL, 1, 1, 'Redis有5种类型，其中有string、hash、set、zset等等', 'oGbwpwBMJ_qpWWxDvsl2ZL_7o_L4', '2024-08-17 17:55:52', NULL, NULL, 0);
+INSERT INTO `subject_info` VALUES (21, 'Redis的数据类型有以下哪几种', 1, NULL, 2, 1, '简单题', 'oGbwpwBMJ_qpWWxDvsl2ZL_7o_L4', '2024-08-17 18:00:02', NULL, NULL, 0);
+INSERT INTO `subject_info` VALUES (22, 'MySQL是关系型数据库吗', 1, NULL, 3, 1, '简单题', 'oGbwpwBMJ_qpWWxDvsl2ZL_7o_L4', '2024-08-17 18:02:08', NULL, NULL, 0);
 
 -- ----------------------------
 -- Table structure for subject_judge
@@ -264,11 +361,12 @@ CREATE TABLE `subject_judge`  (
   `update_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
   `is_deleted` int(11) NULL DEFAULT 0,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '判断题' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '判断题' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of subject_judge
 -- ----------------------------
+INSERT INTO `subject_judge` VALUES (1, 22, 1, 'oGbwpwBMJ_qpWWxDvsl2ZL_7o_L4', '2024-08-17 18:02:08', NULL, NULL, 0);
 
 -- ----------------------------
 -- Table structure for subject_label
@@ -292,7 +390,30 @@ CREATE TABLE `subject_label`  (
 -- ----------------------------
 INSERT INTO `subject_label` VALUES (1, 'Redis', 1, 1, 'oYA4HtwGJEsLio6pGrhx5Hzv9XD0', '2024-02-28 03:21:27', NULL, NULL, 0);
 INSERT INTO `subject_label` VALUES (2, '数据一致性', 1, 1, 'oYA4HtwGJEsLio6pGrhx5Hzv9XD0', '2024-02-28 03:21:27', NULL, NULL, 0);
-INSERT INTO `subject_label` VALUES (3, 'MySQL', 1, 1, 'oYA4HtwGJEsLio6pGrhx5Hzv9XD0', '2024-02-28 03:21:27', NULL, NULL, 0);
+INSERT INTO `subject_label` VALUES (3, 'MySQL', 1, 3, 'oYA4HtwGJEsLio6pGrhx5Hzv9XD0', '2024-02-28 03:21:27', NULL, NULL, 0);
+
+-- ----------------------------
+-- Table structure for subject_liked
+-- ----------------------------
+DROP TABLE IF EXISTS `subject_liked`;
+CREATE TABLE `subject_liked`  (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '主键',
+  `subject_id` bigint(20) NULL DEFAULT NULL COMMENT '题目id',
+  `like_user_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL COMMENT '点赞人id',
+  `status` int(11) NULL DEFAULT NULL COMMENT '点赞状态 1点赞 0不点赞',
+  `created_by` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '创建人',
+  `created_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
+  `update_by` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '修改人',
+  `update_time` datetime NULL DEFAULT NULL COMMENT '修改时间',
+  `is_deleted` int(11) NULL DEFAULT 0,
+  PRIMARY KEY (`id`) USING BTREE,
+  UNIQUE INDEX `uniq_like`(`subject_id`, `like_user_id`) USING BTREE COMMENT '点赞唯一索引'
+) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin COMMENT = '题目点赞表' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of subject_liked
+-- ----------------------------
+INSERT INTO `subject_liked` VALUES (1, 1, 'oGbwpwBMJ_qpWWxDvsl2ZL_7o_L4', 1, NULL, NULL, NULL, NULL, 0);
 
 -- ----------------------------
 -- Table structure for subject_mapping
@@ -309,7 +430,7 @@ CREATE TABLE `subject_mapping`  (
   `update_time` datetime NULL DEFAULT NULL COMMENT '修改时间',
   `is_deleted` int(11) NULL DEFAULT 0,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 19 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '题目分类关系表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 25 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '题目分类关系表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of subject_mapping
@@ -332,6 +453,12 @@ INSERT INTO `subject_mapping` VALUES (15, 14, 3, 3, 'oGbwpwBMJ_qpWWxDvsl2ZL_7o_L
 INSERT INTO `subject_mapping` VALUES (16, 15, 3, 3, 'oGbwpwBMJ_qpWWxDvsl2ZL_7o_L4', '2024-08-16 22:24:00', NULL, NULL, 0);
 INSERT INTO `subject_mapping` VALUES (17, 16, 3, 3, 'oGbwpwBMJ_qpWWxDvsl2ZL_7o_L4', '2024-08-16 22:24:00', NULL, NULL, 0);
 INSERT INTO `subject_mapping` VALUES (18, 17, 3, 3, 'oGbwpwBMJ_qpWWxDvsl2ZL_7o_L4', '2024-08-16 22:38:07', NULL, NULL, 0);
+INSERT INTO `subject_mapping` VALUES (19, 18, 3, 3, 'oGbwpwBMJ_qpWWxDvsl2ZL_7o_L4', '2024-08-17 10:43:51', NULL, NULL, 0);
+INSERT INTO `subject_mapping` VALUES (20, 19, 3, 3, 'oGbwpwBMJ_qpWWxDvsl2ZL_7o_L4', '2024-08-17 10:48:20', NULL, NULL, 0);
+INSERT INTO `subject_mapping` VALUES (21, 20, 2, 1, 'oGbwpwBMJ_qpWWxDvsl2ZL_7o_L4', '2024-08-17 17:55:53', NULL, NULL, 0);
+INSERT INTO `subject_mapping` VALUES (22, 21, 2, 1, 'oGbwpwBMJ_qpWWxDvsl2ZL_7o_L4', '2024-08-17 18:00:03', NULL, NULL, 0);
+INSERT INTO `subject_mapping` VALUES (23, 22, 2, 3, 'oGbwpwBMJ_qpWWxDvsl2ZL_7o_L4', '2024-08-17 18:02:08', NULL, NULL, 0);
+INSERT INTO `subject_mapping` VALUES (24, 22, 3, 3, 'oGbwpwBMJ_qpWWxDvsl2ZL_7o_L4', '2024-08-17 18:02:08', NULL, NULL, 0);
 
 -- ----------------------------
 -- Table structure for subject_multiple
@@ -349,11 +476,15 @@ CREATE TABLE `subject_multiple`  (
   `update_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
   `is_deleted` int(11) NULL DEFAULT 0,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '多选题信息表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '多选题信息表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of subject_multiple
 -- ----------------------------
+INSERT INTO `subject_multiple` VALUES (1, 21, 1, '<p>string</p>', 0, 'oGbwpwBMJ_qpWWxDvsl2ZL_7o_L4', '2024-08-17 18:00:02', NULL, NULL, 0);
+INSERT INTO `subject_multiple` VALUES (2, 21, 2, '<p>set</p>', 0, 'oGbwpwBMJ_qpWWxDvsl2ZL_7o_L4', '2024-08-17 18:00:02', NULL, NULL, 0);
+INSERT INTO `subject_multiple` VALUES (3, 21, 3, '<p>int</p>', 0, 'oGbwpwBMJ_qpWWxDvsl2ZL_7o_L4', '2024-08-17 18:00:02', NULL, NULL, 0);
+INSERT INTO `subject_multiple` VALUES (4, 21, 4, '<p>zset</p>', 0, 'oGbwpwBMJ_qpWWxDvsl2ZL_7o_L4', '2024-08-17 18:00:02', NULL, NULL, 0);
 
 -- ----------------------------
 -- Table structure for subject_radio
@@ -371,10 +502,14 @@ CREATE TABLE `subject_radio`  (
   `update_time` datetime NULL DEFAULT NULL COMMENT '修改时间',
   `is_deleted` int(11) NULL DEFAULT 0,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '单选题信息表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '单选题信息表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of subject_radio
 -- ----------------------------
+INSERT INTO `subject_radio` VALUES (1, 20, 1, '<p>3</p>', 0, 'oGbwpwBMJ_qpWWxDvsl2ZL_7o_L4', '2024-08-17 17:55:53', NULL, NULL, 0);
+INSERT INTO `subject_radio` VALUES (2, 20, 2, '<p>4</p>', 0, 'oGbwpwBMJ_qpWWxDvsl2ZL_7o_L4', '2024-08-17 17:55:53', NULL, NULL, 0);
+INSERT INTO `subject_radio` VALUES (3, 20, 3, '<p>5</p>', 0, 'oGbwpwBMJ_qpWWxDvsl2ZL_7o_L4', '2024-08-17 17:55:53', NULL, NULL, 0);
+INSERT INTO `subject_radio` VALUES (4, 20, 4, '<p>6</p>', 0, 'oGbwpwBMJ_qpWWxDvsl2ZL_7o_L4', '2024-08-17 17:55:53', NULL, NULL, 0);
 
 SET FOREIGN_KEY_CHECKS = 1;

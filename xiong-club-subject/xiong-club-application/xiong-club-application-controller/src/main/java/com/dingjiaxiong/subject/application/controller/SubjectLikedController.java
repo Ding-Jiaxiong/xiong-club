@@ -1,6 +1,7 @@
 package com.dingjiaxiong.subject.application.controller;
 
 import com.alibaba.fastjson.JSON;
+import com.dingjiaxiong.subject.common.util.LoginUtil;
 import com.google.common.base.Preconditions;
 import com.dingjiaxiong.subject.application.convert.SubjectLikedDTOConverter;
 import com.dingjiaxiong.subject.application.dto.SubjectLikedDTO;
@@ -38,17 +39,14 @@ public class SubjectLikedController {
             if (log.isInfoEnabled()) {
                 log.info("SubjectLikedController.add.dto:{}", JSON.toJSONString(subjectLikedDTO));
             }
-            Preconditions.checkNotNull(subjectLikedDTO.getId(), "主键不能为空");
             Preconditions.checkNotNull(subjectLikedDTO.getSubjectId(), "题目id不能为空");
-            Preconditions.checkNotNull(subjectLikedDTO.getLikeUserId(), "点赞人id不能为空");
-            Preconditions.checkNotNull(subjectLikedDTO.getStatus(), "点赞状态 1点赞 0不点赞不能为空");
-            Preconditions.checkNotNull(subjectLikedDTO.getCreatedBy(), "创建人不能为空");
-            Preconditions.checkNotNull(subjectLikedDTO.getCreatedTime(), "创建时间不能为空");
-            Preconditions.checkNotNull(subjectLikedDTO.getUpdateBy(), "修改人不能为空");
-            Preconditions.checkNotNull(subjectLikedDTO.getUpdateTime(), "修改时间不能为空");
-            Preconditions.checkNotNull(subjectLikedDTO.getIsDeleted(), "不能为空");
+            Preconditions.checkNotNull(subjectLikedDTO.getStatus(), "点赞状态不能为空");
+            String loginId = LoginUtil.getLoginId();
+            subjectLikedDTO.setLikeUserId(loginId);
+            Preconditions.checkNotNull(subjectLikedDTO.getLikeUserId(), "点赞人不能为空");
             SubjectLikedBO SubjectLikedBO = SubjectLikedDTOConverter.INSTANCE.convertDTOToBO(subjectLikedDTO);
-            return Result.ok(subjectLikedDomainService.add(SubjectLikedBO));
+            subjectLikedDomainService.add(SubjectLikedBO);
+            return Result.ok(true);
         } catch (Exception e) {
             log.error("SubjectLikedController.register.error:{}", e.getMessage(), e);
             return Result.fail("新增题目点赞表失败");

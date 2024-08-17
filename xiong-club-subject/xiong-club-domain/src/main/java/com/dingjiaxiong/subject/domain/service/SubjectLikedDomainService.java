@@ -14,7 +14,7 @@ public interface SubjectLikedDomainService {
     /**
      * 添加 题目点赞表 信息
      */
-    Boolean add(SubjectLikedBO subjectLikedBO);
+    void add(SubjectLikedBO subjectLikedBO);
 
     /**
      * 更新 题目点赞表 信息

@@ -5,8 +5,10 @@ import com.baomidou.mybatisplus.core.toolkit.CollectionUtils;
 import com.dingjiaxiong.practice.api.enums.CompleteStatusEnum;
 import com.dingjiaxiong.practice.api.enums.IsDeletedFlagEnum;
 import com.dingjiaxiong.practice.api.enums.SubjectInfoTypeEnum;
+import com.dingjiaxiong.practice.api.req.GetScoreDetailReq;
 import com.dingjiaxiong.practice.api.req.SubmitPracticeDetailReq;
 import com.dingjiaxiong.practice.api.req.SubmitSubjectDetailReq;
+import com.dingjiaxiong.practice.api.vo.ScoreDetailVO;
 import com.dingjiaxiong.practice.server.dao.*;
 import com.dingjiaxiong.practice.server.entity.dto.SubjectDTO;
 import com.dingjiaxiong.practice.server.entity.dto.SubjectDetailDTO;
@@ -115,6 +117,8 @@ public class PracticeDetailServiceImpl implements PracticeDetailService {
         return true;
     }
 
+
+
     @Override
     @Transactional(rollbackFor = Exception.class)
     public Boolean submitSubject(SubmitSubjectDetailReq req) {
@@ -214,6 +218,24 @@ public class PracticeDetailServiceImpl implements PracticeDetailService {
         subjectDetailDTO.setSubjectParse(subjectPO.getSubjectParse());
         subjectDetailDTO.setSubjectName(subjectPO.getSubjectName());
         return subjectDetailDTO;
+    }
+
+    @Override
+    public List<ScoreDetailVO> getScoreDetail(GetScoreDetailReq req) {
+        Long practiceId = req.getPracticeId();
+        List<ScoreDetailVO> list = new LinkedList<>();
+        List<PracticeDetailPO> practiceDetailPOList = practiceDetailDao.selectByPracticeId(practiceId);
+        if (CollectionUtils.isEmpty(practiceDetailPOList)) {
+            return Collections.emptyList();
+        }
+        practiceDetailPOList.forEach(po -> {
+            ScoreDetailVO scoreDetailVO = new ScoreDetailVO();
+            scoreDetailVO.setSubjectId(po.getSubjectId());
+            scoreDetailVO.setSubjectType(po.getSubjectType());
+            scoreDetailVO.setIsCorrect(po.getAnswerStatus());
+            list.add(scoreDetailVO);
+        });
+        return list;
     }
 
 }

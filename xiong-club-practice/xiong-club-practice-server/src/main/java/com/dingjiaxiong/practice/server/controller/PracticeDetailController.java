@@ -2,10 +2,10 @@ package com.dingjiaxiong.practice.server.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.dingjiaxiong.practice.api.common.Result;
-import com.dingjiaxiong.practice.api.req.GetScoreDetailReq;
-import com.dingjiaxiong.practice.api.req.SubmitPracticeDetailReq;
-import com.dingjiaxiong.practice.api.req.SubmitSubjectDetailReq;
+import com.dingjiaxiong.practice.api.req.*;
+import com.dingjiaxiong.practice.api.vo.ReportVO;
 import com.dingjiaxiong.practice.api.vo.ScoreDetailVO;
+import com.dingjiaxiong.practice.api.vo.SubjectDetailVO;
 import com.dingjiaxiong.practice.server.service.PracticeDetailService;
 import com.google.common.base.Preconditions;
 import lombok.extern.slf4j.Slf4j;
@@ -103,5 +103,55 @@ public class PracticeDetailController {
         }
     }
 
+    /**
+     * 答案解析-答题详情
+     */
+    @PostMapping(value = "/getSubjectDetail")
+    public Result<SubjectDetailVO> getSubjectDetail(@RequestBody GetSubjectDetailReq req) {
+        try {
+            if (log.isInfoEnabled()) {
+                log.info("答案详情入参{}", JSON.toJSONString(req));
+            }
+            Preconditions.checkArgument(!Objects.isNull(req), "参数不能为空！");
+            Preconditions.checkArgument(!Objects.isNull(req.getSubjectId()), "题目id不能为空！");
+            Preconditions.checkArgument(!Objects.isNull(req.getSubjectType()), "题目类型不能为空！");
+            SubjectDetailVO subjectDetailVO = practiceDetailService.getSubjectDetail(req);
+            if (log.isInfoEnabled()) {
+                log.info("答案详情出参{}", JSON.toJSONString(subjectDetailVO));
+            }
+            return Result.ok(subjectDetailVO);
+        } catch (IllegalArgumentException e) {
+            log.error("参数异常！错误原因{}", e.getMessage(), e);
+            return Result.fail(e.getMessage());
+        } catch (Exception e) {
+            log.error("答案详情异常！错误原因{}", e.getMessage(), e);
+            return Result.fail("答案详情异常！");
+        }
+    }
+
+    /**
+     * 答案解析-评估报告
+     */
+    @PostMapping(value = "/getReport")
+    public Result<ReportVO> getReport(@RequestBody GetReportReq req) {
+        try {
+            if (log.isInfoEnabled()) {
+                log.info("获取评估报告入参{}", JSON.toJSONString(req));
+            }
+            Preconditions.checkArgument(!Objects.isNull(req), "参数不能为空！");
+            Preconditions.checkArgument(!Objects.isNull(req.getPracticeId()), "练习id不能为空！");
+            ReportVO reportVO = practiceDetailService.getReport(req);
+            if (log.isInfoEnabled()) {
+                log.info("获取评估报告出参{}", JSON.toJSONString(reportVO));
+            }
+            return Result.ok(reportVO);
+        } catch (IllegalArgumentException e) {
+            log.error("参数异常！错误原因{}", e.getMessage(), e);
+            return Result.fail(e.getMessage());
+        } catch (Exception e) {
+            log.error("获取评估报告异常！错误原因{}", e.getMessage(), e);
+            return Result.fail("获取评估报告异常！");
+        }
+    }
 
 }

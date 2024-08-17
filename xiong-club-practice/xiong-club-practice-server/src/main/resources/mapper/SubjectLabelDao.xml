@@ -3,6 +3,7 @@
 <mapper namespace="com.dingjiaxiong.practice.server.dao.SubjectLabelDao">
 
 
+    <!--查询单个-->
     <select id="queryById" resultType="com.dingjiaxiong.practice.server.entity.po.SubjectLabelPO">
         select id,
                label_name  as labelName,
@@ -16,5 +17,14 @@
         from subject_label
         where id = #{id}
     </select>
+
+    <select id="getLabelNameByIds" resultType="java.lang.String">
+        select label_name as labelName from subject_label where id in
+        <foreach collection="labelIds" item="item" open="(" close=")" separator=",">
+            #{item}
+        </foreach>
+    </select>
+
+
 </mapper>
 

@@ -2,7 +2,6 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.dingjiaxiong.practice.server.dao.SubjectMappingDao">
 
-
     <select id="getLabelSubjectCount" resultType="com.dingjiaxiong.practice.server.entity.po.LabelCountPO">
         select
         count(distinct a.subject_id) as count,
@@ -20,6 +19,15 @@
         </foreach>
         group by a.label_id
     </select>
+
+    <select id="getLabelIdsBySubjectId"
+            resultType="com.dingjiaxiong.practice.server.entity.po.SubjectMappingPO">
+        select distinct label_id as labelId
+        from subject_mapping
+        where is_deleted = 0
+          and subject_id = #{subjectId,jdbcType=BIGINT}
+    </select>
+
 
 </mapper>
 

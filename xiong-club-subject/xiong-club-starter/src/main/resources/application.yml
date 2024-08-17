@@ -82,12 +82,12 @@ es:
 xxl:
   job:
     admin:
-      addresses: http://116.196.77.213:8080/xxl-job-admin
+      addresses: http://116.196.77.213:8088/xxl-job-admin
     accessToken: default_token
     executor:
       appname: xiong-club-subjcet
       address:
-      ip: 116.196.77.213
+      ip: 127.0.0.1
       port: 9999
       logpath: /data/applogs/xxl-job/jobhandler
       logretentiondays: 30

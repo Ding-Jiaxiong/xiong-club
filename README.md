@@ -11837,23 +11837,343 @@ https://www.xuxueli.com/page/community.html
 
 
 
+【回来了 ，那个数据库得建上】
+
+
+
+![image-20240817134714781](./assets/image-20240817134714781.png)
+
+
+
+就是初始化这个调度数据库
+
+
+
+![image-20240817134752388](./assets/image-20240817134752388.png)
+
+
+
+下载下来
+
+
+
+![image-20240817134906751](./assets/image-20240817134906751.png)
+
+
+
+就这个东西，执行一下就行，
+
+
+
+![image-20240817134938190](./assets/image-20240817134938190.png)
+
+
+
+嗯，语句也有
+
+
+
+![image-20240817135047616](./assets/image-20240817135047616.png)
+
+
+
+没问题
+
+
+
+![image-20240817135142248](./assets/image-20240817135142248.png)
+
+
+
+建出来就行，等着后面用那个 docker 
+
+
+
+##### 3.36 docker安装xxljob
+
+
+
+```
+docker search xxl-job
+docker pull xuxueli/xxl-job-admin:2.4.0
+```
+
+
+
+![image-20240817134237615](./assets/image-20240817134237615.png)
+
+
+
+直接拉
+
+
+
+![image-20240817134311207](./assets/image-20240817134311207.png)
 
 
 
 
 
+![image-20240817134349126](./assets/image-20240817134349126.png)
+
+
+
+等待完成
+
+
+
+![image-20240817134420652](./assets/image-20240817134420652.png)
+
+
+
+来吧，启动
+
+```
+docker run  -d \
+        -p 8088:8088\
+        -v /tool/xxl-job/logs:/data/applogs \
+        -v /tool/xxl-job/application.properties:/xxl-job/xxl-job-admin/src/main/resources/application.properties \
+        -e PARAMS="--server.port=8088\
+        --spring.datasource.url=jdbc:mysql://116.196.77.213:3306/xxl_job?useUnicode=true&characterEncoding=UTF-8&autoReconnect=true&serverTimezone=Asia/Shanghai \
+        --spring.datasource.username=root \
+        --spring.datasource.password=19991012" \
+        --name xxl-job-admin  \
+xuxueli/xxl-job-admin:2.4.0
+```
+
+
+
+意思是那个 xxl_job 的数据库还是得建，行、【这里在前面补上一些提示】
+
+
+
+来了
+
+
+
+![image-20240817135207638](./assets/image-20240817135207638.png)
 
 
 
 
 
+直接启动容器
 
 
 
+![image-20240817135356618](./assets/image-20240817135356618.png)
 
 
 
+开个端口
 
+
+
+![image-20240817135317073](./assets/image-20240817135317073.png)
+
+
+
+访问一下
+
+
+
+http://116.196.77.213:8088/xxl-job-admin/toLogin
+
+
+
+这个密码和账户，admin / 123456
+
+
+
+![image-20240817135541335](./assets/image-20240817135541335.png)
+
+
+
+![image-20240817135602550](./assets/image-20240817135602550.png)
+
+
+
+这样就进来了
+
+![image-20240817135620722](./assets/image-20240817135620722.png)
+
+
+
+有一个送的任务，要修改一下配置文件了
+
+
+
+先试试之前的那个，输出 123456 那个
+
+
+
+![image-20240817135847867](./assets/image-20240817135847867.png)
+
+
+
+在界面新增
+
+
+
+![image-20240817135932699](./assets/image-20240817135932699.png)
+
+
+
+保存
+
+
+
+![image-20240817135945151](./assets/image-20240817135945151.png)
+
+
+
+![image-20240817140131961](./assets/image-20240817140131961.png)
+
+
+
+我这里把 9999 也打开了
+
+
+
+![image-20240817140220349](./assets/image-20240817140220349.png)
+
+
+
+先就这样启动看看
+
+
+
+![image-20240817140357428](./assets/image-20240817140357428.png)
+
+
+
+这里不对，应该写成本地，等跑在服务器再改成 服务器公网 ip
+
+
+
+![image-20240817140506836](./assets/image-20240817140506836.png)
+
+
+
+直接爆了，clean 了一下，重启
+
+
+
+![image-20240817140802611](./assets/image-20240817140802611.png)
+
+
+
+没问题，进来了
+
+
+
+![image-20240817140829964](./assets/image-20240817140829964.png)
+
+
+
+看看界面
+
+
+
+![image-20240817140842541](./assets/image-20240817140842541.png)
+
+
+
+没问题，这样就上来了
+
+
+
+来一个任务
+
+
+
+![image-20240817141004866](./assets/image-20240817141004866.png)
+
+
+
+在这里新增
+
+
+
+![image-20240817141134062](./assets/image-20240817141134062.png)
+
+
+
+每秒一次
+
+
+
+![image-20240817141146133](./assets/image-20240817141146133.png)
+
+
+
+任务代码
+
+
+
+![image-20240817141228876](./assets/image-20240817141228876.png)
+
+
+
+重启一下
+
+![image-20240817141338350](./assets/image-20240817141338350.png)
+
+
+
+执行器没问题
+
+
+
+![image-20240817141356340](./assets/image-20240817141356340.png)
+
+
+
+日志清掉先
+
+![image-20240817141417548](./assets/image-20240817141417548.png)
+
+
+
+直接执行一次
+
+
+
+![image-20240817141430756](./assets/image-20240817141430756.png)
+
+
+
+看看日志
+
+
+
+![image-20240817141458442](./assets/image-20240817141458442.png)
+
+
+
+我的没打印  ... 擦
+
+![image-20240817141900050](./assets/image-20240817141900050.png)
+
+
+
+执行失败了
+
+
+
+![image-20240817141925099](./assets/image-20240817141925099.png)
+
+
+
+这个 ip 不太对吧，感觉这样写就是 docker 去调本地，但是本地没有这个任务，所以执行失败了
+
+
+
+![image-20240817142153740](./assets/image-20240817142153740.png)
+
+
+
+对，和我想的一样，刷题服务要跑在服务器上了才行
 
 
 

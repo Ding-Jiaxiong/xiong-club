@@ -38,6 +38,12 @@ public class SubjectInfoServiceImpl extends ServiceImpl<SubjectInfoMapper, Subje
         return subjectInfoMapper.getContributeCount();
     }
 
+    @Override
+    public SubjectInfo queryById(Long id) {
+
+        return subjectInfoMapper.queryById(id);
+    }
+
 
 }
 

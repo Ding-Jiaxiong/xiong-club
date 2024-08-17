@@ -27,6 +27,8 @@ public interface SubjectInfoMapper extends BaseMapper<SubjectInfo> {
     List<SubjectInfo> getContributeCount();
 
 
+    SubjectInfo queryById(Long id);
+
 }
 
 

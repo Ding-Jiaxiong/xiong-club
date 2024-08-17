@@ -18,4 +18,6 @@ public interface SubjectInfoService extends IService<SubjectInfo> {
 
     List<SubjectInfo> getContributeCount();
 
+    SubjectInfo queryById(Long id);
+
 }

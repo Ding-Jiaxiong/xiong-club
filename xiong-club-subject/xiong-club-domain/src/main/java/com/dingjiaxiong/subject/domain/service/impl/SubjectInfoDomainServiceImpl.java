@@ -12,6 +12,7 @@ import com.dingjiaxiong.subject.domain.handler.subject.SubjectTypeHandler;
 import com.dingjiaxiong.subject.domain.handler.subject.SubjectTypeHandlerFactory;
 import com.dingjiaxiong.subject.domain.redis.RedisUtil;
 import com.dingjiaxiong.subject.domain.service.SubjectInfoDomainService;
+import com.dingjiaxiong.subject.domain.service.SubjectLikedDomainService;
 import com.dingjiaxiong.subject.infra.basic.entity.SubjectInfo;
 import com.dingjiaxiong.subject.infra.basic.entity.SubjectInfoEs;
 import com.dingjiaxiong.subject.infra.basic.entity.SubjectLabel;
@@ -58,6 +59,9 @@ public class SubjectInfoDomainServiceImpl implements SubjectInfoDomainService {
     private RedisUtil redisUtil;
 
     private static final String RANK_KEY = "subject_rank";
+
+    @Resource
+    private SubjectLikedDomainService subjectLikedDomainService;
 
     @Override
     @Transactional(rollbackFor = Exception.class)
@@ -144,7 +148,7 @@ public class SubjectInfoDomainServiceImpl implements SubjectInfoDomainService {
 
     @Override
     public SubjectInfoBO querySubjectInfo(SubjectInfoBO subjectInfoBO) {
-        SubjectInfo subjectInfo = subjectInfoService.getById(subjectInfoBO.getId());
+        SubjectInfo subjectInfo = subjectInfoService.queryById(subjectInfoBO.getId());
         SubjectTypeHandler handler = subjectTypeHandlerFactory.getHandler(subjectInfo.getSubjectType());
         SubjectOptionBO optionBO = handler.query(subjectInfo.getId().intValue());
         SubjectInfoBO bo = SubjectInfoConverter.INSTANCE.convertOptionAndInfoToBo(optionBO, subjectInfo);
@@ -157,8 +161,27 @@ public class SubjectInfoDomainServiceImpl implements SubjectInfoDomainService {
         List<String> labelNameList = labelList.stream().map(SubjectLabel::getLabelName).collect(Collectors.toList());
         bo.setLabelName(labelNameList);
 
+        bo.setLiked(subjectLikedDomainService.isLiked(subjectInfoBO.getId().toString(), LoginUtil.getLoginId()));
+        bo.setLikedCount(subjectLikedDomainService.getLikedCount(subjectInfoBO.getId().toString()));
+//        assembleSubjectCursor(subjectInfoBO, bo);
+
+        System.out.println(bo);
+
         return bo;
     }
+
+//    private void assembleSubjectCursor(SubjectInfoBO subjectInfoBO, SubjectInfoBO bo) {
+//        Long categoryId = subjectInfoBO.getCategoryId();
+//        Long labelId = subjectInfoBO.getLabelId();
+//        Long subjectId = subjectInfoBO.getId();
+//        if (Objects.isNull(categoryId) || Objects.isNull(labelId)) {
+//            return;
+//        }
+//        Long nextSubjectId = subjectInfoService.querySubjectIdCursor(subjectId, categoryId, labelId, 1);
+//        bo.setNextSubjectId(nextSubjectId);
+//        Long lastSubjectId = subjectInfoService.querySubjectIdCursor(subjectId, categoryId, labelId, 0);
+//        bo.setLastSubjectId(lastSubjectId);
+//    }
 
     @Override
     public PageResult<SubjectInfoEs> getSubjectPageBySearch(SubjectInfoBO subjectInfoBO) {

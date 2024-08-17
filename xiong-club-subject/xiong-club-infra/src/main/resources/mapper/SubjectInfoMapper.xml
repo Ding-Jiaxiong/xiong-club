@@ -84,5 +84,22 @@
         limit 0,5
     </select>
 
+    <select id="queryById" resultType="com.dingjiaxiong.subject.infra.basic.entity.SubjectInfo">
+        select id,
+               subject_name,
+               subject_difficult,
+               settle_name,
+               subject_type,
+               subject_score,
+               subject_parse,
+               created_by,
+               created_time,
+               update_by,
+               update_time,
+               is_deleted
+        from subject_info
+        where id = #{id}
+    </select>
+
 
 </mapper>

@@ -26,4 +26,14 @@ public interface SubjectLikedDomainService {
      */
     Boolean delete(SubjectLikedBO subjectLikedBO);
 
+    /**
+     * 获取当前是否被点赞过
+     */
+    Boolean isLiked(String subjectId, String userId);
+
+    /**
+     * 获取点赞数量
+     */
+    Integer getLikedCount(String subjectId);
+
 }

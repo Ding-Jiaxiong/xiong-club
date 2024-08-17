@@ -10953,15 +10953,211 @@ OK，这就是传统 数据库的实现
 
 
 
+##### 3.30 基于redis的zset实现排行榜
 
 
 
+还是 domain 层
 
 
 
+![image-20240817103210035](./assets/image-20240817103210035.png)
 
 
 
+加上
+
+然后就是工具类和配置类
+
+
+
+![image-20240817103347357](./assets/image-20240817103347357.png)
+
+
+
+这下就修改实现类
+
+
+
+先是出题那里
+
+
+
+![image-20240817103824581](./assets/image-20240817103824581.png)
+
+
+
+同步到 es 后，还要放入 redis，岂不是又要那啥，插了才能获取数据
+
+出一道题，数量才加1，我这里直接改redis 了
+
+
+
+![image-20240817104054597](./assets/image-20240817104054597.png)
+
+
+
+重启试试，插个题先
+
+
+
+![image-20240817104355846](./assets/image-20240817104355846.png)
+
+
+
+看看 redis ，这里还查不了
+
+
+
+![image-20240817104456620](./assets/image-20240817104456620.png)
+
+
+
+但是前端确实已经改了，我只有一道了，不对忘了配置 redis了 
+
+
+
+![image-20240817104658622](./assets/image-20240817104658622.png)
+
+
+
+再试一次，这次用的 0 库
+
+
+
+![image-20240817104823869](./assets/image-20240817104823869.png)
+
+
+
+看看 redis 
+
+
+
+![image-20240817104840785](./assets/image-20240817104840785.png)
+
+
+
+没问题，我直接手动改成 19
+
+
+
+![image-20240817104911846](./assets/image-20240817104911846.png)
+
+
+
+看看前端
+
+
+
+![image-20240817104927301](./assets/image-20240817104927301.png)
+
+
+
+没问题
+
+
+
+##### 3.31 点赞与收藏功能设计
+
+
+
+点赞与收藏的逻辑是非常一样的，我们这里就选取点赞功能来给大家做开发。
+
+按照我们的鸡翅 club 的设计，点赞业务其实涉及几个方面，一、我们肯定要知道一个题目被多少人点过赞，还要知道，每个人他点赞了哪些题目。
+
+点赞的业务特性，频繁。用户一多，时时刻刻都在进行点赞啊，收藏啊等等处理，如果说我们采取传统的数据库的模式啊，这个交互量是非常大的，很难去抗住这个并发问题，所以我们采取 redis 的方式来做。
+
+查询的数据交互，我们可以和 redis 直接来做，持久化的数据，通过数据库查询即可，这个数据如何去同步到数据库，我们就采取的定时任务 xxl-job 定期来刷数据。
+
+
+
+![image-20240817105353389](./assets/image-20240817105353389.png)
+
+
+
+记录的时候三个关键信息，点赞的人，被点赞的题目，点赞的状态。
+
+我们最终的数据结构就是 hash，string 类型。
+
+hash，存到一个键里面，键里是一个 map，他又分为 hashkey 和 hashval。
+
+hashkey，subjectId:userId，val 就存的是点赞的状态 1 是点赞 0 是不点赞。
+
+string 类型 key subjectId，val 即使我们的题目被点赞的数量
+
+string 类型。key subjectId:userId.
+
+
+
+###### 3.31.1 数据库的设计
+
+
+
+![image-20240817105704267](./assets/image-20240817105704267.png)
+
+
+
+###### 3.31.2 新增点赞
+
+
+
+直接操作 redis
+
+存 hash，存数量，存点赞的人与题目的 key。
+
+
+
+###### 3.31.2 取消点赞
+
+
+
+上面的反逻辑，数量会-1，hash 里面的状态会更新，点赞人与题目关联的 key 会被删除
+
+
+
+###### 3.32.3 查询当前题目被点赞的数量
+
+
+
+直接与 redis 交互，读题目的被点赞数量的 key
+
+
+
+###### 3.32.4 查询当前题目被当前用户是否点过赞
+
+
+
+直接查 redis 就可以了。
+
+
+
+###### 3.32.5 我的点赞
+
+
+
+直接查数据库做分页逻辑的展示。
+
+
+
+数据表：
+
+```sql
+DROP TABLE IF EXISTS `subject_liked`;
+CREATE TABLE `subject_liked`
+(
+    `id`           bigint(20) NOT NULL AUTO_INCREMENT COMMENT '主键',
+    `subject_id`   bigint(20) DEFAULT NULL COMMENT '题目id',
+    `like_user_id` varchar(32) COLLATE utf8mb4_bin DEFAULT NULL COMMENT '点赞人id',
+    `status`       int(11) DEFAULT NULL COMMENT '点赞状态 1点赞 0不点赞',
+    `created_by`   varchar(32) CHARACTER SET utf8  DEFAULT NULL COMMENT '创建人',
+    `created_time` datetime                        DEFAULT NULL COMMENT '创建时间',
+    `update_by`    varchar(32) CHARACTER SET utf8  DEFAULT NULL COMMENT '修改人',
+    `update_time`  datetime                        DEFAULT NULL COMMENT '修改时间',
+    `is_deleted`   int(11) DEFAULT '0',
+    PRIMARY KEY (`id`),
+    UNIQUE KEY `uniq_like` (`subject_id`,`like_user_id`) USING BTREE COMMENT '点赞唯一索引'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin COMMENT='题目点赞表';
+```
 
 
 

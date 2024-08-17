@@ -10,6 +10,7 @@ import com.dingjiaxiong.subject.domain.entity.SubjectInfoBO;
 import com.dingjiaxiong.subject.domain.entity.SubjectOptionBO;
 import com.dingjiaxiong.subject.domain.handler.subject.SubjectTypeHandler;
 import com.dingjiaxiong.subject.domain.handler.subject.SubjectTypeHandlerFactory;
+import com.dingjiaxiong.subject.domain.redis.RedisUtil;
 import com.dingjiaxiong.subject.domain.service.SubjectInfoDomainService;
 import com.dingjiaxiong.subject.infra.basic.entity.SubjectInfo;
 import com.dingjiaxiong.subject.infra.basic.entity.SubjectInfoEs;
@@ -22,15 +23,13 @@ import com.dingjiaxiong.subject.infra.basic.service.SubjectMappingService;
 import com.dingjiaxiong.subject.infra.entity.UserInfo;
 import com.dingjiaxiong.subject.infra.rpc.UserRpc;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.redis.core.ZSetOperations;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 
 import javax.annotation.Resource;
-import java.util.Collections;
-import java.util.Date;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -54,6 +53,11 @@ public class SubjectInfoDomainServiceImpl implements SubjectInfoDomainService {
 
     @Resource
     private UserRpc userRpc;
+
+    @Resource
+    private RedisUtil redisUtil;
+
+    private static final String RANK_KEY = "subject_rank";
 
     @Override
     @Transactional(rollbackFor = Exception.class)
@@ -102,6 +106,8 @@ public class SubjectInfoDomainServiceImpl implements SubjectInfoDomainService {
         subjectInfoEs.setSubjectType(subjectInfo.getSubjectType());
         subjectEsService.insert(subjectInfoEs);
 
+        //redis放入zadd计入排行榜
+        redisUtil.addScore(RANK_KEY, LoginUtil.getLoginId(), 1);
 
     }
 
@@ -166,47 +172,47 @@ public class SubjectInfoDomainServiceImpl implements SubjectInfoDomainService {
     @Override
     public List<SubjectInfoBO> getContributeList() {
 
-        // 数据库实现
-        List<SubjectInfo> subjectInfoList = subjectInfoService.getContributeCount();
-
-        if (CollectionUtils.isEmpty(subjectInfoList)) {
-            return Collections.emptyList();
-        }
-
-        List<SubjectInfoBO> boList = new LinkedList<>();
-
-        subjectInfoList.forEach(subjectInfo -> {
-            SubjectInfoBO subjectInfoBO = new SubjectInfoBO();
-
-            subjectInfoBO.setSubjectCount(subjectInfo.getSubjectCount());
-            UserInfo userInfo = userRpc.getUserInfo(subjectInfo.getCreatedBy());
-
-//            System.out.println("============");
-//            System.out.println(userInfo);
-
-            subjectInfoBO.setCreateUser(userInfo.getNickName());
-            subjectInfoBO.setCreateUserAvatar(userInfo.getAvatar());
-            boList.add(subjectInfoBO);
-        });
-
-        return boList;
-
-//        Set<ZSetOperations.TypedTuple<String>> typedTuples = redisUtil.rankWithScore(RANK_KEY, 0, 5);
-//        if (log.isInfoEnabled()) {
-//            log.info("getContributeList.typedTuples:{}", JSON.toJSONString(typedTuples));
-//        }
-//        if (CollectionUtils.isEmpty(typedTuples)) {
+//        // 数据库实现
+//        List<SubjectInfo> subjectInfoList = subjectInfoService.getContributeCount();
+//
+//        if (CollectionUtils.isEmpty(subjectInfoList)) {
 //            return Collections.emptyList();
 //        }
+//
 //        List<SubjectInfoBO> boList = new LinkedList<>();
-//        typedTuples.forEach((rank -> {
+//
+//        subjectInfoList.forEach(subjectInfo -> {
 //            SubjectInfoBO subjectInfoBO = new SubjectInfoBO();
-//            subjectInfoBO.setSubjectCount(rank.getScore().intValue());
-//            UserInfo userInfo = userRpc.getUserInfo(rank.getValue());
+//
+//            subjectInfoBO.setSubjectCount(subjectInfo.getSubjectCount());
+//            UserInfo userInfo = userRpc.getUserInfo(subjectInfo.getCreatedBy());
+//
+////            System.out.println("============");
+////            System.out.println(userInfo);
+//
 //            subjectInfoBO.setCreateUser(userInfo.getNickName());
 //            subjectInfoBO.setCreateUserAvatar(userInfo.getAvatar());
 //            boList.add(subjectInfoBO);
-//        }));
+//        });
+//
 //        return boList;
+
+        Set<ZSetOperations.TypedTuple<String>> typedTuples = redisUtil.rankWithScore(RANK_KEY, 0, 5);
+        if (log.isInfoEnabled()) {
+            log.info("getContributeList.typedTuples:{}", JSON.toJSONString(typedTuples));
+        }
+        if (CollectionUtils.isEmpty(typedTuples)) {
+            return Collections.emptyList();
+        }
+        List<SubjectInfoBO> boList = new LinkedList<>();
+        typedTuples.forEach((rank -> {
+            SubjectInfoBO subjectInfoBO = new SubjectInfoBO();
+            subjectInfoBO.setSubjectCount(rank.getScore().intValue());
+            UserInfo userInfo = userRpc.getUserInfo(rank.getValue());
+            subjectInfoBO.setCreateUser(userInfo.getNickName());
+            subjectInfoBO.setCreateUserAvatar(userInfo.getAvatar());
+            boList.add(subjectInfoBO);
+        }));
+        return boList;
     }
 }

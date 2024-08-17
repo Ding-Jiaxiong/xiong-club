@@ -12995,6 +12995,38 @@ server 模块
 
 
 
+##### 4.10 彩蛋：彩色日志
+
+
+
+![image-20240817164630721](./assets/image-20240817164630721.png)
+
+
+
+现在的日志都是黑白的
+
+
+
+源码没给啊
+
+
+
+![image-20240817165224863](./assets/image-20240817165224863.png)
+
+
+
+![image-20240817170004006](./assets/image-20240817170004006.png)
+
+
+
+一般，代码放这里
+
+
+
+```
+        <property name="LOG_PATTERN" value="%highlight{%d{yyyy-MM-dd HH:mm:ss.SSS} | %X{PFTID} | %highlight{%style{[%t]}{GREEN}} | %highlight{%style{%-5level}{BLUE}} | %highlight{%style{%logger{36}}{BOLD,MAGENTA}} | %highlight{%style{%msg}{CYAN}}%n}{GREEN}"/>
+```
+
 
 
 

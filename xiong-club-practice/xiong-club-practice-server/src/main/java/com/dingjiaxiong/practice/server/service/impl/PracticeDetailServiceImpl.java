@@ -115,4 +115,105 @@ public class PracticeDetailServiceImpl implements PracticeDetailService {
         return true;
     }
 
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public Boolean submitSubject(SubmitSubjectDetailReq req) {
+        String timeUse = req.getTimeUse();
+        if (timeUse.equals("0")) {
+            timeUse = "000000";
+        }
+        String hour = timeUse.substring(0, 2);
+        String minute = timeUse.substring(2, 4);
+        String second = timeUse.substring(4, 6);
+        PracticePO practicePO = new PracticePO();
+        practicePO.setId(req.getPracticeId());
+        practicePO.setTimeUse(hour + ":" + minute + ":" + second);
+        practicePO.setSubmitTime(new Date());
+        practiceDao.update(practicePO);
+
+        PracticeDetailPO practiceDetailPO = new PracticeDetailPO();
+        practiceDetailPO.setPracticeId(req.getPracticeId());
+        practiceDetailPO.setSubjectId(req.getSubjectId());
+        practiceDetailPO.setSubjectType(req.getSubjectType());
+        String answerContent = "";
+        //排序答案
+        if (CollectionUtils.isNotEmpty(req.getAnswerContents())) {
+            List<Integer> answerContents = req.getAnswerContents();
+            Collections.sort(answerContents);
+            answerContent = StringUtils.join(answerContents, ",");
+        }
+        practiceDetailPO.setAnswerContent(answerContent);
+        SubjectDTO subjectDTO = new SubjectDTO();
+        subjectDTO.setSubjectId(req.getSubjectId());
+        subjectDTO.setSubjectType(req.getSubjectType());
+        //获取正确答案，并判断答案是否正确
+        SubjectDetailDTO subjectDetail = getSubjectDetail(subjectDTO);
+        StringBuffer correctAnswer = new StringBuffer();
+        if (req.getSubjectType().equals(SubjectInfoTypeEnum.JUDGE.getCode())) {
+            Integer isCorrect = subjectDetail.getIsCorrect();
+            correctAnswer.append(isCorrect);
+        } else {
+            subjectDetail.getOptionList().forEach(e -> {
+                if (Objects.equals(e.getIsCorrect(), 1)) {
+                    correctAnswer.append(e.getOptionType()).append(",");
+                }
+            });
+            if (correctAnswer.length() > 0) {
+                correctAnswer.deleteCharAt(correctAnswer.length() - 1);
+            }
+        }
+        if (Objects.equals(correctAnswer.toString(), answerContent)) {
+            practiceDetailPO.setAnswerStatus(1);
+        } else {
+            practiceDetailPO.setAnswerStatus(0);
+        }
+        practiceDetailPO.setIsDeleted(IsDeletedFlagEnum.UN_DELETED.getCode());
+        practiceDetailPO.setCreatedBy(LoginUtil.getLoginId());
+        practiceDetailPO.setCreatedTime(new Date());
+        PracticeDetailPO existDetail = practiceDetailDao.selectDetail(req.getPracticeId(), req.getSubjectId(), LoginUtil.getLoginId());
+        if (Objects.isNull(existDetail)) {
+            practiceDetailDao.insertSingle(practiceDetailPO);
+        } else {
+            practiceDetailPO.setId(existDetail.getId());
+            practiceDetailDao.update(practiceDetailPO);
+        }
+        return true;
+    }
+
+    public SubjectDetailDTO getSubjectDetail(SubjectDTO dto) {
+        SubjectDetailDTO subjectDetailDTO = new SubjectDetailDTO();
+        SubjectPO subjectPO = subjectDao.selectById(dto.getSubjectId());
+        if (dto.getSubjectType() == SubjectInfoTypeEnum.RADIO.getCode()) {
+            List<SubjectOptionDTO> optionList = new LinkedList<>();
+            List<SubjectRadioPO> radioSubjectPOS = subjectRadioDao.selectBySubjectId(subjectPO.getId());
+            radioSubjectPOS.forEach(e -> {
+                SubjectOptionDTO subjectOptionDTO = new SubjectOptionDTO();
+                subjectOptionDTO.setOptionContent(e.getOptionContent());
+                subjectOptionDTO.setOptionType(e.getOptionType());
+                subjectOptionDTO.setIsCorrect(e.getIsCorrect());
+                optionList.add(subjectOptionDTO);
+            });
+            subjectDetailDTO.setOptionList(optionList);
+        }
+        if (dto.getSubjectType() == SubjectInfoTypeEnum.MULTIPLE.getCode()) {
+            List<SubjectOptionDTO> optionList = new LinkedList<>();
+            List<SubjectMultiplePO> multipleSubjectPOS = subjectMultipleDao.selectBySubjectId(subjectPO.getId());
+            multipleSubjectPOS.forEach(e -> {
+                SubjectOptionDTO subjectOptionDTO = new SubjectOptionDTO();
+                subjectOptionDTO.setOptionContent(e.getOptionContent());
+                subjectOptionDTO.setOptionType(e.getOptionType());
+                subjectOptionDTO.setIsCorrect(e.getIsCorrect());
+                optionList.add(subjectOptionDTO);
+            });
+            subjectDetailDTO.setOptionList(optionList);
+        }
+        if (dto.getSubjectType() == SubjectInfoTypeEnum.JUDGE.getCode()) {
+            SubjectJudgePO judgeSubjectPO = subjectJudgeDao.selectBySubjectId(subjectPO.getId());
+            subjectDetailDTO.setIsCorrect(judgeSubjectPO.getIsCorrect());
+        }
+        subjectDetailDTO.setSubjectParse(subjectPO.getSubjectParse());
+        subjectDetailDTO.setSubjectName(subjectPO.getSubjectName());
+        return subjectDetailDTO;
+    }
+
 }

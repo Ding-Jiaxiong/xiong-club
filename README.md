@@ -12733,7 +12733,7 @@ bo 里面也要加上
 
 
 
-##### 4.6 练习题目数据建模
+##### 4.6 练习题目数据库建模
 
 
 
@@ -12762,6 +12762,112 @@ bo 里面也要加上
 ![image-20240817155201970](./assets/image-20240817155201970.png)
 
 
+
+##### 4.7 数据库表建立
+
+
+
+套题信息表
+
+
+
+```sql
+DROP TABLE IF EXISTS `practice_set`;
+CREATE TABLE `practice_set`
+(
+    `id`                  bigint(20) NOT NULL AUTO_INCREMENT COMMENT '主键',
+    `set_name`            varchar(255) COLLATE utf8mb4_bin DEFAULT NULL COMMENT '套题名称',
+    `set_type`            int(11) DEFAULT NULL COMMENT '套题类型 1实时生成 2预设套题',
+    `set_heat`            int(11) DEFAULT NULL COMMENT '热度',
+    `set_desc`            varchar(255) COLLATE utf8mb4_bin DEFAULT NULL COMMENT '套题描述',
+    `primary_category_id` bigint(20) DEFAULT NULL COMMENT '大类id',
+    `created_by`          varchar(32) CHARACTER SET utf8   DEFAULT NULL COMMENT '创建人',
+    `created_time`        datetime                         DEFAULT NULL COMMENT '创建时间',
+    `update_by`           varchar(32) CHARACTER SET utf8   DEFAULT NULL COMMENT '更新人',
+    `update_time`         datetime                         DEFAULT NULL COMMENT '更新时间',
+    `is_deleted`          int(11) DEFAULT '0' COMMENT '是否被删除 0为删除 1已删除',
+    PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin COMMENT='套题信息表';
+```
+
+
+
+套卷内容表
+
+
+
+```sql
+DROP TABLE IF EXISTS `practice_set_detail`;
+CREATE TABLE `practice_set_detail`
+(
+    `id`           bigint(20) NOT NULL AUTO_INCREMENT COMMENT '主键',
+    `set_id`       bigint(20) NOT NULL COMMENT '套题id',
+    `subject_id`   bigint(20) DEFAULT NULL COMMENT '题目id',
+    `subject_type` int(11) DEFAULT NULL COMMENT '题目类型',
+    `created_by`   varchar(32) CHARACTER SET utf8 DEFAULT NULL COMMENT '创建人',
+    `created_time` datetime                       DEFAULT NULL COMMENT '创建时间',
+    `update_by`    varchar(32) CHARACTER SET utf8 DEFAULT NULL COMMENT '更新人',
+    `update_time`  datetime                       DEFAULT NULL COMMENT '更新时间',
+    `is_deleted`   int(11) DEFAULT '0' COMMENT '是否被删除 0为删除 1已删除',
+    PRIMARY KEY (`id`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin COMMENT='套题内容表';
+```
+
+
+
+练习表
+
+```sql
+DROP TABLE IF EXISTS `practice_info`;
+CREATE TABLE `practice_info`
+(
+    `id`              bigint(20) NOT NULL AUTO_INCREMENT COMMENT '主键',
+    `set_id`          bigint(20) DEFAULT NULL COMMENT '套题id',
+    `complete_status` int(11) DEFAULT NULL COMMENT '是否完成 1完成 0未完成',
+    `time_use`        varchar(32) COLLATE utf8mb4_bin DEFAULT NULL COMMENT '用时',
+    `submit_time`     datetime                        DEFAULT NULL COMMENT '交卷时间',
+    `correct_rate`    decimal(10, 2)                  DEFAULT NULL COMMENT '正确率',
+    `created_by`      varchar(32) CHARACTER SET utf8  DEFAULT NULL COMMENT '创建人',
+    `created_time`    datetime                        DEFAULT NULL COMMENT '创建时间',
+    `update_by`       varchar(32) CHARACTER SET utf8  DEFAULT NULL COMMENT '更新人',
+    `update_time`     datetime                        DEFAULT NULL COMMENT '更新时间',
+    `is_deleted`      int(11) DEFAULT '0' COMMENT '是否被删除 0为删除 1已删除',
+    PRIMARY KEY (`id`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin COMMENT='练习表';
+```
+
+
+
+练习详情表
+
+
+
+```sql
+DROP TABLE IF EXISTS `practice_detail`;
+CREATE TABLE `practice_detail`
+(
+    `id`             bigint(20) NOT NULL AUTO_INCREMENT COMMENT '主键',
+    `practice_id`    bigint(20) DEFAULT NULL COMMENT '练题id',
+    `subject_id`     bigint(20) DEFAULT NULL COMMENT '题目id',
+    `subject_type`   int(11) DEFAULT NULL COMMENT '题目类型',
+    `answer_status`  int(11) DEFAULT NULL COMMENT '回答状态',
+    `answer_content` varchar(64) COLLATE utf8mb4_bin DEFAULT NULL COMMENT '回答内容',
+    `created_by`     varchar(32) CHARACTER SET utf8  DEFAULT NULL COMMENT '创建人',
+    `created_time`   datetime                        DEFAULT NULL COMMENT '创建时间',
+    `update_by`      varchar(32) CHARACTER SET utf8  DEFAULT NULL COMMENT '更新人',
+    `update_time`    datetime                        DEFAULT NULL COMMENT '更新时间',
+    `is_deleted`     int(11) DEFAULT '0' COMMENT '是否被删除 0为删除 1已删除',
+    PRIMARY KEY (`id`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin COMMENT='练习详情表';
+```
+
+
+
+![image-20240817155842800](./assets/image-20240817155842800.png)
+
+
+
+建立完成
 
 
 

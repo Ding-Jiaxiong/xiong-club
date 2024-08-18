@@ -11,7 +11,7 @@
  Target Server Version : 50744
  File Encoding         : 65001
 
- Date: 17/08/2024 18:09:47
+ Date: 17/08/2024 23:31:38
 */
 
 SET NAMES utf8mb4;
@@ -163,11 +163,26 @@ CREATE TABLE `practice_detail`  (
   `update_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
   `is_deleted` int(11) NULL DEFAULT 0 COMMENT '是否被删除 0为删除 1已删除',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin COMMENT = '练习详情表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 16 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin COMMENT = '练习详情表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of practice_detail
 -- ----------------------------
+INSERT INTO `practice_detail` VALUES (1, 3, 20, 1, 0, '', 'oGbwpwBMJ_qpWWxDvsl2ZL_7o_L4', '2024-08-17 21:24:57', NULL, NULL, 0);
+INSERT INTO `practice_detail` VALUES (2, 3, 21, 2, 0, '', 'oGbwpwBMJ_qpWWxDvsl2ZL_7o_L4', '2024-08-17 21:24:57', NULL, NULL, 0);
+INSERT INTO `practice_detail` VALUES (3, 3, 22, 3, 0, '', 'oGbwpwBMJ_qpWWxDvsl2ZL_7o_L4', '2024-08-17 21:24:57', NULL, NULL, 0);
+INSERT INTO `practice_detail` VALUES (4, 4, 20, 1, 1, '3', 'oGbwpwBMJ_qpWWxDvsl2ZL_7o_L4', '2024-08-17 21:38:14', NULL, NULL, 0);
+INSERT INTO `practice_detail` VALUES (5, 4, 21, 2, 1, '1,2,4', 'oGbwpwBMJ_qpWWxDvsl2ZL_7o_L4', '2024-08-17 21:39:09', NULL, NULL, 0);
+INSERT INTO `practice_detail` VALUES (6, 4, 22, 3, 0, '', 'oGbwpwBMJ_qpWWxDvsl2ZL_7o_L4', '2024-08-17 21:39:11', NULL, NULL, 0);
+INSERT INTO `practice_detail` VALUES (7, 5, 20, 1, 1, '3', 'oGbwpwBMJ_qpWWxDvsl2ZL_7o_L4', '2024-08-17 21:45:54', NULL, NULL, 0);
+INSERT INTO `practice_detail` VALUES (8, 5, 21, 2, 1, '1,2,4', 'oGbwpwBMJ_qpWWxDvsl2ZL_7o_L4', '2024-08-17 21:47:14', NULL, NULL, 0);
+INSERT INTO `practice_detail` VALUES (9, 5, 22, 3, 0, '', 'oGbwpwBMJ_qpWWxDvsl2ZL_7o_L4', '2024-08-17 21:47:18', NULL, NULL, 0);
+INSERT INTO `practice_detail` VALUES (10, 6, 20, 1, 1, '3', 'oGbwpwBMJ_qpWWxDvsl2ZL_7o_L4', '2024-08-17 21:55:17', NULL, NULL, 0);
+INSERT INTO `practice_detail` VALUES (11, 6, 21, 2, 1, '1,2,4', 'oGbwpwBMJ_qpWWxDvsl2ZL_7o_L4', '2024-08-17 21:57:36', NULL, NULL, 0);
+INSERT INTO `practice_detail` VALUES (12, 6, 22, 3, 0, '', 'oGbwpwBMJ_qpWWxDvsl2ZL_7o_L4', '2024-08-17 22:02:24', NULL, NULL, 0);
+INSERT INTO `practice_detail` VALUES (13, 7, 20, 1, 1, '3', 'oGbwpwBMJ_qpWWxDvsl2ZL_7o_L4', '2024-08-17 22:42:01', NULL, NULL, 0);
+INSERT INTO `practice_detail` VALUES (14, 7, 21, 2, 1, '1,2,4', 'oGbwpwBMJ_qpWWxDvsl2ZL_7o_L4', '2024-08-17 22:42:04', NULL, NULL, 0);
+INSERT INTO `practice_detail` VALUES (15, 7, 22, 3, 0, '', 'oGbwpwBMJ_qpWWxDvsl2ZL_7o_L4', '2024-08-17 22:42:49', NULL, NULL, 0);
 
 -- ----------------------------
 -- Table structure for practice_info
@@ -186,11 +201,18 @@ CREATE TABLE `practice_info`  (
   `update_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
   `is_deleted` int(11) NULL DEFAULT 0 COMMENT '是否被删除 0为删除 1已删除',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin COMMENT = '练习表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 8 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin COMMENT = '练习表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of practice_info
 -- ----------------------------
+INSERT INTO `practice_info` VALUES (1, 1, 0, '00:00:00', '2024-08-17 20:00:50', 0.00, 'oGbwpwBMJ_qpWWxDvsl2ZL_7o_L4', '2024-08-17 20:00:50', NULL, NULL, 0);
+INSERT INTO `practice_info` VALUES (2, 3, 0, '00:00:00', '2024-08-17 20:52:10', 0.00, 'oGbwpwBMJ_qpWWxDvsl2ZL_7o_L4', '2024-08-17 20:52:10', NULL, NULL, 0);
+INSERT INTO `practice_info` VALUES (3, 4, 1, '00:01:18', '2024-08-17 21:24:55', 0.00, 'oGbwpwBMJ_qpWWxDvsl2ZL_7o_L4', '2024-08-17 21:23:38', NULL, NULL, 0);
+INSERT INTO `practice_info` VALUES (4, 5, 1, '00:01:53', '2024-08-17 21:39:10', 66.67, 'oGbwpwBMJ_qpWWxDvsl2ZL_7o_L4', '2024-08-17 21:37:17', NULL, NULL, 0);
+INSERT INTO `practice_info` VALUES (5, 6, 1, '00:01:45', '2024-08-17 21:47:17', 66.67, 'oGbwpwBMJ_qpWWxDvsl2ZL_7o_L4', '2024-08-17 21:45:32', NULL, NULL, 0);
+INSERT INTO `practice_info` VALUES (6, 7, 1, '00:05:31', '2024-08-17 21:58:41', 66.67, 'oGbwpwBMJ_qpWWxDvsl2ZL_7o_L4', '2024-08-17 21:53:11', NULL, NULL, 0);
+INSERT INTO `practice_info` VALUES (7, 8, 1, '00:00:59', '2024-08-17 22:42:48', 66.67, 'oGbwpwBMJ_qpWWxDvsl2ZL_7o_L4', '2024-08-17 22:41:50', NULL, NULL, 0);
 
 -- ----------------------------
 -- Table structure for practice_set
@@ -209,11 +231,19 @@ CREATE TABLE `practice_set`  (
   `update_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
   `is_deleted` int(11) NULL DEFAULT 0 COMMENT '是否被删除 0为删除 1已删除',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin COMMENT = '套题信息表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 9 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin COMMENT = '套题信息表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of practice_set
 -- ----------------------------
+INSERT INTO `practice_set` VALUES (1, '缓存、数据库等专项练习', 1, NULL, NULL, 2, 'oGbwpwBMJ_qpWWxDvsl2ZL_7o_L4', '2024-08-17 19:32:08', NULL, NULL, 0);
+INSERT INTO `practice_set` VALUES (2, '缓存、数据库等专项练习', 1, NULL, NULL, 2, 'oGbwpwBMJ_qpWWxDvsl2ZL_7o_L4', '2024-08-17 19:36:26', NULL, NULL, 0);
+INSERT INTO `practice_set` VALUES (3, '缓存、数据库等专项练习', 1, NULL, NULL, 2, 'oGbwpwBMJ_qpWWxDvsl2ZL_7o_L4', '2024-08-17 20:52:08', NULL, NULL, 0);
+INSERT INTO `practice_set` VALUES (4, '缓存、数据库等专项练习', 1, NULL, NULL, 2, 'oGbwpwBMJ_qpWWxDvsl2ZL_7o_L4', '2024-08-17 21:23:37', NULL, NULL, 0);
+INSERT INTO `practice_set` VALUES (5, '缓存、数据库等专项练习', 1, NULL, NULL, 2, 'oGbwpwBMJ_qpWWxDvsl2ZL_7o_L4', '2024-08-17 21:37:16', NULL, NULL, 0);
+INSERT INTO `practice_set` VALUES (6, '缓存、数据库等专项练习', 1, NULL, NULL, 2, 'oGbwpwBMJ_qpWWxDvsl2ZL_7o_L4', '2024-08-17 21:45:31', NULL, NULL, 0);
+INSERT INTO `practice_set` VALUES (7, '缓存、数据库等专项练习', 1, NULL, NULL, 2, 'oGbwpwBMJ_qpWWxDvsl2ZL_7o_L4', '2024-08-17 21:53:10', NULL, NULL, 0);
+INSERT INTO `practice_set` VALUES (8, '缓存、数据库等专项练习', 1, NULL, NULL, 2, 'oGbwpwBMJ_qpWWxDvsl2ZL_7o_L4', '2024-08-17 22:41:48', NULL, NULL, 0);
 
 -- ----------------------------
 -- Table structure for practice_set_detail
@@ -230,11 +260,35 @@ CREATE TABLE `practice_set_detail`  (
   `update_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
   `is_deleted` int(11) NULL DEFAULT 0 COMMENT '是否被删除 0为删除 1已删除',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin COMMENT = '套题内容表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 25 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin COMMENT = '套题内容表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of practice_set_detail
 -- ----------------------------
+INSERT INTO `practice_set_detail` VALUES (1, 1, 20, 1, 'oGbwpwBMJ_qpWWxDvsl2ZL_7o_L4', '2024-08-17 19:32:08', NULL, NULL, 0);
+INSERT INTO `practice_set_detail` VALUES (2, 1, 21, 2, 'oGbwpwBMJ_qpWWxDvsl2ZL_7o_L4', '2024-08-17 19:32:08', NULL, NULL, 0);
+INSERT INTO `practice_set_detail` VALUES (3, 1, 22, 3, 'oGbwpwBMJ_qpWWxDvsl2ZL_7o_L4', '2024-08-17 19:32:08', NULL, NULL, 0);
+INSERT INTO `practice_set_detail` VALUES (4, 2, 20, 1, 'oGbwpwBMJ_qpWWxDvsl2ZL_7o_L4', '2024-08-17 19:36:26', NULL, NULL, 0);
+INSERT INTO `practice_set_detail` VALUES (5, 2, 21, 2, 'oGbwpwBMJ_qpWWxDvsl2ZL_7o_L4', '2024-08-17 19:36:26', NULL, NULL, 0);
+INSERT INTO `practice_set_detail` VALUES (6, 2, 22, 3, 'oGbwpwBMJ_qpWWxDvsl2ZL_7o_L4', '2024-08-17 19:36:26', NULL, NULL, 0);
+INSERT INTO `practice_set_detail` VALUES (7, 3, 20, 1, 'oGbwpwBMJ_qpWWxDvsl2ZL_7o_L4', '2024-08-17 20:52:09', NULL, NULL, 0);
+INSERT INTO `practice_set_detail` VALUES (8, 3, 21, 2, 'oGbwpwBMJ_qpWWxDvsl2ZL_7o_L4', '2024-08-17 20:52:09', NULL, NULL, 0);
+INSERT INTO `practice_set_detail` VALUES (9, 3, 22, 3, 'oGbwpwBMJ_qpWWxDvsl2ZL_7o_L4', '2024-08-17 20:52:09', NULL, NULL, 0);
+INSERT INTO `practice_set_detail` VALUES (10, 4, 20, 1, 'oGbwpwBMJ_qpWWxDvsl2ZL_7o_L4', '2024-08-17 21:23:37', NULL, NULL, 0);
+INSERT INTO `practice_set_detail` VALUES (11, 4, 21, 2, 'oGbwpwBMJ_qpWWxDvsl2ZL_7o_L4', '2024-08-17 21:23:37', NULL, NULL, 0);
+INSERT INTO `practice_set_detail` VALUES (12, 4, 22, 3, 'oGbwpwBMJ_qpWWxDvsl2ZL_7o_L4', '2024-08-17 21:23:37', NULL, NULL, 0);
+INSERT INTO `practice_set_detail` VALUES (13, 5, 20, 1, 'oGbwpwBMJ_qpWWxDvsl2ZL_7o_L4', '2024-08-17 21:37:16', NULL, NULL, 0);
+INSERT INTO `practice_set_detail` VALUES (14, 5, 21, 2, 'oGbwpwBMJ_qpWWxDvsl2ZL_7o_L4', '2024-08-17 21:37:16', NULL, NULL, 0);
+INSERT INTO `practice_set_detail` VALUES (15, 5, 22, 3, 'oGbwpwBMJ_qpWWxDvsl2ZL_7o_L4', '2024-08-17 21:37:17', NULL, NULL, 0);
+INSERT INTO `practice_set_detail` VALUES (16, 6, 20, 1, 'oGbwpwBMJ_qpWWxDvsl2ZL_7o_L4', '2024-08-17 21:45:31', NULL, NULL, 0);
+INSERT INTO `practice_set_detail` VALUES (17, 6, 21, 2, 'oGbwpwBMJ_qpWWxDvsl2ZL_7o_L4', '2024-08-17 21:45:31', NULL, NULL, 0);
+INSERT INTO `practice_set_detail` VALUES (18, 6, 22, 3, 'oGbwpwBMJ_qpWWxDvsl2ZL_7o_L4', '2024-08-17 21:45:32', NULL, NULL, 0);
+INSERT INTO `practice_set_detail` VALUES (19, 7, 20, 1, 'oGbwpwBMJ_qpWWxDvsl2ZL_7o_L4', '2024-08-17 21:53:10', NULL, NULL, 0);
+INSERT INTO `practice_set_detail` VALUES (20, 7, 21, 2, 'oGbwpwBMJ_qpWWxDvsl2ZL_7o_L4', '2024-08-17 21:53:10', NULL, NULL, 0);
+INSERT INTO `practice_set_detail` VALUES (21, 7, 22, 3, 'oGbwpwBMJ_qpWWxDvsl2ZL_7o_L4', '2024-08-17 21:53:10', NULL, NULL, 0);
+INSERT INTO `practice_set_detail` VALUES (22, 8, 20, 1, 'oGbwpwBMJ_qpWWxDvsl2ZL_7o_L4', '2024-08-17 22:41:49', NULL, NULL, 0);
+INSERT INTO `practice_set_detail` VALUES (23, 8, 21, 2, 'oGbwpwBMJ_qpWWxDvsl2ZL_7o_L4', '2024-08-17 22:41:49', NULL, NULL, 0);
+INSERT INTO `practice_set_detail` VALUES (24, 8, 22, 3, 'oGbwpwBMJ_qpWWxDvsl2ZL_7o_L4', '2024-08-17 22:41:49', NULL, NULL, 0);
 
 -- ----------------------------
 -- Table structure for subject_brief
@@ -388,8 +442,8 @@ CREATE TABLE `subject_label`  (
 -- ----------------------------
 -- Records of subject_label
 -- ----------------------------
-INSERT INTO `subject_label` VALUES (1, 'Redis', 1, 1, 'oYA4HtwGJEsLio6pGrhx5Hzv9XD0', '2024-02-28 03:21:27', NULL, NULL, 0);
-INSERT INTO `subject_label` VALUES (2, '数据一致性', 1, 1, 'oYA4HtwGJEsLio6pGrhx5Hzv9XD0', '2024-02-28 03:21:27', NULL, NULL, 0);
+INSERT INTO `subject_label` VALUES (1, 'Redis', 1, 2, 'oYA4HtwGJEsLio6pGrhx5Hzv9XD0', '2024-02-28 03:21:27', NULL, NULL, 0);
+INSERT INTO `subject_label` VALUES (2, '数据一致性', 1, 2, 'oYA4HtwGJEsLio6pGrhx5Hzv9XD0', '2024-02-28 03:21:27', NULL, NULL, 0);
 INSERT INTO `subject_label` VALUES (3, 'MySQL', 1, 3, 'oYA4HtwGJEsLio6pGrhx5Hzv9XD0', '2024-02-28 03:21:27', NULL, NULL, 0);
 
 -- ----------------------------
@@ -457,7 +511,6 @@ INSERT INTO `subject_mapping` VALUES (19, 18, 3, 3, 'oGbwpwBMJ_qpWWxDvsl2ZL_7o_L
 INSERT INTO `subject_mapping` VALUES (20, 19, 3, 3, 'oGbwpwBMJ_qpWWxDvsl2ZL_7o_L4', '2024-08-17 10:48:20', NULL, NULL, 0);
 INSERT INTO `subject_mapping` VALUES (21, 20, 2, 1, 'oGbwpwBMJ_qpWWxDvsl2ZL_7o_L4', '2024-08-17 17:55:53', NULL, NULL, 0);
 INSERT INTO `subject_mapping` VALUES (22, 21, 2, 1, 'oGbwpwBMJ_qpWWxDvsl2ZL_7o_L4', '2024-08-17 18:00:03', NULL, NULL, 0);
-INSERT INTO `subject_mapping` VALUES (23, 22, 2, 3, 'oGbwpwBMJ_qpWWxDvsl2ZL_7o_L4', '2024-08-17 18:02:08', NULL, NULL, 0);
 INSERT INTO `subject_mapping` VALUES (24, 22, 3, 3, 'oGbwpwBMJ_qpWWxDvsl2ZL_7o_L4', '2024-08-17 18:02:08', NULL, NULL, 0);
 
 -- ----------------------------
@@ -481,10 +534,10 @@ CREATE TABLE `subject_multiple`  (
 -- ----------------------------
 -- Records of subject_multiple
 -- ----------------------------
-INSERT INTO `subject_multiple` VALUES (1, 21, 1, '<p>string</p>', 0, 'oGbwpwBMJ_qpWWxDvsl2ZL_7o_L4', '2024-08-17 18:00:02', NULL, NULL, 0);
-INSERT INTO `subject_multiple` VALUES (2, 21, 2, '<p>set</p>', 0, 'oGbwpwBMJ_qpWWxDvsl2ZL_7o_L4', '2024-08-17 18:00:02', NULL, NULL, 0);
+INSERT INTO `subject_multiple` VALUES (1, 21, 1, '<p>string</p>', 1, 'oGbwpwBMJ_qpWWxDvsl2ZL_7o_L4', '2024-08-17 18:00:02', NULL, NULL, 0);
+INSERT INTO `subject_multiple` VALUES (2, 21, 2, '<p>set</p>', 1, 'oGbwpwBMJ_qpWWxDvsl2ZL_7o_L4', '2024-08-17 18:00:02', NULL, NULL, 0);
 INSERT INTO `subject_multiple` VALUES (3, 21, 3, '<p>int</p>', 0, 'oGbwpwBMJ_qpWWxDvsl2ZL_7o_L4', '2024-08-17 18:00:02', NULL, NULL, 0);
-INSERT INTO `subject_multiple` VALUES (4, 21, 4, '<p>zset</p>', 0, 'oGbwpwBMJ_qpWWxDvsl2ZL_7o_L4', '2024-08-17 18:00:02', NULL, NULL, 0);
+INSERT INTO `subject_multiple` VALUES (4, 21, 4, '<p>zset</p>', 1, 'oGbwpwBMJ_qpWWxDvsl2ZL_7o_L4', '2024-08-17 18:00:02', NULL, NULL, 0);
 
 -- ----------------------------
 -- Table structure for subject_radio
@@ -509,7 +562,7 @@ CREATE TABLE `subject_radio`  (
 -- ----------------------------
 INSERT INTO `subject_radio` VALUES (1, 20, 1, '<p>3</p>', 0, 'oGbwpwBMJ_qpWWxDvsl2ZL_7o_L4', '2024-08-17 17:55:53', NULL, NULL, 0);
 INSERT INTO `subject_radio` VALUES (2, 20, 2, '<p>4</p>', 0, 'oGbwpwBMJ_qpWWxDvsl2ZL_7o_L4', '2024-08-17 17:55:53', NULL, NULL, 0);
-INSERT INTO `subject_radio` VALUES (3, 20, 3, '<p>5</p>', 0, 'oGbwpwBMJ_qpWWxDvsl2ZL_7o_L4', '2024-08-17 17:55:53', NULL, NULL, 0);
+INSERT INTO `subject_radio` VALUES (3, 20, 3, '<p>5</p>', 1, 'oGbwpwBMJ_qpWWxDvsl2ZL_7o_L4', '2024-08-17 17:55:53', NULL, NULL, 0);
 INSERT INTO `subject_radio` VALUES (4, 20, 4, '<p>6</p>', 0, 'oGbwpwBMJ_qpWWxDvsl2ZL_7o_L4', '2024-08-17 17:55:53', NULL, NULL, 0);
 
 SET FOREIGN_KEY_CHECKS = 1;

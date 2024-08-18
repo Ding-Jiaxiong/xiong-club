@@ -395,4 +395,12 @@ public class PracticeDetailServiceImpl implements PracticeDetailService {
         return list;
     }
 
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public Boolean giveUp(Long practiceId) {
+        practiceDetailDao.deleteByPracticeId(practiceId);
+        practiceDao.deleteById(practiceId);
+        return true;
+    }
+
 }

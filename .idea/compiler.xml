@@ -9,6 +9,7 @@
         <outputRelativeToContentRoot value="true" />
         <module name="xiong-club-auth-application-controller" />
         <module name="easy-gen-code-spring-boot-starter" />
+        <module name="asyncTool" />
         <module name="xiong-club-starter" />
         <module name="xiong-club-gen" />
         <module name="xiong-club-oss" />

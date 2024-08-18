@@ -18085,9 +18085,77 @@ subject_brief 查出 answer 答案
 
 
 
+##### 6.3 数据表设计
 
 
 
+###### 6.3.1 面试汇总记录表
+
+
+
+```sql
+DROP TABLE IF EXISTS `interview_history`;
+CREATE TABLE `interview_history` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT 'id',
+  `avg_score` double DEFAULT NULL COMMENT '平均分',
+  `key_words` varchar(1024) DEFAULT NULL COMMENT '面试关键字',
+  `tip` varchar(1024) DEFAULT NULL COMMENT '面试评价',
+  `interview_url` varchar(256) DEFAULT NULL COMMENT '简历地址',
+  `created_by` varchar(32) DEFAULT NULL COMMENT '创建人',
+  `created_time` datetime DEFAULT NULL COMMENT '创建时间',
+  `update_by` varchar(32) DEFAULT NULL COMMENT '更新人',
+  `update_time` datetime DEFAULT NULL COMMENT '更新时间',
+  `is_deleted` int(11) DEFAULT '0' COMMENT '是否被删除 0为删除 1已删除',
+  PRIMARY KEY (`id`),
+  KEY `idx_created_by` (`created_by`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='面试汇总记录表';
+```
+
+
+
+
+
+###### 6.3.2 面试题目记录表
+
+
+
+```sql
+DROP TABLE IF EXISTS `interview_question_history`;
+CREATE TABLE `interview_question_history` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT 'id',
+  `interview_id` bigint(20) NOT NULL COMMENT '面试场次ID',
+  `score` double DEFAULT NULL COMMENT '均分',
+  `key_words` varchar(1024) DEFAULT NULL COMMENT '面试关键字',
+  `question` varchar(1024) DEFAULT NULL COMMENT '问题',
+  `answer` varchar(1024) DEFAULT NULL COMMENT '答案',
+  `user_answer` varchar(1024) DEFAULT NULL COMMENT '用户答案',
+  `created_by` varchar(32) DEFAULT NULL COMMENT '创建人',
+  `created_time` datetime DEFAULT NULL COMMENT '创建时间',
+  `update_by` varchar(32) DEFAULT NULL COMMENT '更新人',
+  `update_time` datetime DEFAULT NULL COMMENT '更新时间',
+  `is_deleted` int(11) DEFAULT '0' COMMENT '是否被删除 0为删除 1已删除',
+  PRIMARY KEY (`id`),
+  KEY `idx_interview_id` (`interview_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='面试题目记录表'
+```
+
+
+
+直接创建出来
+
+
+
+![image-20240818180503032](./assets/image-20240818180503032.png)
+
+
+
+
+
+##### 6.4 服务搭建
+
+
+
+这次是 copy circle 服务
 
 
 

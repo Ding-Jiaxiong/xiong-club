@@ -8,10 +8,13 @@ import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.dingjiaxiong.circle.api.enums.IsDeletedFlagEnum;
+import com.dingjiaxiong.circle.api.req.GetShareCommentReq;
 import com.dingjiaxiong.circle.api.req.RemoveShareCommentReq;
 import com.dingjiaxiong.circle.api.req.SaveShareCommentReplyReq;
+import com.dingjiaxiong.circle.api.vo.ShareCommentReplyVO;
 import com.dingjiaxiong.circle.server.dao.ShareCommentReplyMapper;
 import com.dingjiaxiong.circle.server.dao.ShareMomentMapper;
+import com.dingjiaxiong.circle.server.entity.dto.UserInfo;
 import com.dingjiaxiong.circle.server.entity.po.ShareCommentReply;
 import com.dingjiaxiong.circle.server.entity.po.ShareMoment;
 import com.dingjiaxiong.circle.server.rpc.UserRpc;
@@ -23,11 +26,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 
 import javax.annotation.Resource;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -56,12 +55,12 @@ public class ShareCommentReplyServiceImpl extends ServiceImpl<ShareCommentReplyM
         String loginId = LoginUtil.getLoginId();
         // 1评论 2回复
         if (req.getReplyType() == 1) {
-//            comment.setParentId(-1L);
+            comment.setParentId(-1L);
             comment.setToId(req.getTargetId());
             comment.setToUser(loginId);
             comment.setToUserAuthor(Objects.nonNull(moment.getCreatedBy()) && loginId.equals(moment.getCreatedBy()) ? 1 : 0);
         } else {
-//            comment.setParentId(req.getTargetId());
+            comment.setParentId(req.getTargetId());
             comment.setReplyId(req.getTargetId());
             comment.setReplyUser(loginId);
             comment.setReplayAuthor(Objects.nonNull(moment.getCreatedBy()) && loginId.equals(moment.getCreatedBy()) ? 1 : 0);
@@ -125,8 +124,8 @@ public class ShareCommentReplyServiceImpl extends ServiceImpl<ShareCommentReplyM
                         ShareCommentReply::getParentId);
         List<ShareCommentReply> list = list(query);
         List<String> userNameList = list.stream().map(ShareCommentReply::getCreatedBy).distinct().collect(Collectors.toList());
-        Map<String, UserInfo> userInfoMap = userRpc.batchGetUserInfo(userNameList);
-        UserInfo defaultUser = new UserInfo();
+//        Map<String, UserInfo> userInfoMap = userRpc.batchGetUserInfo(userNameList);
+//        UserInfo defaultUser = new UserInfo();
         List<ShareCommentReplyVO> voList = list.stream().map(item -> {
             ShareCommentReplyVO vo = new ShareCommentReplyVO();
             vo.setId(item.getId());
@@ -141,9 +140,9 @@ public class ShareCommentReplyServiceImpl extends ServiceImpl<ShareCommentReplyM
                 vo.setToId(item.getToUser());
             }
             vo.setParentId(item.getParentId());
-            UserInfo user = userInfoMap.getOrDefault(item.getCreatedBy(), defaultUser);
-            vo.setUserName(user.getNickName());
-            vo.setAvatar(user.getAvatar());
+//            UserInfo user = userInfoMap.getOrDefault(item.getCreatedBy(), defaultUser);
+//            vo.setUserName(user.getNickName());
+//            vo.setAvatar(user.getAvatar());
             vo.setCreatedTime(item.getCreatedTime().getTime());
             return vo;
         }).collect(Collectors.toList());

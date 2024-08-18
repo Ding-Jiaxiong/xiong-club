@@ -1,10 +1,12 @@
 package com.dingjiaxiong.practice.server.service;
 
+import com.dingjiaxiong.practice.api.common.PageResult;
 import com.dingjiaxiong.practice.api.req.GetPracticeSubjectsReq;
 import com.dingjiaxiong.practice.api.vo.PracticeSetVO;
 import com.dingjiaxiong.practice.api.vo.PracticeSubjectListVO;
 import com.dingjiaxiong.practice.api.vo.PracticeSubjectVO;
 import com.dingjiaxiong.practice.api.vo.SpecialPracticeVO;
+import com.dingjiaxiong.practice.server.entity.dto.PracticeSetDTO;
 import com.dingjiaxiong.practice.server.entity.dto.PracticeSubjectDTO;
 
 import java.util.List;
@@ -31,4 +33,10 @@ public interface PracticeSetService {
      * 获取题目
      */
     PracticeSubjectVO getPracticeSubject(PracticeSubjectDTO dto);
+
+    /**
+     * 获取模拟套题内容
+     */
+    PageResult<PracticeSetVO> getPreSetContent(PracticeSetDTO dto);
+
 }

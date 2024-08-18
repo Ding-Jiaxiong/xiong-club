@@ -8,6 +8,7 @@ import com.dingjiaxiong.circle.api.req.RemoveShareMomentReq;
 import com.dingjiaxiong.circle.api.req.SaveMomentCircleReq;
 import com.dingjiaxiong.circle.api.vo.ShareMomentVO;
 import com.dingjiaxiong.circle.server.entity.po.ShareCircle;
+import com.dingjiaxiong.circle.server.sensitive.WordFilter;
 import com.dingjiaxiong.circle.server.service.ShareCircleService;
 import com.dingjiaxiong.circle.server.service.ShareMomentService;
 import com.google.common.base.Preconditions;
@@ -38,6 +39,9 @@ public class ShareMomentController {
     @Resource
     private ShareCircleService shareCircleService;
 
+    @Resource
+    private WordFilter wordFilter;
+
     /**
      * 发布内容
      */
@@ -52,6 +56,9 @@ public class ShareMomentController {
             ShareCircle data = shareCircleService.getById(req.getCircleId());
             Preconditions.checkArgument((Objects.nonNull(data) && data.getParentId() != -1), "非法圈子ID！");
             Preconditions.checkArgument((Objects.nonNull(req.getContent()) || Objects.nonNull(req.getPicUrlList())), "熊圈不能为空！");
+
+            wordFilter.check(req.getContent());
+
             Boolean result = shareMomentService.saveMoment(req);
             if (log.isInfoEnabled()) {
                 log.info("发布内容{}", JSON.toJSONString(result));

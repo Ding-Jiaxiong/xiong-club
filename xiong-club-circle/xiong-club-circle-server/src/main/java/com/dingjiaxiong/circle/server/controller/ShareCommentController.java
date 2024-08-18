@@ -1,6 +1,7 @@
 package com.dingjiaxiong.circle.server.controller;
 
 import com.alibaba.fastjson.JSON;
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.dingjiaxiong.auth.entity.Result;
 import com.dingjiaxiong.circle.api.enums.IsDeletedFlagEnum;
@@ -8,9 +9,12 @@ import com.dingjiaxiong.circle.api.req.GetShareCommentReq;
 import com.dingjiaxiong.circle.api.req.RemoveShareCommentReq;
 import com.dingjiaxiong.circle.api.req.SaveShareCommentReplyReq;
 import com.dingjiaxiong.circle.api.vo.ShareCommentReplyVO;
+import com.dingjiaxiong.circle.server.entity.po.ShareCommentReply;
 import com.dingjiaxiong.circle.server.entity.po.ShareMoment;
+import com.dingjiaxiong.circle.server.sensitive.WordFilter;
 import com.dingjiaxiong.circle.server.service.ShareCommentReplyService;
 import com.dingjiaxiong.circle.server.service.ShareMomentService;
+import com.dingjiaxiong.circle.server.util.LoginUtil;
 import com.google.common.base.Preconditions;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -40,6 +44,8 @@ public class ShareCommentController {
     @Resource
     private ShareCommentReplyService shareCommentReplyService;
 
+    @Resource
+    private WordFilter wordFilter;
     /**
      * 发布评论
      */
@@ -55,7 +61,7 @@ public class ShareCommentController {
             ShareMoment moment = shareMomentService.getById(req.getMomentId());
             Preconditions.checkArgument((Objects.nonNull(moment) && moment.getIsDeleted() != IsDeletedFlagEnum.DELETED.getCode()), "非法内容！");
             Preconditions.checkArgument((Objects.nonNull(req.getContent()) || Objects.nonNull(req.getPicUrlList())), "内容不能为空！");
-//            wordFilter.check(req.getContent());
+            wordFilter.check(req.getContent());
             Boolean result = shareCommentReplyService.saveComment(req);
 //            if (req.getReplyType() == 1) {
 //                shareMessageService.comment(LoginUtil.getLoginId(), moment.getCreatedBy(), moment.getId());

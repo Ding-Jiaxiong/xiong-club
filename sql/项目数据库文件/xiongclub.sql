@@ -11,7 +11,7 @@
  Target Server Version : 50744
  File Encoding         : 65001
 
- Date: 17/08/2024 23:31:38
+ Date: 18/08/2024 16:08:29
 */
 
 SET NAMES utf8mb4;
@@ -201,7 +201,7 @@ CREATE TABLE `practice_info`  (
   `update_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
   `is_deleted` int(11) NULL DEFAULT 0 COMMENT '是否被删除 0为删除 1已删除',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 8 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin COMMENT = '练习表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 9 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin COMMENT = '练习表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of practice_info
@@ -213,6 +213,7 @@ INSERT INTO `practice_info` VALUES (4, 5, 1, '00:01:53', '2024-08-17 21:39:10', 
 INSERT INTO `practice_info` VALUES (5, 6, 1, '00:01:45', '2024-08-17 21:47:17', 66.67, 'oGbwpwBMJ_qpWWxDvsl2ZL_7o_L4', '2024-08-17 21:45:32', NULL, NULL, 0);
 INSERT INTO `practice_info` VALUES (6, 7, 1, '00:05:31', '2024-08-17 21:58:41', 66.67, 'oGbwpwBMJ_qpWWxDvsl2ZL_7o_L4', '2024-08-17 21:53:11', NULL, NULL, 0);
 INSERT INTO `practice_info` VALUES (7, 8, 1, '00:00:59', '2024-08-17 22:42:48', 66.67, 'oGbwpwBMJ_qpWWxDvsl2ZL_7o_L4', '2024-08-17 22:41:50', NULL, NULL, 0);
+INSERT INTO `practice_info` VALUES (8, 9, 0, '00:00:00', '2024-08-18 09:31:42', 0.00, 'oGbwpwBMJ_qpWWxDvsl2ZL_7o_L4', '2024-08-18 09:31:42', NULL, NULL, 1);
 
 -- ----------------------------
 -- Table structure for practice_set
@@ -231,12 +232,12 @@ CREATE TABLE `practice_set`  (
   `update_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
   `is_deleted` int(11) NULL DEFAULT 0 COMMENT '是否被删除 0为删除 1已删除',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 9 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin COMMENT = '套题信息表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 10 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin COMMENT = '套题信息表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of practice_set
 -- ----------------------------
-INSERT INTO `practice_set` VALUES (1, '缓存、数据库等专项练习', 1, NULL, NULL, 2, 'oGbwpwBMJ_qpWWxDvsl2ZL_7o_L4', '2024-08-17 19:32:08', NULL, NULL, 0);
+INSERT INTO `practice_set` VALUES (1, '缓存、数据库等专项练习', 2, 200, '高质量套卷，只有三道题', 2, 'oGbwpwBMJ_qpWWxDvsl2ZL_7o_L4', '2024-08-17 19:32:08', NULL, NULL, 0);
 INSERT INTO `practice_set` VALUES (2, '缓存、数据库等专项练习', 1, NULL, NULL, 2, 'oGbwpwBMJ_qpWWxDvsl2ZL_7o_L4', '2024-08-17 19:36:26', NULL, NULL, 0);
 INSERT INTO `practice_set` VALUES (3, '缓存、数据库等专项练习', 1, NULL, NULL, 2, 'oGbwpwBMJ_qpWWxDvsl2ZL_7o_L4', '2024-08-17 20:52:08', NULL, NULL, 0);
 INSERT INTO `practice_set` VALUES (4, '缓存、数据库等专项练习', 1, NULL, NULL, 2, 'oGbwpwBMJ_qpWWxDvsl2ZL_7o_L4', '2024-08-17 21:23:37', NULL, NULL, 0);
@@ -244,6 +245,7 @@ INSERT INTO `practice_set` VALUES (5, '缓存、数据库等专项练习', 1, NU
 INSERT INTO `practice_set` VALUES (6, '缓存、数据库等专项练习', 1, NULL, NULL, 2, 'oGbwpwBMJ_qpWWxDvsl2ZL_7o_L4', '2024-08-17 21:45:31', NULL, NULL, 0);
 INSERT INTO `practice_set` VALUES (7, '缓存、数据库等专项练习', 1, NULL, NULL, 2, 'oGbwpwBMJ_qpWWxDvsl2ZL_7o_L4', '2024-08-17 21:53:10', NULL, NULL, 0);
 INSERT INTO `practice_set` VALUES (8, '缓存、数据库等专项练习', 1, NULL, NULL, 2, 'oGbwpwBMJ_qpWWxDvsl2ZL_7o_L4', '2024-08-17 22:41:48', NULL, NULL, 0);
+INSERT INTO `practice_set` VALUES (9, '缓存、数据库等专项练习', 1, NULL, NULL, 2, 'oGbwpwBMJ_qpWWxDvsl2ZL_7o_L4', '2024-08-18 09:31:41', NULL, NULL, 0);
 
 -- ----------------------------
 -- Table structure for practice_set_detail
@@ -260,7 +262,7 @@ CREATE TABLE `practice_set_detail`  (
   `update_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
   `is_deleted` int(11) NULL DEFAULT 0 COMMENT '是否被删除 0为删除 1已删除',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 25 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin COMMENT = '套题内容表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 28 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin COMMENT = '套题内容表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of practice_set_detail
@@ -289,6 +291,131 @@ INSERT INTO `practice_set_detail` VALUES (21, 7, 22, 3, 'oGbwpwBMJ_qpWWxDvsl2ZL_
 INSERT INTO `practice_set_detail` VALUES (22, 8, 20, 1, 'oGbwpwBMJ_qpWWxDvsl2ZL_7o_L4', '2024-08-17 22:41:49', NULL, NULL, 0);
 INSERT INTO `practice_set_detail` VALUES (23, 8, 21, 2, 'oGbwpwBMJ_qpWWxDvsl2ZL_7o_L4', '2024-08-17 22:41:49', NULL, NULL, 0);
 INSERT INTO `practice_set_detail` VALUES (24, 8, 22, 3, 'oGbwpwBMJ_qpWWxDvsl2ZL_7o_L4', '2024-08-17 22:41:49', NULL, NULL, 0);
+INSERT INTO `practice_set_detail` VALUES (25, 9, 20, 1, 'oGbwpwBMJ_qpWWxDvsl2ZL_7o_L4', '2024-08-18 09:31:41', NULL, NULL, 0);
+INSERT INTO `practice_set_detail` VALUES (26, 9, 21, 2, 'oGbwpwBMJ_qpWWxDvsl2ZL_7o_L4', '2024-08-18 09:31:41', NULL, NULL, 0);
+INSERT INTO `practice_set_detail` VALUES (27, 9, 22, 3, 'oGbwpwBMJ_qpWWxDvsl2ZL_7o_L4', '2024-08-18 09:31:41', NULL, NULL, 0);
+
+-- ----------------------------
+-- Table structure for sensitive_words
+-- ----------------------------
+DROP TABLE IF EXISTS `sensitive_words`;
+CREATE TABLE `sensitive_words`  (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT 'id',
+  `words` varchar(1024) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '内容',
+  `type` int(11) NULL DEFAULT 0 COMMENT '1=黑名单 2=白名单',
+  `is_deleted` int(11) NULL DEFAULT NULL COMMENT '是否被删除 0为删除 1已删除',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '敏感词表' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of sensitive_words
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for share_circle
+-- ----------------------------
+DROP TABLE IF EXISTS `share_circle`;
+CREATE TABLE `share_circle`  (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '圈子ID',
+  `parent_id` bigint(20) NOT NULL COMMENT '父级ID,-1为大类',
+  `circle_name` varchar(16) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '圈子名称',
+  `icon` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '圈子图片',
+  `created_by` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '创建人',
+  `created_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
+  `update_by` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '更新人',
+  `update_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
+  `is_deleted` int(11) NULL DEFAULT 0 COMMENT '是否被删除 0为删除 1已删除',
+  PRIMARY KEY (`id`) USING BTREE,
+  INDEX `idx_parent_id`(`parent_id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 6 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '圈子信息' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of share_circle
+-- ----------------------------
+INSERT INTO `share_circle` VALUES (1, -1, '推荐圈子', 'http://1123.img', 'oGbwpwBMJ_qpWWxDvsl2ZL_7o_L4', '2024-08-18 14:19:22', NULL, NULL, 0);
+INSERT INTO `share_circle` VALUES (2, 1, 'Java圈子', 'https://img0.baidu.com/it/u=3569431596,3072439958&fm=253&fmt=auto&app=138&f=JPEG?w=893&h=500', 'oGbwpwBMJ_qpWWxDvsl2ZL_7o_L4', '2024-08-18 14:21:18', 'oGbwpwBMJ_qpWWxDvsl2ZL_7o_L4', '2024-08-18 14:47:35', 0);
+INSERT INTO `share_circle` VALUES (3, 1, '前端圈子【更新版】', 'https://img0.baidu.com/it/u=3813516895,2440098047&fm=253&fmt=auto&app=120&f=JPEG?w=683&h=384', 'oGbwpwBMJ_qpWWxDvsl2ZL_7o_L4', '2024-08-18 14:25:27', NULL, '2024-08-18 14:43:34', 0);
+INSERT INTO `share_circle` VALUES (4, 1, '运维圈子【更新版】', 'https://img2.baidu.com/it/u=383026482,2806158636&fm=253&fmt=auto&app=138&f=PNG?w=350&h=245', 'oGbwpwBMJ_qpWWxDvsl2ZL_7o_L4', '2024-08-18 14:36:48', NULL, '2024-08-18 14:44:54', 0);
+INSERT INTO `share_circle` VALUES (5, 1, '准备删除的圈子', 'http://1123.img', 'oGbwpwBMJ_qpWWxDvsl2ZL_7o_L4', '2024-08-18 14:48:33', NULL, NULL, 1);
+
+-- ----------------------------
+-- Table structure for share_comment_reply
+-- ----------------------------
+DROP TABLE IF EXISTS `share_comment_reply`;
+CREATE TABLE `share_comment_reply`  (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '评论ID',
+  `moment_id` int(11) NOT NULL COMMENT '原始动态ID',
+  `reply_type` int(11) NOT NULL COMMENT '回复类型 1评论 2回复',
+  `to_id` bigint(20) NULL DEFAULT NULL COMMENT '评论目标id',
+  `to_user` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '评论人',
+  `to_user_author` int(11) NULL DEFAULT NULL COMMENT '评论人是否作者 1=是 0=否',
+  `reply_id` bigint(20) NULL DEFAULT NULL COMMENT '回复目标id',
+  `reply_user` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '回复人',
+  `replay_author` int(11) NULL DEFAULT NULL COMMENT '回复人是否作者 1=是 0=否',
+  `content` varchar(1024) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '内容',
+  `pic_urls` varchar(1024) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '图片内容',
+  `created_by` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '创建人',
+  `created_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
+  `update_by` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '更新人',
+  `update_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
+  `is_deleted` int(11) NULL DEFAULT 0 COMMENT '是否被删除 0为删除 1已删除',
+  `parent_id` bigint(20) NULL DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE,
+  INDEX `idx_moment_id`(`moment_id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '评论及回复信息' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of share_comment_reply
+-- ----------------------------
+INSERT INTO `share_comment_reply` VALUES (1, 1, 1, 1, 'oGbwpwBMJ_qpWWxDvsl2ZL_7o_L4', 1, NULL, NULL, NULL, '希望大家天天开心', NULL, 'oGbwpwBMJ_qpWWxDvsl2ZL_7o_L4', '2024-08-18 15:57:34', NULL, NULL, 0, -1);
+INSERT INTO `share_comment_reply` VALUES (2, 1, 2, NULL, NULL, NULL, 1, 'oGbwpwBMJ_qpWWxDvsl2ZL_7o_L4', 1, '再下一层', NULL, 'oGbwpwBMJ_qpWWxDvsl2ZL_7o_L4', '2024-08-18 15:58:52', NULL, NULL, 0, 1);
+
+-- ----------------------------
+-- Table structure for share_message
+-- ----------------------------
+DROP TABLE IF EXISTS `share_message`;
+CREATE TABLE `share_message`  (
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '主键',
+  `from_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '来自人',
+  `to_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '送达人',
+  `content` varchar(256) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '消息内容',
+  `is_read` int(11) NULL DEFAULT 0 COMMENT '是否被阅读 1是 2否',
+  `created_by` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '创建人',
+  `created_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
+  `update_by` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '更新人',
+  `update_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
+  `is_deleted` int(11) NULL DEFAULT 0 COMMENT '是否被删除 0为删除 1已删除',
+  PRIMARY KEY (`id`) USING BTREE,
+  INDEX `idx_to_id`(`to_id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '消息表' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of share_message
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for share_moment
+-- ----------------------------
+DROP TABLE IF EXISTS `share_moment`;
+CREATE TABLE `share_moment`  (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '动态ID',
+  `circle_id` bigint(20) NOT NULL COMMENT '圈子ID',
+  `content` varchar(1024) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '动态内容',
+  `pic_urls` varchar(1024) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '动态图片内容',
+  `reply_count` int(11) NOT NULL DEFAULT 0 COMMENT '回复数',
+  `created_by` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '创建人',
+  `created_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
+  `update_by` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '更新人',
+  `update_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
+  `is_deleted` int(11) NULL DEFAULT 0 COMMENT '是否被删除 0为删除 1已删除',
+  PRIMARY KEY (`id`) USING BTREE,
+  INDEX `idx_circle_id`(`circle_id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '动态信息' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of share_moment
+-- ----------------------------
+INSERT INTO `share_moment` VALUES (1, 2, '这是我的第一条熊圈，大家好！', NULL, 2, 'oGbwpwBMJ_qpWWxDvsl2ZL_7o_L4', '2024-08-18 15:21:46', NULL, NULL, 0);
 
 -- ----------------------------
 -- Table structure for subject_brief
@@ -462,12 +589,13 @@ CREATE TABLE `subject_liked`  (
   `is_deleted` int(11) NULL DEFAULT 0,
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `uniq_like`(`subject_id`, `like_user_id`) USING BTREE COMMENT '点赞唯一索引'
-) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin COMMENT = '题目点赞表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin COMMENT = '题目点赞表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of subject_liked
 -- ----------------------------
 INSERT INTO `subject_liked` VALUES (1, 1, 'oGbwpwBMJ_qpWWxDvsl2ZL_7o_L4', 1, NULL, NULL, NULL, NULL, 0);
+INSERT INTO `subject_liked` VALUES (2, 2, 'oGbwpwBMJ_qpWWxDvsl2ZL_7o_L4', 1, NULL, NULL, NULL, NULL, 0);
 
 -- ----------------------------
 -- Table structure for subject_mapping

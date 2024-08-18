@@ -16201,7 +16201,7 @@ C1=加100元 C2=给用户减一瓶水 C3=给库存加一瓶水
 
 
 
-第三期结束
+第三期结束【这里这个东西没细看，后面好像会和 练题业务整合到时候再说】
 
 
 
@@ -16224,6 +16224,182 @@ C1=加100元 C2=给用户减一瓶水 C3=给库存加一瓶水
 在第四期主要是带大家来实现鸡圈模块。首先恭喜看到第四期的小伙伴，基本上到这里，你的面试和技术栈已经很全了，完全可以放心出去面试了。【哇哦】
 
 
+
+##### 5.2 数据库表设计
+
+
+
+主要是实现如下功能
+
+1、圈子的查询
+
+2、动态的发布
+
+3、评论与回复
+
+4、websocket 的实时通知
+
+
+
+###### 5.2.1 圈子相关
+
+
+
+![image-20240818125726460](./assets/image-20240818125726460.png)
+
+
+
+###### 5.2.2 动态发布
+
+
+
+![image-20240818125755038](./assets/image-20240818125755038.png)
+
+
+
+###### 5.2.3 评论与回复
+
+
+
+![image-20240818125819805](./assets/image-20240818125819805.png)
+
+
+
+
+
+###### 5.2.4 五张表
+
+
+
+敏感词：
+
+```sql
+DROP TABLE IF EXISTS `sensitive_words`;
+CREATE TABLE `sensitive_words`
+(
+    `id`         bigint(20) NOT NULL AUTO_INCREMENT COMMENT 'id',
+    `words`      varchar(1024) DEFAULT NULL COMMENT '内容',
+    `type`       int(11) DEFAULT '0' COMMENT '1=黑名单 2=白名单',
+    `is_deleted` int(11) DEFAULT NULL COMMENT '是否被删除 0为删除 1已删除',
+    PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='敏感词表';
+```
+
+
+
+圈子信息：
+
+```sql
+DROP TABLE IF EXISTS `share_circle`;
+CREATE TABLE `share_circle`
+(
+    `id`           bigint(20) NOT NULL AUTO_INCREMENT COMMENT '圈子ID',
+    `parent_id`    bigint(20) NOT NULL COMMENT '父级ID,-1为大类',
+    `circle_name`  varchar(16) NOT NULL COMMENT '圈子名称',
+    `icon`         varchar(255) DEFAULT NULL COMMENT '圈子图片',
+    `created_by`   varchar(32)  DEFAULT NULL COMMENT '创建人',
+    `created_time` datetime     DEFAULT NULL COMMENT '创建时间',
+    `update_by`    varchar(32)  DEFAULT NULL COMMENT '更新人',
+    `update_time`  datetime     DEFAULT NULL COMMENT '更新时间',
+    `is_deleted`   int(11) DEFAULT '0' COMMENT '是否被删除 0为删除 1已删除',
+    PRIMARY KEY (`id`),
+    KEY            `idx_parent_id` (`parent_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='圈子信息';
+```
+
+
+
+评论及回复信息：
+
+```sql
+DROP TABLE IF EXISTS `share_comment_reply`;
+CREATE TABLE `share_comment_reply`
+(
+    `id`             bigint(20) NOT NULL AUTO_INCREMENT COMMENT '评论ID',
+    `moment_id`      int(11) NOT NULL COMMENT '原始动态ID',
+    `reply_type`     int(11) NOT NULL COMMENT '回复类型 1评论 2回复',
+    `to_id`          bigint(20) DEFAULT NULL COMMENT '评论目标id',
+    `to_user`        varchar(32)   DEFAULT NULL COMMENT '评论人',
+    `to_user_author` int(11) DEFAULT NULL COMMENT '评论人是否作者 1=是 0=否',
+    `reply_id`       bigint(20) DEFAULT NULL COMMENT '回复目标id',
+    `reply_user`     varchar(32)   DEFAULT NULL COMMENT '回复人',
+    `replay_author`  int(11) DEFAULT NULL COMMENT '回复人是否作者 1=是 0=否',
+    `content`        varchar(1024) DEFAULT NULL COMMENT '内容',
+    `pic_urls`       varchar(1024) DEFAULT NULL COMMENT '图片内容',
+    `created_by`     varchar(32)   DEFAULT NULL COMMENT '创建人',
+    `created_time`   datetime      DEFAULT NULL COMMENT '创建时间',
+    `update_by`      varchar(32)   DEFAULT NULL COMMENT '更新人',
+    `update_time`    datetime      DEFAULT NULL COMMENT '更新时间',
+    `is_deleted`     int(11) DEFAULT '0' COMMENT '是否被删除 0为删除 1已删除',
+    `parent_id`      bigint(20) DEFAULT NULL,
+    PRIMARY KEY (`id`),
+    KEY              `idx_moment_id` (`moment_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='评论及回复信息';
+```
+
+
+
+消息表：
+
+```sql
+DROP TABLE IF EXISTS `share_message`;
+CREATE TABLE `share_message`
+(
+    `id`           int(11) NOT NULL AUTO_INCREMENT COMMENT '主键',
+    `from_id`      varchar(32) NOT NULL COMMENT '来自人',
+    `to_id`        varchar(32) NOT NULL COMMENT '送达人',
+    `content`      varchar(256) DEFAULT NULL COMMENT '消息内容',
+    `is_read`      int(11) DEFAULT '0' COMMENT '是否被阅读 1是 2否',
+    `created_by`   varchar(32)  DEFAULT NULL COMMENT '创建人',
+    `created_time` datetime     DEFAULT NULL COMMENT '创建时间',
+    `update_by`    varchar(32)  DEFAULT NULL COMMENT '更新人',
+    `update_time`  datetime     DEFAULT NULL COMMENT '更新时间',
+    `is_deleted`   int(11) DEFAULT '0' COMMENT '是否被删除 0为删除 1已删除',
+    PRIMARY KEY (`id`),
+    KEY            `idx_to_id` (`to_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='消息表';
+```
+
+
+
+动态信息：
+
+
+
+```sql
+DROP TABLE IF EXISTS `share_moment`;
+CREATE TABLE `share_moment`
+(
+    `id`           bigint(20) NOT NULL AUTO_INCREMENT COMMENT '动态ID',
+    `circle_id`    bigint(20) NOT NULL COMMENT '圈子ID',
+    `content`      varchar(1024) DEFAULT NULL COMMENT '动态内容',
+    `pic_urls`     varchar(1024) DEFAULT NULL COMMENT '动态图片内容',
+    `reply_count`  int(11) NOT NULL DEFAULT '0' COMMENT '回复数',
+    `created_by`   varchar(32)   DEFAULT NULL COMMENT '创建人',
+    `created_time` datetime      DEFAULT NULL COMMENT '创建时间',
+    `update_by`    varchar(32)   DEFAULT NULL COMMENT '更新人',
+    `update_time`  datetime      DEFAULT NULL COMMENT '更新时间',
+    `is_deleted`   int(11) DEFAULT '0' COMMENT '是否被删除 0为删除 1已删除',
+    PRIMARY KEY (`id`),
+    KEY            `idx_circle_id` (`circle_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='动态信息';
+```
+
+
+
+直接创建出来
+
+
+
+![image-20240818134057558](./assets/image-20240818134057558.png)
+
+
+
+直接 逆向到 模型
+
+
+
+![image-20240818134126093](./assets/image-20240818134126093.png)
 
 
 

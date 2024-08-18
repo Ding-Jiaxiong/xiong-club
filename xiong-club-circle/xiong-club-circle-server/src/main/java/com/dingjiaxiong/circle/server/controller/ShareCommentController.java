@@ -13,6 +13,7 @@ import com.dingjiaxiong.circle.server.entity.po.ShareCommentReply;
 import com.dingjiaxiong.circle.server.entity.po.ShareMoment;
 import com.dingjiaxiong.circle.server.sensitive.WordFilter;
 import com.dingjiaxiong.circle.server.service.ShareCommentReplyService;
+import com.dingjiaxiong.circle.server.service.ShareMessageService;
 import com.dingjiaxiong.circle.server.service.ShareMomentService;
 import com.dingjiaxiong.circle.server.util.LoginUtil;
 import com.google.common.base.Preconditions;
@@ -46,6 +47,11 @@ public class ShareCommentController {
 
     @Resource
     private WordFilter wordFilter;
+
+    @Resource
+    private ShareMessageService shareMessageService;
+
+
     /**
      * 发布评论
      */
@@ -63,15 +69,15 @@ public class ShareCommentController {
             Preconditions.checkArgument((Objects.nonNull(req.getContent()) || Objects.nonNull(req.getPicUrlList())), "内容不能为空！");
             wordFilter.check(req.getContent());
             Boolean result = shareCommentReplyService.saveComment(req);
-//            if (req.getReplyType() == 1) {
-//                shareMessageService.comment(LoginUtil.getLoginId(), moment.getCreatedBy(), moment.getId());
-//            } else {
-//                LambdaQueryWrapper<ShareCommentReply> query = Wrappers.<ShareCommentReply>lambdaQuery()
-//                        .eq(ShareCommentReply::getId, req.getTargetId())
-//                        .select(ShareCommentReply::getCreatedBy);
-//                ShareCommentReply reply = shareCommentReplyService.getOne(query);
-//                shareMessageService.reply(LoginUtil.getLoginId(), reply.getCreatedBy(), moment.getId());
-//            }
+            if (req.getReplyType() == 1) {
+                shareMessageService.comment(LoginUtil.getLoginId(), moment.getCreatedBy(), moment.getId());
+            } else {
+                LambdaQueryWrapper<ShareCommentReply> query = Wrappers.<ShareCommentReply>lambdaQuery()
+                        .eq(ShareCommentReply::getId, req.getTargetId())
+                        .select(ShareCommentReply::getCreatedBy);
+                ShareCommentReply reply = shareCommentReplyService.getOne(query);
+                shareMessageService.reply(LoginUtil.getLoginId(), reply.getCreatedBy(), moment.getId());
+            }
             if (log.isInfoEnabled()) {
                 log.info("发布内容{}", JSON.toJSONString(result));
             }

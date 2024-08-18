@@ -29,6 +29,12 @@ spring:
             - Path=/practice/**
           filters:
             - StripPrefix=1
+        - id: circle
+          uri: lb://xiong-club-circle-dev
+          predicates:
+            - Path=/circle/**
+          filters:
+            - StripPrefix=1
   redis:
     # Redis数据库索引（默认为0）
     database: 1

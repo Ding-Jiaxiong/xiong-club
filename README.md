@@ -15282,6 +15282,405 @@ docker run -d --restart=always --name rmqadmin -e "JAVA_OPTS=-Drocketmq.namesrv.
 
 
 
+##### 4.33 这里居然有个插曲 ... 一封信
+
+
+
+好好，感人
+
+
+
+##### 4.44 项目集成mq代码
+
+
+
+要改配置了
+
+
+
+###### 4.44.1 调整 rocketmq 的配置
+
+
+
+```
+先关闭broker，namesrv
+sh mqshutdown broker
+sh mqshutdown namesrv
+进行配置文件调整
+conf/broker.conf 
+brokerIP1=116.196.77.213
+重新启动
+export NAMESRV_ADDR=116.196.77.213:9876
+nohup sh mqnamesrv -n 116.196.77.213:9876 &
+nohup sh mqbroker -n 116.196.77.213:9876 -c conf/broker.conf autoCreateTopicEnable=true &
+```
+
+
+
+![image-20240818113311629](./assets/image-20240818113311629.png)
+
+
+
+先把依赖加上，用的刷题服务做实验
+
+
+
+![image-20240818113527888](./assets/image-20240818113527888.png)
+
+
+
+然后到 mq 层加依赖
+
+
+
+![image-20240818113616179](./assets/image-20240818113616179.png)
+
+
+
+依赖 domain 就行
+
+
+
+然后是 starter 依赖
+
+
+
+![image-20240818113717199](./assets/image-20240818113717199.png)
+
+
+
+修改启动的配置文件
+
+
+
+![image-20240818113817045](./assets/image-20240818113817045.png)
+
+
+
+做一个发送实验
+
+![image-20240818114103082](./assets/image-20240818114103082.png)
+
+
+
+然后是消费
+
+
+
+![image-20240818114305715](./assets/image-20240818114305715.png)
+
+
+
+直接重启刷题服务
+
+![image-20240818114514687](./assets/image-20240818114514687.png)
+
+
+
+完事儿要把服务器那边弄好
+
+```
+先关闭broker，namesrv
+sh mqshutdown broker
+sh mqshutdown namesrv
+进行配置文件调整
+conf/broker.conf 
+brokerIP1=117.72.14.166
+
+
+
+重新启动
+export NAMESRV_ADDR=192.168.75.128:9876
+nohup sh mqnamesrv -n 192.168.75.128:9876 &
+nohup sh mqbroker -n 192.168.75.128:9876 -c conf/broker.conf autoCreateTopicEnable=true &
+```
+
+
+
+![image-20240818114614017](./assets/image-20240818114614017.png)
+
+
+
+![image-20240818114651250](./assets/image-20240818114651250.png)
+
+
+
+都完成后，再重启一下啊
+
+
+
+![image-20240818114742725](./assets/image-20240818114742725.png)
+
+
+
+其实已经连接上了，接口测试一下
+
+
+
+![image-20240818115059441](./assets/image-20240818115059441.png)
+
+
+
+![image-20240818115114527](./assets/image-20240818115114527.png)
+
+
+
+说没找到这个 topic 
+
+
+
+![image-20240818115134031](./assets/image-20240818115134031.png)
+
+
+
+改一下啊
+
+![image-20240818115148713](./assets/image-20240818115148713.png)
+
+
+
+再来一次
+
+
+
+![image-20240818115237425](./assets/image-20240818115237425.png)
+
+
+
+还是没有
+
+
+
+clean ，一下， install 一下
+
+
+
+![image-20240818115609213](./assets/image-20240818115609213.png)
+
+
+
+还是不行
+
+
+
+![image-20240818115647717](./assets/image-20240818115647717.png)
+
+
+
+又改了下这儿，我感觉是我这个 topic 就没有创建成功
+
+
+
+![image-20240818115722392](./assets/image-20240818115722392.png)
+
+
+
+可视化界面也没有
+
+
+
+![image-20240818115741984](./assets/image-20240818115741984.png)
+
+
+
+对的，肯定是这个问题，
+
+
+
+![image-20240818115838456](./assets/image-20240818115838456.png)
+
+
+
+按理说应该是对的吧
+
+
+
+![image-20240818115907674](./assets/image-20240818115907674.png)
+
+
+
+试试
+
+`sh bin/mqbroker -m`
+
+
+
+![image-20240818115948645](./assets/image-20240818115948645.png)
+
+
+
+这个 ip 好像有问题
+
+![image-20240818120021303](./assets/image-20240818120021303.png)
+
+
+
+我也加一个试试
+
+
+
+![image-20240818120049688](./assets/image-20240818120049688.png)
+
+
+
+重启一下namesrv 和 broker 
+
+
+
+![image-20240818120158008](./assets/image-20240818120158008.png)
+
+
+
+
+
+再是一次
+
+
+
+![image-20240818120248121](./assets/image-20240818120248121.png)
+
+
+
+还是不行，我手动创建一个 topic 试试
+
+
+
+![image-20240818120321379](./assets/image-20240818120321379.png)
+
+
+
+![image-20240818120349893](./assets/image-20240818120349893.png)
+
+
+
+马德，压根儿没监测dao
+
+
+
+![image-20240818120507442](./assets/image-20240818120507442.png)
+
+
+
+broker 没有启动成功
+
+
+
+![image-20240818120546749](./assets/image-20240818120546749.png)
+
+
+
+应该是没有用到我们的配置文件
+
+
+
+![image-20240818120637640](./assets/image-20240818120637640.png)
+
+
+
+对吧，没有启动成功
+
+
+
+![image-20240818120748175](./assets/image-20240818120748175.png)
+
+
+
+换了个写法，这次应该是用到了，
+
+
+
+![image-20240818120829134](./assets/image-20240818120829134.png)
+
+
+
+先关掉我知道了
+
+
+
+![image-20240818120843447](./assets/image-20240818120843447.png)
+
+
+
+忘记换了，这不是我的 ip
+
+
+
+```
+先关闭broker，namesrv
+sh mqshutdown broker
+sh mqshutdown namesrv
+进行配置文件调整
+conf/broker.conf 
+brokerIP1=116.196.77.213
+
+
+
+重新启动
+export NAMESRV_ADDR=116.196.77.213:9876
+nohup sh mqnamesrv -n 116.196.77.213:9876 &
+nohup sh mqbroker -n 116.196.77.213:9876 -c ../conf/broker.conf autoCreateTopicEnable=true &
+```
+
+
+
+![image-20240818120948613](./assets/image-20240818120948613.png)
+
+
+
+made ，再来
+
+
+
+![image-20240818121028036](./assets/image-20240818121028036.png)
+
+
+
+
+
+![image-20240818121057380](./assets/image-20240818121057380.png)
+
+
+
+这次绝逼没问题了
+
+
+
+![image-20240818121108238](./assets/image-20240818121108238.png)
+
+
+
+重启再来一次
+
+
+
+![image-20240818121156344](./assets/image-20240818121156344.png)
+
+
+
+发送成功了
+
+![image-20240818121207576](./assets/image-20240818121207576.png)
+
+
+
+牛逼！！！！卧槽！！！！！！！ 了
+
+
+
+![image-20240818121245095](./assets/image-20240818121245095.png)
+
+
+
+topic 这次才是创建成功了
+
+
+
+
+
+
+
+
+
 
 
 

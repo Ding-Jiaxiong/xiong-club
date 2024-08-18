@@ -14637,23 +14637,45 @@ kafaka：大数据量
 
 
 
+##### 4.29 rocketmq 简介
 
 
 
+RocketMQ是一个统一消息引擎、轻量级数据处理平台。 
+
+RocketMQ是⼀款阿⾥巴巴开源的消息中间件。2016年11⽉28⽇，阿⾥巴巴向 Apache 软件基⾦会捐赠 
+
+RocketMQ，成为 Apache 孵化项⽬。2017 年 9 ⽉ 25 ⽇，Apache 宣布 RocketMQ孵化成为 Apache 顶级项⽬（TLP ），成为国内⾸个互联⽹中间件在 Apache 的顶级项目
 
 
 
+![image-20240818095835356](./assets/image-20240818095835356.png)
 
 
 
+官网：https://rocketmq.apache.org/
 
 
 
+**rocketmq 发展**
 
 
 
+![image-20240818095913356](./assets/image-20240818095913356.png)
 
 
+
+2007年，阿里开始五彩石项目，Notify作为项目中交易核心消息流转系统，应运而生。Notify系统是 RocketMQ的雏形。 
+
+2010年，B2B大规模使用ActiveMQ作为阿里的消息内核。阿里急需一个具有海量堆积能力的消息系 统。 
+
+2011年初，Kafka开源。淘宝中间件团队在对Kafka进行了深入研究后，开发了一款新的MQ，MetaQ。2012年，MetaQ发展到了v3.0版本，在它基础上进行了进一步的抽象，形成了RocketMQ，然后就将其 进行了开源。 
+
+2015年，阿里在RocketMQ的基础上，又推出了一款专门针对阿里云上用户的消息系统Aliware MQ。 
+
+2016年双十一，RocketMQ承载了万亿级消息的流转，跨越了一个新的里程碑。11⽉28⽇，阿⾥巴巴 向 Apache 软件基⾦会捐赠 RocketMQ，成为 Apache 孵化项⽬。 
+
+2017 年 9 ⽉ 25 ⽇，Apache 宣布 RocketMQ孵化成为 Apache 顶级项⽬（TLP ），成为国内⾸个互联 ⽹中间件在 Apache 上的顶级项⽬。
 
 
 

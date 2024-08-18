@@ -7,30 +7,32 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="xiong-club-auth-application-controller" />
         <module name="easy-gen-code-spring-boot-starter" />
         <module name="asyncTool" />
-        <module name="xiong-club-starter" />
         <module name="xiong-club-gen" />
         <module name="xiong-club-oss" />
-        <module name="xiong-club-auth-starter" />
+        <module name="xiong-club-circle-api" />
         <module name="xiong-club-auth-application-job" />
-        <module name="xiong-club-auth-application-mq" />
-        <module name="xiong-club-domain" />
         <module name="xiong-club-auth-common" />
-        <module name="xiong-club-wx" />
-        <module name="xiong-club-infra" />
         <module name="xiong-club-auth-api" />
-        <module name="xiong-club-practice-api" />
         <module name="xiong-club-subject-api" />
-        <module name="xiong-club-gateway" />
-        <module name="xiong-club-practice-server" />
         <module name="xiong-club-application-controller" />
-        <module name="xiong-club-application-mq" />
-        <module name="xiong-club-auth-infra" />
         <module name="xiong-club-application-job" />
         <module name="xiong-club-auth-domain" />
         <module name="xiong-club-common" />
+        <module name="xiong-club-auth-application-controller" />
+        <module name="xiong-club-starter" />
+        <module name="xiong-club-auth-starter" />
+        <module name="xiong-club-auth-application-mq" />
+        <module name="xiong-club-domain" />
+        <module name="xiong-club-wx" />
+        <module name="xiong-club-infra" />
+        <module name="xiong-club-practice-api" />
+        <module name="xiong-club-circle-server" />
+        <module name="xiong-club-gateway" />
+        <module name="xiong-club-practice-server" />
+        <module name="xiong-club-application-mq" />
+        <module name="xiong-club-auth-infra" />
       </profile>
     </annotationProcessing>
   </component>

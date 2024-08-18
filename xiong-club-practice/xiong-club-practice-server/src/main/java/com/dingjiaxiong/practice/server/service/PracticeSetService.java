@@ -2,10 +2,8 @@ package com.dingjiaxiong.practice.server.service;
 
 import com.dingjiaxiong.practice.api.common.PageResult;
 import com.dingjiaxiong.practice.api.req.GetPracticeSubjectsReq;
-import com.dingjiaxiong.practice.api.vo.PracticeSetVO;
-import com.dingjiaxiong.practice.api.vo.PracticeSubjectListVO;
-import com.dingjiaxiong.practice.api.vo.PracticeSubjectVO;
-import com.dingjiaxiong.practice.api.vo.SpecialPracticeVO;
+import com.dingjiaxiong.practice.api.req.GetUnCompletePracticeReq;
+import com.dingjiaxiong.practice.api.vo.*;
 import com.dingjiaxiong.practice.server.entity.dto.PracticeSetDTO;
 import com.dingjiaxiong.practice.server.entity.dto.PracticeSubjectDTO;
 
@@ -39,4 +37,8 @@ public interface PracticeSetService {
      */
     PageResult<PracticeSetVO> getPreSetContent(PracticeSetDTO dto);
 
+    /**
+     * 获取未完成练习内容
+     */
+    PageResult<UnCompletePracticeSetVO> getUnCompletePractice(GetUnCompletePracticeReq req);
 }

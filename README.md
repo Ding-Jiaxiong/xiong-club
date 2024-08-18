@@ -15140,6 +15140,150 @@ nohup sh mqbroker -c /soft/rocketmq-all-4.8.0-bin-release/conf/broker.conf &
 
 
 
+##### 4.32 rocketmq 的可视化
+
+
+
+这里直接给到了一个压缩文件
+
+
+
+![image-20240818110426971](./assets/image-20240818110426971.png)
+
+
+
+试试吧
+
+
+
+![image-20240818110530016](./assets/image-20240818110530016.png)
+
+
+
+直接 idea 打开
+
+
+
+![image-20240818110604501](./assets/image-20240818110604501.png)
+
+
+
+修改配置文件
+
+
+
+![image-20240818110700783](./assets/image-20240818110700783.png)
+
+
+
+先等加载完成，在下 依赖
+
+
+
+![image-20240818111049772](./assets/image-20240818111049772.png)
+
+
+
+其实 docker 好像也行
+
+
+
+![image-20240818111142319](./assets/image-20240818111142319.png)
+
+
+
+就这两个地方要改
+
+然后 install 出一个 jar 包，运行就行
+
+
+
+![image-20240818111233163](./assets/image-20240818111233163.png)
+
+
+
+6 分钟 了，哥
+
+
+
+![image-20240818111346325](./assets/image-20240818111346325.png)
+
+
+
+jdk 1.7 炸裂，我不用了，我用 docker 装一个
+
+
+
+```
+docker pull styletang/rocketmq-console-ng
+```
+
+
+
+
+
+![image-20240818111459875](./assets/image-20240818111459875.png)
+
+
+
+着实有点慢
+
+![image-20240818111713710](./assets/image-20240818111713710.png)
+
+
+
+![image-20240818111834520](./assets/image-20240818111834520.png)
+
+
+
+```
+docker run -e "JAVA_OPTS=-Drocketmq.namesrv.addr=127.0.0.1:9876 -Dcom.rocketmq.sendMessageWithVIPChannel=false" -p 7777:7777 -t styletang/rocketmq-console-ng
+```
+
+
+
+完事儿后直接启动
+
+
+
+![image-20240818111919015](./assets/image-20240818111919015.png)
+
+... 这么还是前台启动的  。。。 
+
+docker 没成功
+
+
+
+换个命令
+
+```
+docker run -d --restart=always --name rmqadmin -e "JAVA_OPTS=-Drocketmq.namesrv.addr=116.196.77.213:9876 -Dcom.rocketmqsendMessageWithVIPChannel=false"  -p 7777:8080  styletang/rocketmq-console-ng
+```
+
+
+
+![image-20240818112521315](./assets/image-20240818112521315.png)
+
+
+
+试试
+
+![image-20240818112642570](./assets/image-20240818112642570.png)
+
+
+
+一下就成功了
+
+![image-20240818112718931](./assets/image-20240818112718931.png)
+
+
+
+没问题，原来是 1000 条消息
+
+
+
+
+
 
 
 

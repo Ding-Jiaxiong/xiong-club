@@ -3,6 +3,7 @@ package com.dingjiaxiong.circle.server.service.impl;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -13,8 +14,10 @@ import com.dingjiaxiong.circle.api.req.GetShareMomentReq;
 import com.dingjiaxiong.circle.api.req.RemoveShareMomentReq;
 import com.dingjiaxiong.circle.api.req.SaveMomentCircleReq;
 import com.dingjiaxiong.circle.api.vo.ShareMomentVO;
+import com.dingjiaxiong.circle.server.dao.ShareCommentReplyMapper;
 import com.dingjiaxiong.circle.server.dao.ShareMomentMapper;
 import com.dingjiaxiong.circle.server.entity.dto.UserInfo;
+import com.dingjiaxiong.circle.server.entity.po.ShareCommentReply;
 import com.dingjiaxiong.circle.server.entity.po.ShareMoment;
 import com.dingjiaxiong.circle.server.rpc.UserRpc;
 import com.dingjiaxiong.circle.server.service.ShareMomentService;
@@ -43,6 +46,9 @@ public class ShareMomentServiceImpl extends ServiceImpl<ShareMomentMapper, Share
 
     @Resource
     private UserRpc userRpc;
+
+    @Resource
+    private ShareCommentReplyMapper shareCommentReplyMapper;
 
     @Override
     public Boolean saveMoment(SaveMomentCircleReq req) {
@@ -74,7 +80,7 @@ public class ShareMomentServiceImpl extends ServiceImpl<ShareMomentMapper, Share
         PageResult<ShareMomentVO> result = new PageResult<>();
         List<ShareMoment> records = pageRes.getRecords();
         List<String> userNameList = records.stream().map(ShareMoment::getCreatedBy).distinct().collect(Collectors.toList());
-//        Map<String, UserInfo> userInfoMap = userRpc.batchGetUserInfo(userNameList);
+        Map<String, UserInfo> userInfoMap = userRpc.batchGetUserInfo(userNameList);
         UserInfo defaultUser = new UserInfo();
         List<ShareMomentVO> list = records.stream().map(item -> {
             ShareMomentVO vo = new ShareMomentVO();
@@ -87,9 +93,9 @@ public class ShareMomentServiceImpl extends ServiceImpl<ShareMomentMapper, Share
             }
             vo.setReplyCount(item.getReplyCount());
             vo.setCreatedTime(item.getCreatedTime().getTime());
-//            UserInfo user = userInfoMap.getOrDefault(item.getCreatedBy(), defaultUser);
-//            vo.setUserName(user.getNickName());
-//            vo.setUserAvatar(user.getAvatar());
+            UserInfo user = userInfoMap.getOrDefault(item.getCreatedBy(), defaultUser);
+            vo.setUserName(user.getNickName());
+            vo.setUserAvatar(user.getAvatar());
             return vo;
         }).collect(Collectors.toList());
         result.setRecords(list);
@@ -102,10 +108,10 @@ public class ShareMomentServiceImpl extends ServiceImpl<ShareMomentMapper, Share
     @Override
     @Transactional(rollbackFor = Exception.class)
     public Boolean removeMoment(RemoveShareMomentReq req) {
-//        ShareCommentReply updateEntity = new ShareCommentReply();
-//        updateEntity.setIsDeleted(IsDeletedFlagEnum.DELETED.getCode());
-//        LambdaUpdateWrapper<ShareCommentReply> update = Wrappers.<ShareCommentReply>lambdaUpdate().eq(ShareCommentReply::getMomentId, req.getId());
-//        shareCommentReplyMapper.update(updateEntity, update);
+        ShareCommentReply updateEntity = new ShareCommentReply();
+        updateEntity.setIsDeleted(IsDeletedFlagEnum.DELETED.getCode());
+        LambdaUpdateWrapper<ShareCommentReply> update = Wrappers.<ShareCommentReply>lambdaUpdate().eq(ShareCommentReply::getMomentId, req.getId());
+        shareCommentReplyMapper.update(updateEntity, update);
         return super.update(Wrappers.<ShareMoment>lambdaUpdate().eq(ShareMoment::getId, req.getId())
                 .eq(ShareMoment::getIsDeleted, IsDeletedFlagEnum.UN_DELETED.getCode())
                 .set(ShareMoment::getIsDeleted, IsDeletedFlagEnum.DELETED.getCode()));

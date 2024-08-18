@@ -34,6 +34,13 @@ public class AuthUserServiceImpl extends ServiceImpl<AuthUserMapper, AuthUser>
     public Integer updateByUserName(AuthUser authUser) {
         return authUserMapper.updateByUserName(authUser);
     }
+
+    @Override
+    public List<AuthUser> listUserInfoByIds(List<String> userNameList) {
+        return authUserMapper.listUserInfoByIds(userNameList);
+    }
+
+
 }
 
 

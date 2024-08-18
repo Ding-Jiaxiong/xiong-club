@@ -16,4 +16,6 @@ public interface AuthUserService extends IService<AuthUser> {
 
     Integer updateByUserName(AuthUser authUser);
 
+    List<AuthUser> listUserInfoByIds(List<String> ids);
+
 }

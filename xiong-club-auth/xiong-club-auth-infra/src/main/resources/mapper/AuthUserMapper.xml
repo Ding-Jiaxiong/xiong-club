@@ -137,4 +137,15 @@
             </if>
         </where>
     </select>
+
+    <select id="listUserInfoByIds" resultType="com.dingjiaxiong.auth.infra.basic.entity.AuthUser">
+        select
+        id, user_name, nick_name, email, phone, password, sex, avatar, status, introduce, ext_json, created_by,
+        created_time, update_by, update_time, is_deleted
+        from auth_user
+        where user_name in
+        <foreach collection="userNameList" index="index" item="item" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </select>
 </mapper>

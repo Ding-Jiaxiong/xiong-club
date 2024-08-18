@@ -124,8 +124,8 @@ public class ShareCommentReplyServiceImpl extends ServiceImpl<ShareCommentReplyM
                         ShareCommentReply::getParentId);
         List<ShareCommentReply> list = list(query);
         List<String> userNameList = list.stream().map(ShareCommentReply::getCreatedBy).distinct().collect(Collectors.toList());
-//        Map<String, UserInfo> userInfoMap = userRpc.batchGetUserInfo(userNameList);
-//        UserInfo defaultUser = new UserInfo();
+        Map<String, UserInfo> userInfoMap = userRpc.batchGetUserInfo(userNameList);
+        UserInfo defaultUser = new UserInfo();
         List<ShareCommentReplyVO> voList = list.stream().map(item -> {
             ShareCommentReplyVO vo = new ShareCommentReplyVO();
             vo.setId(item.getId());
@@ -140,9 +140,9 @@ public class ShareCommentReplyServiceImpl extends ServiceImpl<ShareCommentReplyM
                 vo.setToId(item.getToUser());
             }
             vo.setParentId(item.getParentId());
-//            UserInfo user = userInfoMap.getOrDefault(item.getCreatedBy(), defaultUser);
-//            vo.setUserName(user.getNickName());
-//            vo.setAvatar(user.getAvatar());
+            UserInfo user = userInfoMap.getOrDefault(item.getCreatedBy(), defaultUser);
+            vo.setUserName(user.getNickName());
+            vo.setAvatar(user.getAvatar());
             vo.setCreatedTime(item.getCreatedTime().getTime());
             return vo;
         }).collect(Collectors.toList());

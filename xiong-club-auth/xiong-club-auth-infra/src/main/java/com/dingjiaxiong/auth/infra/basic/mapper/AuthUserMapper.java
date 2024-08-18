@@ -2,6 +2,7 @@ package com.dingjiaxiong.auth.infra.basic.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.dingjiaxiong.auth.infra.basic.entity.AuthUser;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -16,6 +17,8 @@ public interface AuthUserMapper extends BaseMapper<AuthUser> {
     List<AuthUser> queryAllByLimit(AuthUser existAuthUser);
 
     Integer updateByUserName(AuthUser authUser);
+
+    List<AuthUser> listUserInfoByIds(@Param("userNameList") List<String> userNameList);
 
 }
 

@@ -25,5 +25,6 @@ public interface AuthUserDomainService {
 
     AuthUserBO getUserInfo(AuthUserBO authUserBO);
 
+    List<AuthUserBO> listUserInfoByIds(List<String> ids);
 }
 

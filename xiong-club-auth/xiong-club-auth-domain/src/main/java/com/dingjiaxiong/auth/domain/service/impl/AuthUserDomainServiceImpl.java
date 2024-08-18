@@ -186,4 +186,14 @@ public class AuthUserDomainServiceImpl implements AuthUserDomainService {
         return AuthUserBOConverter.INSTANCE.convertEntityToBO(user);
     }
 
+    @Override
+    public List<AuthUserBO> listUserInfoByIds(List<String> userNameList) {
+        List<AuthUser> userList = authUserService.listUserInfoByIds(userNameList);
+        if (CollectionUtils.isEmpty(userList)) {
+            return Collections.emptyList();
+        }
+        return AuthUserBOConverter.INSTANCE.convertEntityToBO(userList);
+    }
+
+
 }

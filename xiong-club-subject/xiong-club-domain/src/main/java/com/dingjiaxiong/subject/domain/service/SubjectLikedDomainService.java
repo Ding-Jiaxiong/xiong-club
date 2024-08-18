@@ -44,4 +44,7 @@ public interface SubjectLikedDomainService {
 
 
     PageResult<SubjectLikedBO> getSubjectLikedPage(SubjectLikedBO subjectLikedBO);
+
+    void syncLikedByMsg(SubjectLikedBO subjectLikedBO);
+
 }
